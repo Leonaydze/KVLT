@@ -8,14 +8,14 @@ int PlayerWeapon::GetWeaponWeight()
 PlayerWeapon::PlayerWeapon(int weaponDamage, float weaponSpeed){
 	if (currentWW == LIGHT) {
 		weaponDamage = 10;
-		weaponSpeed = 4.0;
+		weaponSpeed = 1.0;
 	}
 	if (currentWW == MEDIUM) {
 		weaponDamage = 20;
-		weaponSpeed = 3.0;
+		weaponSpeed = 2.0;
 	}
 	if (currentWW == HEAVY) {
 		weaponDamage = 40;
-		weaponSpeed = 1.0;
+		weaponSpeed = 4.0;
 	}
 }
