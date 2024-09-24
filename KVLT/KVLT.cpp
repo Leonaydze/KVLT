@@ -86,7 +86,4 @@ void Remove(int index) {
 
 int main()
 {
-    Create("AZAA", 3);
-    Read();
-    
 }
