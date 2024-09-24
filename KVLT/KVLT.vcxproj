@@ -133,6 +133,7 @@
     <ClCompile Include="KVLT.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
+    <ClCompile Include="PlayerWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Flask.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventory.h" />
+    <ClInclude Include="PlayerWeapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
