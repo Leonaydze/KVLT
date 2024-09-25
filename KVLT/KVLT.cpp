@@ -2,6 +2,8 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include "Player.h"
+#include "PlayerInventory.h"
 
 using json = nlohmann::json;
 
@@ -84,6 +86,11 @@ void Remove(int index) {
     }
 }
 
-int main()
-{
+int main(){
+
+    Player player;
+    player.Create();
+    PlayerInventory pInv;
+    pInv.Create();
+
 }

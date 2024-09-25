@@ -1,83 +1,5 @@
 #include "Player.h"
 
-void Player::Create(){
-	json j;
-	//Read
-	std::ifstream inputFile(_filename);
-	if (inputFile) {
-		inputFile >> j;
-	}
-
-	//New Entity
-	json newEntry = { { "Health" , _playerHealth }, { "Position X" , _playerPosition.x }, { "Position Y" , _playerPosition.y } };
-	j.push_back(newEntry);
-
-	//Save File
-	std::ofstream outputFile(_filename);
-	outputFile << j.dump(4);
-	outputFile.close();
-}
-
-void Player::Read(){
-	json j;
-	//Read
-	std::ifstream inputFile(_filename);
-	if (inputFile) {
-		inputFile >> j;
-		//Output On Screen
-		std::cout << j.dump(4) << "\n";
-	}
-	else {
-		std::cout << "FileNotFound" << std::endl;
-	}
-}
-
-void Player::Update(unsigned short int index){
-	json j;
-	//Read
-	std::ifstream inputFile(_filename);
-	if (inputFile) {
-		inputFile >> j;
-		//Проверка в диапозоне ли индекс
-		if (index < 0 or index >= j.size()) {
-			std::cout << "Index is out of range" << std::endl;
-			return;
-		}
-		j[index]["Health"] = _playerHealth;
-		j[index]["Position X"] = _playerPosition.x;
-		j[index]["Position Y"] = _playerPosition.y;
-		//Save File
-		std::ofstream outputFile(_filename);
-		outputFile << j.dump(4);
-		outputFile.close();
-	}
-	else {
-		std::cout << "FileNotFound" << std::endl;
-	}
-}
-
-void Player::Remove(unsigned short int index){
-	json j;
-	//Read
-	std::ifstream inputFile(_filename);
-	if (inputFile) {
-		inputFile >> j;
-		//Проверка в диапозоне ли индекс
-		if (index < 0 or index >= j.size()) {
-			std::cout << "Index is out of range" << std::endl;
-			return;
-		}
-		j.erase(j.begin() + index);
-		//Save File
-		std::ofstream outputFile(_filename);
-		outputFile << j.dump(4);
-		outputFile.close();
-	}
-	else {
-		std::cout << "FileNotFound" << std::endl;
-	}
-}
-
 Player::Player()
 {
 }
@@ -114,3 +36,80 @@ void Player::SetPlayerPositionY(float playerPosY){
 	_playerPosition.y = playerPosY;
 }
 
+void Player::Create() {
+	json j;
+	//Read
+	std::ifstream inputFile(_filename);
+	if (inputFile) {
+		inputFile >> j;
+	}
+
+	//New Entity
+	json newEntry = { { "Health" , _playerHealth }, { "Position X" , _playerPosition.x }, { "Position Y" , _playerPosition.y } };
+	j.push_back(newEntry);
+
+	//Save File
+	std::ofstream outputFile(_filename);
+	outputFile << j.dump(4);
+	outputFile.close();
+}
+
+void Player::Read() {
+	json j;
+	//Read
+	std::ifstream inputFile(_filename);
+	if (inputFile) {
+		inputFile >> j;
+		//Output On Screen
+		std::cout << j.dump(4) << "\n";
+	}
+	else {
+		std::cout << "FileNotFound" << std::endl;
+	}
+}
+
+void Player::Update(unsigned short int index) {
+	json j;
+	//Read
+	std::ifstream inputFile(_filename);
+	if (inputFile) {
+		inputFile >> j;
+		//Проверка в диапозоне ли индекс
+		if (index < 0 or index >= j.size()) {
+			std::cout << "Index is out of range" << std::endl;
+			return;
+		}
+		j[index]["Health"] = _playerHealth;
+		j[index]["Position X"] = _playerPosition.x;
+		j[index]["Position Y"] = _playerPosition.y;
+		//Save File
+		std::ofstream outputFile(_filename);
+		outputFile << j.dump(4);
+		outputFile.close();
+	}
+	else {
+		std::cout << "FileNotFound" << std::endl;
+	}
+}
+
+void Player::Remove(unsigned short int index) {
+	json j;
+	//Read
+	std::ifstream inputFile(_filename);
+	if (inputFile) {
+		inputFile >> j;
+		//Проверка в диапозоне ли индекс
+		if (index < 0 or index >= j.size()) {
+			std::cout << "Index is out of range" << std::endl;
+			return;
+		}
+		j.erase(j.begin() + index);
+		//Save File
+		std::ofstream outputFile(_filename);
+		outputFile << j.dump(4);
+		outputFile.close();
+	}
+	else {
+		std::cout << "FileNotFound" << std::endl;
+	}
+}

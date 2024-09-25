@@ -7,16 +7,13 @@
 
 using json = nlohmann::json;
 
-const std::string _filename = "playerData.json";
 
 class Player{
 private:
+	const std::string _filename = "playerData.json";
 	short int _playerHealth = 100;
 
 	Vector2 _playerPosition = { 0, 0 };
-
-	void Create();
-	void Read();
 public:
 	Player();
 
@@ -32,6 +29,8 @@ public:
 	float GetPlayerPositionY();
 	void SetPlayerPositionY(float playerPosY);
 
+	void Create();
+	void Read();
 	void Update(unsigned short int index);
 	void Remove(unsigned short int index);
 };
