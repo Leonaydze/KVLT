@@ -16,7 +16,7 @@ int PlayerInventory::GetCurrentCountFlask()
 	return _currentCountFlax;
 }
 
-void PlayerInventory::Create() {
+void PlayerInventory::CreateData() {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -34,7 +34,7 @@ void PlayerInventory::Create() {
 	outputFile.close();
 }
 
-void PlayerInventory::Read() {
+void PlayerInventory::ReadData() {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -48,7 +48,7 @@ void PlayerInventory::Read() {
 	}
 }
 
-void PlayerInventory::Update(unsigned short int index) {
+void PlayerInventory::UpdateData(unsigned short int index) {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -71,7 +71,7 @@ void PlayerInventory::Update(unsigned short int index) {
 	}
 }
 
-void PlayerInventory::Remove(unsigned short int index) {
+void PlayerInventory::RemoveData(unsigned short int index) {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);

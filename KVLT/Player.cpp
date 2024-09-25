@@ -36,7 +36,7 @@ void Player::SetPlayerPositionY(float playerPosY){
 	_playerPosition.y = playerPosY;
 }
 
-void Player::Create() {
+void Player::CreateData() {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -54,7 +54,7 @@ void Player::Create() {
 	outputFile.close();
 }
 
-void Player::Read() {
+void Player::ReadData() {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -68,7 +68,7 @@ void Player::Read() {
 	}
 }
 
-void Player::Update(unsigned short int index) {
+void Player::UpdateData(unsigned short int index) {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);
@@ -92,7 +92,7 @@ void Player::Update(unsigned short int index) {
 	}
 }
 
-void Player::Remove(unsigned short int index) {
+void Player::RemoveData(unsigned short int index) {
 	json j;
 	//Read
 	std::ifstream inputFile(_filename);

@@ -15,9 +15,9 @@ public:
 
 	int GetCurrentCountFlask();
 
-	void Create();
-	void Read();
-	void Update(unsigned short int index);
-	void Remove(unsigned short int index);
+	void CreateData();
+	void ReadData();
+	void UpdateData(unsigned short int index);
+	void RemoveData(unsigned short int index);
 };
 
