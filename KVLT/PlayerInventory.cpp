@@ -11,3 +11,8 @@ PlayerInventory::PlayerInventory(){
 	_currentCountFlax = 1;
 }
 
+int PlayerInventory::GetCurrentCountFlask()
+{
+	return _currentCountFlax;
+}
+
