@@ -59,7 +59,7 @@ void PlayerInventory::UpdateData(unsigned short int index) {
 			std::cout << "Index is out of range" << std::endl;
 			return;
 		}
-		j[index]["Count Flask"] = _currentCountFlax;
+		j[index]["Flask"] = _currentCountFlax;
 
 		//Save File
 		std::ofstream outputFile(_filename);
