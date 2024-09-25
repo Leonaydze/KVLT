@@ -70,7 +70,7 @@ void Remove(int index) {
         inputFile >> j;
         //Проверка в диапозоне ли индекс
         if (index < 0 or index >= j.size()) {
-            std::cout << "Index in out of range" << std::endl;
+            std::cout << "Index is out of range" << std::endl;
             return;
         }
         j.erase(j.begin() + index);
