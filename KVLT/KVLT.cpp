@@ -87,10 +87,4 @@ void Remove(int index) {
 }
 
 int main(){
-
-    Player player;
-    player.ReadData();
-    PlayerInventory pInv;
-    pInv.ReadData();
-
 }
