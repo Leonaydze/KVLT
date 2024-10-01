@@ -116,14 +116,9 @@ template <typename T>
 const std::string DataSource<T>::_fileName = "data.json";
 
 int main(){
-	DataSource<Animal> dataSource;
-
-	Animal a1(1, "Bobik", "Dog", 10);
-	dataSource.Create(a1);
-	dataSource.Read();
-
-	Animal updA1(1, "Bobik", "Dog", 20);
-	dataSource.Update(updA1);
+	DataSource<Player> dataSource;
+	Player p1 = Player();
+	dataSource.Create(p1);
 
 	dataSource.Read();
 	dataSource.Remove(1);

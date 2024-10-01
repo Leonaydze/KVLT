@@ -1,11 +1,5 @@
 #include "Player.h"
 
-Player::Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
-	this->_playerHealth = _playerHealth;
-	this->_playerPosition.x = _playerPosX;
-	this->_playerPosition.y = _playerPosY;
-}
-
 int Player::GetPlayerHealth(){
 	return _playerHealth;
 }

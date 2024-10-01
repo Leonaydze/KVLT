@@ -10,9 +10,13 @@ class Player{
 private:
 	short int _playerHealth = 100;
 
-	Vector2 _playerPosition = { 0, 0 };
+	Vector2 _playerPosition = { 10, -100 };
 public:
+	Player() {};
 	Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
+		this->_playerHealth = _playerHealth;
+		this->_playerPosition.x = _playerPosX;
+		this->_playerPosition.y = _playerPosY;
 	};
 
 	int GetPlayerHealth();
