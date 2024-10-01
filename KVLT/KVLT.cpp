@@ -32,15 +32,18 @@ template <typename T>
 class DataSource {
 private:
 	static const std::string _fileName;
+	json data;
+	int currentId;
 
-	static json readFile() {
-		json j;
-		//Read
+	void readFile() {
 		std::ifstream inputFile(_fileName);
 		if (inputFile) {
-			inputFile >> j;
+			inputFile >> data;
+			currentId = data.empty() ? 1 : data.back()["id"] + 1;
 		}
-		return j;
+		else {
+			currentId = 1;
+		}
 	}
 
 	static void writeFile(const json &j) {
@@ -55,10 +58,9 @@ private:
 	/// <returns>Индекс элемента или -1, если он не был найден</returns>
 	int FindById(int id) {
 		int index = -1;
-		json j = readFile();
 
-		for (int i = 0; i < j.size(); i++) {
-			if (j[i]["id"] == id) {
+		for (int i = 0; i < data.size(); i++) {
+			if (data[i]["id"] == id) {
 				index = i;
 				break;
 			}
@@ -67,24 +69,29 @@ private:
 		return index;
 	}
 public:
-	void Create(const T &item) {
-		json j = readFile();
+	DataSource() {
+		readFile();
+	}
+	~DataSource() {
+		writeFile(data);
+	}
 
-		j.push_back(item.toJson());
-		writeFile(j);
+	void Create(const T &item) {
+		T next(currentId, item.name, item.breed, item.weight);
+		data.push_back(item.toJson());
+		currentId++;
+		writeFile(data);
 	}
 
 	void Read() {
-		json j = readFile();
-		std::cout << j.dump(4) << std::endl;
+		std::cout << data.dump(4) << std::endl;
 	}
 
 	void Update(const T &item) {
-		json j = readFile();
 		int index = FindById(item.id);
 		if (index != -1) {
-			j[index] = item.toJson();
-			writeFile(j);
+			data[index] = item.toJson();
+			writeFile(data);
 		}
 		else {
 			std::cout << "Index is out of range" << std::endl;
@@ -93,16 +100,14 @@ public:
 	}
 
 	void Remove(int id) {
-		json j = readFile();
 		int index = FindById(id);
 		if (index != - 1) {
-			j.erase(j.begin() + index);
-			writeFile(j);
+			data.erase(data.begin() + index);
+			writeFile(data);
 		}
 		else {
 			std::cout << "Index is out of range" << std::endl;
 			return;
-
 		}
 	}
 };
