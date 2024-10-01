@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Altar.cpp" />
+    <ClCompile Include="DataSource.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Flask.cpp" />
     <ClCompile Include="KVLT.cpp" />
@@ -137,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h" />
+    <ClInclude Include="DataSource.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Flask.h" />
     <ClInclude Include="Player.h" />

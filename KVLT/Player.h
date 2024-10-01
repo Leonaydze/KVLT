@@ -1,5 +1,10 @@
 #pragma once
 #include <raylib.h>
+#include <string>
+#include <nlohmann/json.hpp>
+#include <fstream>
+
+using json = nlohmann::json;
 
 class Player{
 private:
@@ -7,7 +12,8 @@ private:
 
 	Vector2 _playerPosition = { 0, 0 };
 public:
-	Player();
+	Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
+	};
 
 	int GetPlayerHealth();
 	void HealPlayer(int healthAmount);
@@ -20,5 +26,8 @@ public:
 
 	float GetPlayerPositionY();
 	void SetPlayerPositionY(float playerPosY);
+
+	json toJson() const;
+	Player fromJson(const json& _filename);
 };
 

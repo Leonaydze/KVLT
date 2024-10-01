@@ -1,7 +1,9 @@
 #include "Player.h"
 
-Player::Player()
-{
+Player::Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
+	this->_playerHealth = _playerHealth;
+	this->_playerPosition.x = _playerPosX;
+	this->_playerPosition.y = _playerPosY;
 }
 
 int Player::GetPlayerHealth(){
@@ -34,4 +36,14 @@ float Player::GetPlayerPositionY(){
 
 void Player::SetPlayerPositionY(float playerPosY){
 	_playerPosition.y = playerPosY;
+}
+
+json Player::toJson() const
+{
+	return json{ {"Health", _playerHealth}, {"PosX", _playerPosition.x}, {"PosY", _playerPosition.y}};
+}
+
+Player Player::fromJson(const json& _filename)
+{
+	return Player(_filename["Health"], _filename["PosX"], _filename["PosY"]);
 }
