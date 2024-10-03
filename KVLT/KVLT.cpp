@@ -1,91 +1,95 @@
-﻿#include <iostream>
+﻿// JSONexample.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
 #include <string>
-#include <nlohmann/json.hpp>
+#include <iostream>
 #include <fstream>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
+using namespace std;
 
 class Animal {
 public:
 	int id;
-	std::string name;
-	std::string breed;
+	string name;
+	string breed;
 	double weight;
 
-	Animal(int id, const std::string &name, const std::string &breed, double weight)
+	Animal(int id, const string& name, const string& breed, double weight)
 		: id(id), name(name), breed(breed), weight(weight) {}
 
 	// Конструктор копирования
-	Animal(int id, const Animal& other) : id(id), name(other.name), breed(other.breed), weight(other.weight) {}
+	Animal(int id, const Animal& other)
+		: id(id), name(other.name), breed(other.breed), weight(other.weight) {}
 
 	json toJson() const {
-		return json{ {"id", id} , 
-			{"name", name} , 
+		return json{
+			{"id",id},
+			{"name",name},
 			{"breed", breed},
-			{"weight", weight} };
+			{"weight",weight}
+		};
 	}
-	static Animal fromJson(const json& _fileName) {
-		return Animal(_fileName["id"],_fileName["name"],_fileName["breed"],_fileName["weight"]);
+
+	static Animal fromJson(const json& j) {
+		return Animal(j["id"], j["name"], j["breed"], j["weight"]);
 	}
+
+	string ToString() {
+		return to_string(id)
+			+ " " + name
+			+ " " + breed
+			+ " " + to_string(weight);
+	}
+
 };
+
 
 class Task {
-private:
-	int id;
-	std::string title;
-	std::string description;
-
 public:
-	Task(int id, const std::string& title, const std::string& description)
+	int id;
+	string title;
+	string description;
+
+	Task(int id, const string& title, const string& description)
 		: id(id), title(title), description(description) {}
 
+	// Конструктор копирования
+	Task(int id, const Task& other)
+		: id(id), title(other.title), description(other.description) {}
 
 	json toJson() const {
-		return json{ {"id", id} ,
-			{"title", title} ,
-			{"description", description} };
+		return json{
+			{"id",id},
+			{"title",title},
+			{"description", description}
+		};
 	}
 
-	static Task fromJson(const json& _fileName) {
-		return Task(_fileName["id"], _fileName["title"], _fileName["description"]);
-	}
-};
-
-
-class Service {
-public:
-	template <typename T>
-	void create(DataSource<T> &dataSource, const T &item) {
-		dataSource.Create(item);
+	static Task fromJson(const json& j) {
+		return Task(j["id"], j["title"], j["description"]);
 	}
 
-	template <typename T>
-	std::vector<T> read(DataSource<T> &dataSource) {
-		return dataSource.Read();
+	string ToString() {
+		return to_string(id)
+			+ " " + title
+			+ " " + description;
 	}
 
-	template <typename T>
-	void update(DataSource<T> &dataSource, const T &item) {
-		dataSource.Update(item);
-	}
-
-	template <typename T>
-	void remove(DataSource<T> &dataSource, int id) {
-		dataSource.Remove(id);
-	}
-	
 };
 
 template <typename T>
 class DataSource {
 private:
-	static const std::string _fileName;
+	string filename;
 	json data;
 	int currentId;
 
 	void readFile() {
-		std::ifstream inputFile(_fileName);
+		ifstream inputFile(filename);
 		if (inputFile) {
 			inputFile >> data;
 			currentId = data.empty() ? 1 : data.back()["id"] + 1;
@@ -95,80 +99,168 @@ private:
 		}
 	}
 
-	static void writeFile(const json &j) {
-		std::ofstream outputFile(_fileName);
+	void writeFile(const json& j) {
+		ofstream outputFile(filename);
 		outputFile << j.dump(4);
 	}
 
-	/// <summary>
-	/// Функция поиска по идентификатору
-	/// </summary>
-	/// <param name="id">Идентификатор</param>
-	/// <returns>Индекс элемента или -1, если он не был найден</returns>
 	int FindById(int id) {
 		int index = -1;
-
 		for (int i = 0; i < data.size(); i++) {
 			if (data[i]["id"] == id) {
 				index = i;
 				break;
 			}
 		}
-
 		return index;
 	}
+
 public:
-	DataSource(std::string filename) {
-		this->_fileName = filename;
+
+	DataSource(string filename) {
+		this->filename = filename;
 		readFile();
 	}
+
 	~DataSource() {
 		writeFile(data);
 	}
 
-	void Create(const T &item) {
+	void create(const T& item) {
 		T next(currentId, item);
-		data.push_back(item.toJson());
+		data.push_back(next.toJson());
 		currentId++;
 		writeFile(data);
 	}
 
-	std::vector<T> Read() {
-		std::vector<T> items;
+	vector<T> read() {
+		vector<T> items;
 		for (const auto& j : data) {
 			items.push_back(T::fromJson(j));
 		}
 		return items;
 	}
 
-	void Update(const T &item) {
+	void update(const T& item) {
 		int index = FindById(item.id);
-		if (index != -1) {
+		if (index != -1)
+		{
 			data[index] = item.toJson();
 			writeFile(data);
 		}
 		else {
-			std::cout << "Index is out of range" << std::endl;
-			return;
+			cout << "Index is out of range!" << endl;
 		}
 	}
 
-	void Remove(int id) {
+	void remove(int id) {
 		int index = FindById(id);
-		if (index != - 1) {
+		if (index != -1) {
 			data.erase(data.begin() + index);
 			writeFile(data);
 		}
 		else {
-			std::cout << "Index is out of range" << std::endl;
-			return;
+			cout << "Index is out of range!" << endl;
 		}
 	}
 };
 
-template <typename T>
-const std::string DataSource<T>::_fileName = "data.json";
+class Service {
+public:
+	template <typename T>
+	void create(DataSource<T>& dataSource, const T& item) {
+		dataSource.create(item);
+	}
+	template <typename T>
+	vector<T> read(DataSource<T>& dataSource) {
+		return dataSource.read();
+	}
+	template <typename T>
+	void update(DataSource<T>& dataSource, const T& item) {
+		dataSource.update(item);
+	}
+	template <typename T>
+	void remove(DataSource<T>& dataSource, int id) {
+		dataSource.remove(id);
+	}
+};
 
-int main(){
+class AnimalService : public Service {
+private:
+	DataSource<Animal> dataSource;
+public:
+	AnimalService() :dataSource("animals.json") {}
+	void create(const Animal& animal) {
+		Service::create(dataSource, animal);
+	}
+	vector<Animal> read() {
+		return Service::read(dataSource);
+	}
+	void update(const Animal& animal) {
+		Service::update(dataSource, animal);
+	}
+	void remove(int id) {
+		Service::remove(dataSource, id);
+	}
+};
 
+class TaskService : public Service {
+private:
+	DataSource<Task> dataSource;
+public:
+	TaskService() :dataSource("tasks.json") {}
+	void create(const Task& task) {
+		Service::create(dataSource, task);
+	}
+	vector<Task> read() {
+		return Service::read(dataSource);
+	}
+	void update(const Task& task) {
+		Service::update(dataSource, task);
+	}
+	void remove(int id) {
+		Service::remove(dataSource, id);
+	}
+};
+
+
+int main()
+{
+	setlocale(0, "ru");
+	cout << "Работа с животными" << endl;
+	AnimalService animalService;
+	Animal animal1(1, "Bobik", "Dog", 10);
+	Animal animal2(2, "Murka", "Cat", 5);
+
+	animalService.create(animal1);
+	animalService.create(animal2);
+
+	cout << "Содержимое файла:" << endl;
+	for (const auto& item : animalService.read()) {
+		cout << item.ToString() << endl;
+	}
+
+
+	animalService.remove(1);
+	cout << "Содержимое файла:" << endl;
+	animalService.read();
+
+	cout << "Работа с задачами" << endl;
+
+	TaskService taskService;
+
+	Task task1(0, "Task1", "Description1");
+	Task task2(0, "Task2", "Description2");
+
+	taskService.create(task1);
+	taskService.create(task2);
+
+	cout << "Содержимое файла:" << endl;
+	taskService.read();
+
+	taskService.remove(1);
+	cout << "Содержимое файла:" << endl;
+	taskService.read();
+
+	return 0;
 }
