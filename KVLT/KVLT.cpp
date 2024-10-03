@@ -236,7 +236,7 @@ int main()
 	animalService.create(animal2);
 
 	cout << "Содержимое файла:" << endl;
-	for (const auto& item : animalService.read()) {
+	for (auto& item : animalService.read()) {
 		cout << item.ToString() << endl;
 	}
 
