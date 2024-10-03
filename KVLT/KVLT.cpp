@@ -2,8 +2,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <fstream>
-#include "Player.h"
-#include "PlayerInventory.h"
+#include <vector>
 
 using json = nlohmann::json;
 
@@ -17,15 +16,65 @@ public:
 	Animal(int id, const std::string &name, const std::string &breed, double weight)
 		: id(id), name(name), breed(breed), weight(weight) {}
 
+	// Конструктор копирования
+	Animal(int id, const Animal& other) : id(id), name(other.name), breed(other.breed), weight(other.weight) {}
+
 	json toJson() const {
 		return json{ {"id", id} , 
 			{"name", name} , 
 			{"breed", breed},
 			{"weight", weight} };
 	}
-	Animal fromJson(const json& _fileName) {
+	static Animal fromJson(const json& _fileName) {
 		return Animal(_fileName["id"],_fileName["name"],_fileName["breed"],_fileName["weight"]);
 	}
+};
+
+class Task {
+private:
+	int id;
+	std::string title;
+	std::string description;
+
+public:
+	Task(int id, const std::string& title, const std::string& description)
+		: id(id), title(title), description(description) {}
+
+
+	json toJson() const {
+		return json{ {"id", id} ,
+			{"title", title} ,
+			{"description", description} };
+	}
+
+	static Task fromJson(const json& _fileName) {
+		return Task(_fileName["id"], _fileName["title"], _fileName["description"]);
+	}
+};
+
+
+class Service {
+public:
+	template <typename T>
+	void create(DataSource<T> &dataSource, const T &item) {
+		dataSource.Create(item);
+	}
+
+	template <typename T>
+	std::vector<T> read(DataSource<T> &dataSource) {
+		return dataSource.Read();
+	}
+
+	template <typename T>
+	void update(DataSource<T> &dataSource, const T &item) {
+		dataSource.Update(item);
+	}
+
+	template <typename T>
+	void remove(DataSource<T> &dataSource, int id) {
+		dataSource.Remove(id);
+	}
+	
 };
 
 template <typename T>
@@ -69,7 +118,8 @@ private:
 		return index;
 	}
 public:
-	DataSource() {
+	DataSource(std::string filename) {
+		this->_fileName = filename;
 		readFile();
 	}
 	~DataSource() {
@@ -77,14 +127,18 @@ public:
 	}
 
 	void Create(const T &item) {
-		T next(currentId, item.name, item.breed, item.weight);
+		T next(currentId, item);
 		data.push_back(item.toJson());
 		currentId++;
 		writeFile(data);
 	}
 
-	void Read() {
-		std::cout << data.dump(4) << std::endl;
+	std::vector<T> Read() {
+		std::vector<T> items;
+		for (const auto& j : data) {
+			items.push_back(T::fromJson(j));
+		}
+		return items;
 	}
 
 	void Update(const T &item) {
@@ -116,10 +170,5 @@ template <typename T>
 const std::string DataSource<T>::_fileName = "data.json";
 
 int main(){
-	DataSource<Player> dataSource;
-	Player p1 = Player();
-	dataSource.Create(p1);
 
-	dataSource.Read();
-	dataSource.Remove(1);
 }
