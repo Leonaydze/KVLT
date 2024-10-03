@@ -1,0 +1,20 @@
+[
+    {
+        "breed": "Cat",
+        "id": 2,
+        "name": "Murka",
+        "weight": 5.0
+    },
+    {
+        "breed": "Dog",
+        "id": 3,
+        "name": "Bobik",
+        "weight": 10.0
+    },
+    {
+        "breed": "Cat",
+        "id": 4,
+        "name": "Murka",
+        "weight": 5.0
+    }
+]

@@ -223,6 +223,12 @@ public:
 	}
 };
 
+template <typename T>
+void PrintList(vector<T> list) {
+	for (auto& item : list) {
+		cout << item.ToString() << endl;
+	}
+}
 
 int main()
 {
@@ -236,9 +242,7 @@ int main()
 	animalService.create(animal2);
 
 	cout << "Содержимое файла:" << endl;
-	for (auto& item : animalService.read()) {
-		cout << item.ToString() << endl;
-	}
+	PrintList(animalService.read());
 
 
 	animalService.remove(1);
