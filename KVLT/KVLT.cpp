@@ -266,6 +266,8 @@ int main()
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
 
+	float volume;
+
 	while (!GetExitWindow())
 	{
 		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
@@ -291,6 +293,9 @@ int main()
 		if (setRequest) {
 			int result = GuiWindowBox({600, 200, 800, 600}, "Settings");
 			if (result == 1) setRequest = false;
+			DrawTextEx(font, "MasterVolume", { 650, 250 }, 20, 2, RAYWHITE);
+			GuiSlider({ 650, 275, 100, 25 }, "", "100%", &volume, 0, 100);
+			SetMasterVolume(volume);
 		}
 
 		if (GetExitWindowRequest() || exitRequest && !setRequest) {
