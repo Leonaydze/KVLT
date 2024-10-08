@@ -284,6 +284,10 @@ int main()
 		if (GuiButton({ 125, 650, 100, 40 }, "Quit")) 		exitRequest = true;
 		GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 
+		if (playRequest) {
+			///
+		}
+
 		if (setRequest) {
 			int result = GuiWindowBox({600, 200, 800, 600}, "Settings");
 			if (result == 1) setRequest = false;
