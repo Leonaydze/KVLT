@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <string>
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <nlohmann/json.hpp>
@@ -247,7 +246,6 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 	_exitWindowRequested = exitWindowRequest;
 }
 
-
 int main()
 {
 	setlocale(0, "ru");
@@ -259,9 +257,10 @@ int main()
 
 	SetExitKey(KEY_NULL);
 
-	bool showMessageBox = false;
+	bool exitRequest = false;
+	bool playRequest = false;
+	bool setRequest = false;
 
-	GuiSetFont(GetFontDefault());
 	Font font = LoadFont("Font.png");
 	GuiSetFont(font);
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
@@ -269,26 +268,38 @@ int main()
 
 	while (!GetExitWindow())
 	{
-		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) {
+		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
 			SetExitWindowRequest(true);
-			showMessageBox = true;
+			exitRequest = true;
 		}
 
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 		
-		DrawTextEx(font, "KVLT", { 100 , 100 }, 72, 3, WHITE);
+		DrawTextEx(font, "KVLT", { 100 , 350 }, 72, 3, WHITE);
 
-		if (GetExitWindowRequest() || showMessageBox) {
+		GuiSetStyle(DEFAULT, TEXT_SIZE, 24);
+		if (GuiButton({ 125, 500, 100, 40 }, "Play"))		playRequest = true;
+		if (GuiButton({ 125, 575, 100, 40 }, "Settings"))	setRequest = true;
+		if (GuiButton({ 125, 650, 100, 40 }, "Quit")) 		exitRequest = true;
+		GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
+
+		if (setRequest) {
+			int result = GuiWindowBox({600, 200, 800, 600}, "Settings");
+			if (result == 1) setRequest = false;
+		}
+
+		if (GetExitWindowRequest() || exitRequest && !setRequest) {
 			int result = GuiMessageBox({(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 				"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 			if(result == 1) SetExitWindow(true);
-			else if (result == 2) {
+			else if (result == 2 or result == 0) {
 				SetExitWindowRequest(false);
-				showMessageBox = false;
+				exitRequest = false;
 			}
 		}
 
+		DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
 		EndDrawing();
 	}
 
