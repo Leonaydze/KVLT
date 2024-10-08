@@ -146,9 +146,6 @@
   <ItemGroup>
     <Image Include="Font.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="myStyle.rgs" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

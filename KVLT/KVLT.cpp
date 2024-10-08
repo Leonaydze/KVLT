@@ -253,18 +253,21 @@ int main()
 	setlocale(0, "ru");
 
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
-	//GuiLoadStyle("myStyle.rgs");
+	GuiLoadStyle("style_ui.rgs");
+	
+	SetTargetFPS(60);
 
 	SetExitKey(KEY_NULL);
 
 	bool showMessageBox = false;
 	
-	SetTargetFPS(60);
 
+	GuiSetFont(GetFontDefault());
 	Font font = LoadFont("Font.png");
 	GuiSetFont(font);
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
+
 
 	while (!GetExitWindow())
 	{
