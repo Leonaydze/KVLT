@@ -260,14 +260,12 @@ int main()
 	SetExitKey(KEY_NULL);
 
 	bool showMessageBox = false;
-	
 
 	GuiSetFont(GetFontDefault());
 	Font font = LoadFont("Font.png");
 	GuiSetFont(font);
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
-
 
 	while (!GetExitWindow())
 	{
@@ -279,6 +277,8 @@ int main()
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 		
+		DrawTextEx(font, "KVLT", { 100 , 100 }, 72, 3, WHITE);
+
 		if (GetExitWindowRequest() || showMessageBox) {
 			int result = GuiMessageBox({(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 				"#193#Quit?", "Are You Want To Quit?", "Yes;No");
