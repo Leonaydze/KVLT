@@ -16,5 +16,17 @@
         "id": 4,
         "name": "Murka",
         "weight": 5.0
+    },
+    {
+        "breed": "Dog",
+        "id": 5,
+        "name": "Bobik",
+        "weight": 10.0
+    },
+    {
+        "breed": "Cat",
+        "id": 6,
+        "name": "Murka",
+        "weight": 5.0
     }
 ]

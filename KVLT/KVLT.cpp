@@ -1,12 +1,12 @@
-﻿// JSONexample.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <nlohmann/json.hpp>
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
+#include <raylib.h>
 
 using json = nlohmann::json;
 using namespace std;
@@ -230,41 +230,66 @@ void PrintList(vector<T> list) {
 	}
 }
 
+bool _exitWindowRequested = false;
+bool _exitWindow = false;
+
+bool GetExitWindow() {
+	return _exitWindow;
+}
+void SetExitWindow(bool exitWindow) {
+	_exitWindow = exitWindow;
+}
+
+bool GetExitWindowRequest() {
+	return _exitWindowRequested;
+}
+void SetExitWindowRequest(bool exitWindowRequest) {
+	_exitWindowRequested = exitWindowRequest;
+}
+
+
 int main()
 {
 	setlocale(0, "ru");
-	cout << "Работа с животными" << endl;
-	AnimalService animalService;
-	Animal animal1(1, "Bobik", "Dog", 10);
-	Animal animal2(2, "Murka", "Cat", 5);
 
-	animalService.create(animal1);
-	animalService.create(animal2);
+	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
+	//GuiLoadStyle("myStyle.rgs");
 
-	cout << "Содержимое файла:" << endl;
-	PrintList(animalService.read());
+	SetExitKey(KEY_NULL);
 
+	bool showMessageBox = false;
+	
+	SetTargetFPS(60);
 
-	animalService.remove(1);
-	cout << "Содержимое файла:" << endl;
-	animalService.read();
+	Font font = LoadFont("Font.png");
+	GuiSetFont(font);
+	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
+	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
 
-	cout << "Работа с задачами" << endl;
+	while (!GetExitWindow())
+	{
+		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) {
+			SetExitWindowRequest(true);
+			showMessageBox = true;
+		}
 
-	TaskService taskService;
+		BeginDrawing();
+		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+		
+		if (GetExitWindowRequest() || showMessageBox) {
+			int result = GuiMessageBox({(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
+				"#193#Quit?", "Are You Want To Quit?", "Yes;No");
+			if(result == 1) SetExitWindow(true);
+			else if (result == 2) {
+				SetExitWindowRequest(false);
+				showMessageBox = false;
+			}
+		}
 
-	Task task1(0, "Task1", "Description1");
-	Task task2(0, "Task2", "Description2");
+		EndDrawing();
+	}
 
-	taskService.create(task1);
-	taskService.create(task2);
-
-	cout << "Содержимое файла:" << endl;
-	taskService.read();
-
-	taskService.remove(1);
-	cout << "Содержимое файла:" << endl;
-	taskService.read();
+	CloseWindow();
 
 	return 0;
 }
