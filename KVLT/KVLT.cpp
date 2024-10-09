@@ -259,8 +259,8 @@ void PlayMusic(Music &music) {
 	if (IsMusicReady(music)) {
 		if (lastMusicNumber == randomMusicNumber && !IsMusicStreamPlaying(music)) {
 			randomMusicNumber = rand() % 4;
+			std::cout << randomMusicNumber;
 		}
-		std::cout << randomMusicNumber;
 		if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
 			music = LoadMusicStream("Music\\mainMusic.mp3");
 			PlayMusicStream(music);
