@@ -62,4 +62,18 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Music\mainMusic.mp3">
+      <Filter>Файлы ресурсов</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_2.mp3">
+      <Filter>Файлы ресурсов</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_3.mp3">
+      <Filter>Файлы ресурсов</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_4.mp3">
+      <Filter>Файлы ресурсов</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

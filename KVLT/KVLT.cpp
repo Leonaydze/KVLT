@@ -6,6 +6,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include <raygui.h>
 #include <raylib.h>
+#include <ctime>
 
 using json = nlohmann::json;
 using namespace std;
@@ -222,6 +223,10 @@ public:
 	}
 };
 
+class SettingsService : public Service {
+
+};
+
 template <typename T>
 void PrintList(vector<T> list) {
 	for (auto& item : list) {
@@ -246,13 +251,45 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 	_exitWindowRequested = exitWindowRequest;
 }
 
+int lastMusicNumber = 3;
+void PlayMusic(Music &music) {
+	srand(time(0));
+	int randomMusicNumber = 0;
+
+	if (IsMusicReady(music)) {
+		if (lastMusicNumber == randomMusicNumber && !IsMusicStreamPlaying(music)) {
+			randomMusicNumber = rand() % 4;
+		}
+		std::cout << randomMusicNumber;
+		if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
+			music = LoadMusicStream("Music\\mainMusic.mp3");
+			PlayMusicStream(music);
+			lastMusicNumber = randomMusicNumber;
+		}
+		else if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music)) {
+			music = LoadMusicStream("Music\\mainMusic_2.mp3");
+			PlayMusicStream(music);
+		}
+		else if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music)) {
+			music = LoadMusicStream("Music\\mainMusic_3.mp3");
+			PlayMusicStream(music);
+		}
+		else if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
+			music = LoadMusicStream("Music\\mainMusic_4.mp3");
+			PlayMusicStream(music);
+		}
+	}
+}
+
 int main()
 {
 	setlocale(0, "ru");
 
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
+	InitAudioDevice();
 	GuiLoadStyle("style_ui.rgs");
-	
+
+
 	SetTargetFPS(60);
 
 	SetExitKey(KEY_NULL);
@@ -266,14 +303,22 @@ int main()
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
 
-	float volume;
+	float volume = 50;
+
+	float musicVolume = 0.5;
+	Music playMusic = LoadMusicStream("Music\\mainMusic_2.mp3");
+	SetMusicVolume(playMusic, 0.5);
 
 	while (!GetExitWindow())
 	{
+		PlayMusic(playMusic);
+		UpdateMusicStream(playMusic);
+
 		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
 			SetExitWindowRequest(true);
 			exitRequest = true;
 		}
+
 
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
@@ -287,7 +332,6 @@ int main()
 		GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 
 		if (playRequest) {
-			///
 		}
 
 		if (setRequest) {
@@ -296,6 +340,9 @@ int main()
 			DrawTextEx(font, "MasterVolume", { 650, 250 }, 20, 2, RAYWHITE);
 			GuiSlider({ 650, 275, 100, 25 }, "", "100%", &volume, 0, 100);
 			SetMasterVolume(volume);
+			DrawTextEx(font, "MusicVolume", { 650, 325 }, 20, 2, RAYWHITE);
+			GuiSlider({ 650, 350, 100, 25 }, "", "100%", &musicVolume, 0, 1);
+			SetMusicVolume(playMusic, musicVolume);
 		}
 
 		if (GetExitWindowRequest() || exitRequest && !setRequest) {
@@ -313,6 +360,7 @@ int main()
 	}
 
 	CloseWindow();
+	CloseAudioDevice();
 
 	return 0;
 }
