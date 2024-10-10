@@ -115,7 +115,7 @@ int lastMusicNumber = -1;
 /// <summary>
 /// Function for randomness of tracks
 /// </summary>
-/// <param name="Music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
+/// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
 	srand(time(0));
 	int randomMusicNumber = rand() % 4;
