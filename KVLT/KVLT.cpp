@@ -262,7 +262,6 @@ void PlayMusic(Music &music) {
 			PlayMusicStream(music);
 		}
 		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_2.mp3");
@@ -270,7 +269,6 @@ void PlayMusic(Music &music) {
 			PlayMusicStream(music);
 		}
 		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_3.mp3");
@@ -278,7 +276,6 @@ void PlayMusic(Music &music) {
 			PlayMusicStream(music);
 		}
 		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	if (randomMusicNumber == 3 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_4.mp3");
@@ -286,7 +283,6 @@ void PlayMusic(Music &music) {
 			PlayMusicStream(music);
 		}
 		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	if (randomMusicNumber == 4 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_5.mp3");
@@ -294,26 +290,24 @@ void PlayMusic(Music &music) {
 			PlayMusicStream(music);
 		}
 		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	if (randomMusicNumber == 5 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_6.mp3");
 		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
 			PlayMusicStream(music);
 		}
-		lastMusicNumber = randomMusicNumber;
-		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
+		lastMusicNumber = randomMusicNumber
 	}
 
 	
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
 
 	if (timePlayed > 1.0f) {
+		StopMusicStream(music);
+		UnloadMusicStream(music);
 		while (lastMusicNumber == randomMusicNumber) {
 			randomMusicNumber = rand() % 6;
 		}
-		StopMusicStream(music);
-		UnloadMusicStream(music);
 	}
 }
 
