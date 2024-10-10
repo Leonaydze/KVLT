@@ -210,7 +210,6 @@ int main()
 
 		//Play, update and customization music
 		PlayMusic(playMusic);
-		SetMusicVolume(playMusic, 0.1);
 		if (IsMusicStreamPlaying(playMusic)) {
 			UpdateMusicStream(playMusic);
 		}
