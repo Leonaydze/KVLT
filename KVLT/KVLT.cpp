@@ -180,6 +180,7 @@ int main()
 {
 	setlocale(0, "ru");
 
+	//Init window, audio and gui style
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
 	InitAudioDevice();
 	GuiLoadStyle("style_ui.rgs");
