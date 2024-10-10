@@ -85,3 +85,4 @@ void DataSource<T>::remove(int id) {
 }
 
 template class DataSource<Task>;
+template class DataSource<Player>;
