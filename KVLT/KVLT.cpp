@@ -220,6 +220,7 @@ int main()
 			exitRequest = true;
 		}
 
+		//Drawing display
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 		
