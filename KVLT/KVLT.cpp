@@ -291,8 +291,6 @@ void PlayMusic(Music &music) {
 		UnloadMusicStream(music);
 		randomMusicNumber++;
 	}
-
-	UpdateMusicStream(music);
 }
 
 int main()
@@ -323,8 +321,12 @@ int main()
 
 	while (!GetExitWindow())
 	{
+
 		PlayMusic(playMusic);
 		SetMusicVolume(playMusic, 0.1);
+		if (IsMusicStreamPlaying(playMusic)) {
+			UpdateMusicStream(playMusic);
+		}
 
 		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
 			SetExitWindowRequest(true);
