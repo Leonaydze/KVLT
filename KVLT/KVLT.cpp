@@ -118,7 +118,7 @@ int lastMusicNumber = -1;
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
 	srand(time(0));
-	int randomMusicNumber = rand() % 4;
+	int randomMusicNumber = rand() % 6;
 
 	//Choice music
 	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
