@@ -251,45 +251,52 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 	_exitWindowRequested = exitWindowRequest;
 }
 
-int randomMusicNumber = rand() % 4;
+int lastMusicNumber = -1;
 void PlayMusic(Music &music) {
-	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
+	srand(time(0));
+	int randomMusicNumber = rand() % 4;
+
+	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic.mp3");
 		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
 			PlayMusicStream(music);
 		}
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
-	if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music)) {
+	if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_2.mp3");
 		if ((GetMusicTimePlayed(music) < GetMusicTimeLength(music))) {
 			PlayMusicStream(music);
 		}
-
-		SeekMusicStream(music, 430);
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
-	if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music)) {
+	if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_3.mp3");
 		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
 			PlayMusicStream(music);
 		}
-		std::cout << randomMusicNumber << std::endl;
-		std::cout << GetMusicTimePlayed(music) << std::endl;
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
-	if (randomMusicNumber == 3 && !IsMusicStreamPlaying(music)) {
+	if (randomMusicNumber == 3 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic_4.mp3");
-		std::cout << randomMusicNumber << std::endl;
 		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
 			PlayMusicStream(music);
 		}
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
 	
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
 
 	if (timePlayed > 1.0f) {
-		std::cout << timePlayed << std::endl;
+		while (lastMusicNumber == randomMusicNumber) {
+			randomMusicNumber = rand() % 4;
+		}
 		StopMusicStream(music);
 		UnloadMusicStream(music);
-		randomMusicNumber++;
 	}
 }
 
