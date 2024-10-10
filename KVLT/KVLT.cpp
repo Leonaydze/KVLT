@@ -288,12 +288,29 @@ void PlayMusic(Music &music) {
 		lastMusicNumber = randomMusicNumber;
 		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
 	}
+	if (randomMusicNumber == 4 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_5.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
+	}
+	if (randomMusicNumber == 5 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_6.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+		SeekMusicStream(music, GetMusicTimeLength(music) - 10);
+	}
+
 	
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
 
 	if (timePlayed > 1.0f) {
 		while (lastMusicNumber == randomMusicNumber) {
-			randomMusicNumber = rand() % 4;
+			randomMusicNumber = rand() % 6;
 		}
 		StopMusicStream(music);
 		UnloadMusicStream(music);
