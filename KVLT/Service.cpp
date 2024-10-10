@@ -1,5 +1,6 @@
 #include "Service.h"
 #include "Task.h"
+#include "Player.h"
 
 template <typename T>
 void Service<T>::create(DataSource<T>& dataSource, const T& item) {
@@ -20,3 +21,4 @@ void Service<T>::remove(DataSource<T>& dataSource, int id) {
 
 //explicit implementation
 template class Service<Task>;
+template class Service<Player>;

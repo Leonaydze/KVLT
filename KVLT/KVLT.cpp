@@ -1,12 +1,7 @@
-﻿#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <nlohmann/json.hpp>
-#define RAYGUI_IMPLEMENTATION
+﻿#define RAYGUI_IMPLEMENTATION
 #include <raygui.h>
-#include <raylib.h>
 #include <ctime>
+#include "PlayerService.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -129,6 +124,11 @@ int main()
 
 	float musicVolume = 0.1;
 	Music playMusic = LoadMusicStream("");
+
+	PlayerService playerS;
+	Player player;
+
+	playerS.create(player);
 
 	while (!GetExitWindow())
 	{

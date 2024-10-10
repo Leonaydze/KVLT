@@ -12,6 +12,7 @@ private:
 
 	Vector2 _playerPosition = { 10, -100 };
 public:
+	int id = -1;
 	Player() {};
 	Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
 		this->_playerHealth = _playerHealth;
@@ -19,7 +20,7 @@ public:
 		this->_playerPosition.y = _playerPosY;
 	};
 
-	Player(const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition) {}
+	Player(int id, const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition) {}
 
 	int GetPlayerHealth();
 	void HealPlayer(int healthAmount);
@@ -34,6 +35,6 @@ public:
 	void SetPlayerPositionY(float playerPosY);
 
 	json toJson() const;
-	Player fromJson(const json& _filename);
+	static Player fromJson(const json& _filename);
 };
 
