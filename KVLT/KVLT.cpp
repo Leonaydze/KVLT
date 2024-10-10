@@ -251,34 +251,48 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 	_exitWindowRequested = exitWindowRequest;
 }
 
-int lastMusicNumber = 3;
+int randomMusicNumber = rand() % 4;
 void PlayMusic(Music &music) {
-	srand(time(0));
-	int randomMusicNumber = 0;
-
-	if (IsMusicReady(music)) {
-		if (lastMusicNumber == randomMusicNumber && !IsMusicStreamPlaying(music)) {
-			randomMusicNumber = rand() % 4;
-			std::cout << randomMusicNumber;
-		}
-		if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
-			music = LoadMusicStream("Music\\mainMusic.mp3");
-			PlayMusicStream(music);
-			lastMusicNumber = randomMusicNumber;
-		}
-		else if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music)) {
-			music = LoadMusicStream("Music\\mainMusic_2.mp3");
-			PlayMusicStream(music);
-		}
-		else if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music)) {
-			music = LoadMusicStream("Music\\mainMusic_3.mp3");
-			PlayMusicStream(music);
-		}
-		else if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
-			music = LoadMusicStream("Music\\mainMusic_4.mp3");
+	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music)) {
+		music = LoadMusicStream("Music\\mainMusic.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
 			PlayMusicStream(music);
 		}
 	}
+	if (randomMusicNumber == 1 && !IsMusicStreamPlaying(music)) {
+		music = LoadMusicStream("Music\\mainMusic_2.mp3");
+		if ((GetMusicTimePlayed(music) < GetMusicTimeLength(music))) {
+			PlayMusicStream(music);
+		}
+
+		SeekMusicStream(music, 430);
+	}
+	if (randomMusicNumber == 2 && !IsMusicStreamPlaying(music)) {
+		music = LoadMusicStream("Music\\mainMusic_3.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		std::cout << randomMusicNumber << std::endl;
+		std::cout << GetMusicTimePlayed(music) << std::endl;
+	}
+	if (randomMusicNumber == 3 && !IsMusicStreamPlaying(music)) {
+		music = LoadMusicStream("Music\\mainMusic_4.mp3");
+		std::cout << randomMusicNumber << std::endl;
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+	}
+	
+	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
+
+	if (timePlayed > 1.0f) {
+		std::cout << timePlayed << std::endl;
+		StopMusicStream(music);
+		UnloadMusicStream(music);
+		randomMusicNumber++;
+	}
+
+	UpdateMusicStream(music);
 }
 
 int main()
@@ -288,7 +302,6 @@ int main()
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
 	InitAudioDevice();
 	GuiLoadStyle("style_ui.rgs");
-
 
 	SetTargetFPS(60);
 
@@ -305,14 +318,13 @@ int main()
 
 	float volume = 50;
 
-	float musicVolume = 0.5;
-	Music playMusic = LoadMusicStream("Music\\mainMusic_2.mp3");
-	SetMusicVolume(playMusic, 0.5);
+	float musicVolume = 0.1;
+	Music playMusic = LoadMusicStream("");
 
 	while (!GetExitWindow())
 	{
 		PlayMusic(playMusic);
-		UpdateMusicStream(playMusic);
+		SetMusicVolume(playMusic, 0.1);
 
 		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
 			SetExitWindowRequest(true);
@@ -359,6 +371,7 @@ int main()
 		EndDrawing();
 	}
 
+	UnloadMusicStream(playMusic);
 	CloseWindow();
 	CloseAudioDevice();
 
