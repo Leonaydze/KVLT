@@ -112,6 +112,7 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 }
 
 int lastMusicNumber = -1;
+
 /// <summary>
 /// Function for randomness of tracks
 /// </summary>
