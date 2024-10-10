@@ -11,88 +11,12 @@
 using json = nlohmann::json;
 using namespace std;
 
-//class Animal {
-//public:
-//	int id;
-//	string name;
-//	string breed;
-//	double weight;
-//
-//	Animal(int id, const string& name, const string& breed, double weight)
-//		: id(id), name(name), breed(breed), weight(weight) {}
-//
-//	// Конструктор копирования
-//	Animal(int id, const Animal& other)
-//		: id(id), name(other.name), breed(other.breed), weight(other.weight) {}
-//
-//	json toJson() const {
-//		return json{
-//			{"id",id},
-//			{"name",name},
-//			{"breed", breed},
-//			{"weight",weight}
-//		};
-//	}
-//
-//	static Animal fromJson(const json& j) {
-//		return Animal(j["id"], j["name"], j["breed"], j["weight"]);
-//	}
-//
-//	string ToString() {
-//		return to_string(id)
-//			+ " " + name
-//			+ " " + breed
-//			+ " " + to_string(weight);
-//	}
-//
-//};
-//
-//
-//
-//class AnimalService : public Service {
-//private:
-//	DataSource<Animal> dataSource;
-//public:
-//	AnimalService() :dataSource("animals.json") {}
-//	void create(const Animal& animal) {
-//		Service::create(dataSource, animal);
-//	}
-//	vector<Animal> read() {
-//		return Service::read(dataSource);
-//	}
-//	void update(const Animal& animal) {
-//		Service::update(dataSource, animal);
-//	}
-//	void remove(int id) {
-//		Service::remove(dataSource, id);
-//	}
-//};
-//
-//class TaskService : public Service {
-//private:
-//	DataSource<Task> dataSource;
-//public:
-//	TaskService() :dataSource("tasks.json") {}
-//	void create(const Task& task) {
-//		Service::create(dataSource, task);
-//	}
-//	vector<Task> read() {
-//		return Service::read(dataSource);
-//	}
-//	void update(const Task& task) {
-//		Service::update(dataSource, task);
-//	}
-//	void remove(int id) {
-//		Service::remove(dataSource, id);
-//	}
-//};
-//
-//template <typename T>
-//void PrintList(vector<T> list) {
-//	for (auto& item : list) {
-//		cout << item.ToString() << endl;
-//	}
-//}
+template <typename T>
+void PrintList(vector<T> list) {
+	for (auto& item : list) {
+		cout << item.ToString() << endl;
+	}
+}
 
 bool _exitWindowRequested = false;
 bool _exitWindow = false;

@@ -19,6 +19,8 @@ public:
 		this->_playerPosition.y = _playerPosY;
 	};
 
+	Player(const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition) {}
+
 	int GetPlayerHealth();
 	void HealPlayer(int healthAmount);
 

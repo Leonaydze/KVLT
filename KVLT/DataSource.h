@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif DATASOURCE_H
+#endif // !DATASOURCE_H

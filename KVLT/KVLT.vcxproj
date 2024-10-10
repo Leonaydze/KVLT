@@ -134,6 +134,7 @@
     <ClCompile Include="KVLT.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
+    <ClCompile Include="PlayerService.cpp" />
     <ClCompile Include="PlayerWeapon.cpp" />
     <ClCompile Include="Service.cpp" />
     <ClCompile Include="Task.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Flask.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventory.h" />
+    <ClInclude Include="PlayerService.h" />
     <ClInclude Include="PlayerWeapon.h" />
     <ClInclude Include="Service.h" />
     <ClInclude Include="Task.h" />

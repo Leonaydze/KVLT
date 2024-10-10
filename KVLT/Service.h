@@ -13,4 +13,4 @@ public:
 	void remove(DataSource<T>& dataSource, int id);
 };
 
-#endif SERVICE_H
+#endif // !SERVICE_H
