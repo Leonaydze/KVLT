@@ -112,10 +112,15 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 }
 
 int lastMusicNumber = -1;
+/// <summary>
+/// Function for randomness of tracks
+/// </summary>
+/// <param name="Music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
 	srand(time(0));
 	int randomMusicNumber = rand() % 4;
 
+	//Choice music
 	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
 		music = LoadMusicStream("Music\\mainMusic.mp3");
 		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
@@ -159,7 +164,7 @@ void PlayMusic(Music &music) {
 		lastMusicNumber = randomMusicNumber;
 	}
 
-	
+	//How much did the song play
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
 
 	if (timePlayed > 1.0f) {
@@ -183,10 +188,12 @@ int main()
 
 	SetExitKey(KEY_NULL);
 
+	//Variables for buttons
 	bool exitRequest = false;
 	bool playRequest = false;
 	bool setRequest = false;
 
+	//Text size and spacing changes
 	Font font = LoadFont("Font.png");
 	GuiSetFont(font);
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
@@ -200,47 +207,63 @@ int main()
 	while (!GetExitWindow())
 	{
 
+		//Play, update and customization music
 		PlayMusic(playMusic);
 		SetMusicVolume(playMusic, 0.1);
 		if (IsMusicStreamPlaying(playMusic)) {
 			UpdateMusicStream(playMusic);
 		}
 
+		//If the game is closed, a window pops up
 		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
 			SetExitWindowRequest(true);
 			exitRequest = true;
 		}
 
-
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 		
+		//Heading
 		DrawTextEx(font, "KVLT", { 100 , 300 }, 92, 3, WHITE);
 
+		//Buttons
 		GuiSetStyle(DEFAULT, TEXT_SIZE, 24);
 		if (GuiButton({ 125, 500, 100, 40 }, "Play"))		playRequest = true;
 		if (GuiButton({ 125, 575, 100, 40 }, "Settings"))	setRequest = true;
 		if (GuiButton({ 125, 650, 100, 40 }, "Quit")) 		exitRequest = true;
 		GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 
+		//Play
 		if (playRequest) {
 		}
 
+		//Open settings window
 		if (setRequest) {
 			int result = GuiWindowBox({600, 200, 800, 600}, "Settings");
-			if (result == 1) setRequest = false;
+			
+			//Slider and master volume change
 			DrawTextEx(font, "MasterVolume", { 650, 250 }, 20, 2, RAYWHITE);
 			GuiSlider({ 650, 275, 100, 25 }, "", "100%", &volume, 0, 100);
 			SetMasterVolume(volume);
+
+			//Slider and musiv volume change
 			DrawTextEx(font, "MusicVolume", { 650, 325 }, 20, 2, RAYWHITE);
 			GuiSlider({ 650, 350, 100, 25 }, "", "100%", &musicVolume, 0, 1);
 			SetMusicVolume(playMusic, musicVolume);
+
+			//Exit frim settings
+			if (result == 1) setRequest = false;
 		}
 
+		//Open exit window
 		if (GetExitWindowRequest() || exitRequest && !setRequest) {
 			int result = GuiMessageBox({(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 				"#193#Quit?", "Are You Want To Quit?", "Yes;No");
-			if(result == 1) SetExitWindow(true);
+
+			//Exit window choice
+			if (result == 1) {
+				SetExitWindow(true);
+			}
 			else if (result == 2 or result == 0) {
 				SetExitWindowRequest(false);
 				exitRequest = false;
@@ -251,6 +274,7 @@ int main()
 		EndDrawing();
 	}
 
+	//Close and unload
 	UnloadMusicStream(playMusic);
 	CloseWindow();
 	CloseAudioDevice();
