@@ -128,20 +128,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Altar.cpp" />
+    <ClCompile Include="DataSource.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Flask.cpp" />
     <ClCompile Include="KVLT.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerWeapon.cpp" />
+    <ClCompile Include="Service.cpp" />
+    <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h" />
+    <ClInclude Include="DataSource.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Flask.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerWeapon.h" />
+    <ClInclude Include="Service.h" />
+    <ClInclude Include="Task.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png" />
