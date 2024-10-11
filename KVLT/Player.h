@@ -12,7 +12,7 @@ private:
 
 	Vector2 _playerPosition = { 10, -100 };
 public:
-	int id = -1;
+	int id = 1;
 	Player() {};
 	Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
 		this->_playerHealth = _playerHealth;
