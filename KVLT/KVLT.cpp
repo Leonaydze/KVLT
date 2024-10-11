@@ -125,10 +125,7 @@ int main()
 	float musicVolume = 0.1;
 	Music playMusic = LoadMusicStream("");
 
-	PlayerService playerS;
-	Player player;
-
-	playerS.create(player);
+	
 
 	while (!GetExitWindow())
 	{
