@@ -1,4 +1,10 @@
 #pragma once
+#include <string>
+#include <nlohmann/json.hpp>
+#include <fstream>
+
+using json = nlohmann::json;
+
 class PlayerWeapon{
 private:
 	enum _WeaponWeight {LIGHT, MEDIUM, HEAVY};
@@ -7,6 +13,17 @@ private:
 	float _weaponSpeed = 0;
 	int GetWeaponWeight();
 public:
-	PlayerWeapon(int weaponDamage, float weaponSpeed);
+	int id = -1;
+
+	PlayerWeapon();
+
+	PlayerWeapon(_WeaponWeight currentWW, unsigned short int weaponDamage, float weaponSpeed)
+		: currentWW(currentWW), _weaponDamage(weaponDamage), _weaponSpeed(weaponSpeed) {}
+
+	PlayerWeapon(int id, const PlayerWeapon& other)
+		: id(id), currentWW(other.currentWW), _weaponDamage(other._weaponDamage), _weaponSpeed(other._weaponSpeed) {}
+
+	json toJson() const;
+	static PlayerWeapon fromJson(const json& _filename);
 };
 
