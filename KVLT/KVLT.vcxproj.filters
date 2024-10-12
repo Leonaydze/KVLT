@@ -13,12 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы ресурсов\Music">
+      <UniqueIdentifier>{7ac27741-7547-4be3-9808-6f75d285ba20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Font">
+      <UniqueIdentifier>{ac90956e-b00d-476f-a253-dc213518467f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Player">
+      <UniqueIdentifier>{e1f35e5b-30d5-40d8-a472-6ca7f3e9b7f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Player">
+      <UniqueIdentifier>{3e92be63-41f8-4233-8584-fe1a3f3d59f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
@@ -27,13 +36,7 @@
     <ClCompile Include="Altar.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInventory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Flask.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerWeapon.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="DataSource.cpp">
@@ -45,27 +48,27 @@
     <ClCompile Include="Task.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInventory.cpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerService.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWeapon.cpp">
+      <Filter>Исходные файлы\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Altar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInventory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Flask.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerWeapon.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="DataSource.h">
@@ -77,33 +80,45 @@
     <ClInclude Include="Task.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerInventory.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerService.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWeapon.h">
+      <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Font.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <Media Include="Music\mainMusic.mp3">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Music</Filter>
     </Media>
     <Media Include="Music\mainMusic_2.mp3">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Music</Filter>
     </Media>
     <Media Include="Music\mainMusic_3.mp3">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Music</Filter>
     </Media>
     <Media Include="Music\mainMusic_4.mp3">
-      <Filter>Файлы ресурсов</Filter>
-    </Media>
-    <Media Include="Music\mainMusic_6.mp3">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Music</Filter>
     </Media>
     <Media Include="Music\mainMusic_5.mp3">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Music</Filter>
     </Media>
+    <Media Include="Music\mainMusic_6.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_7.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Font.png">
+      <Filter>Файлы ресурсов\Font</Filter>
+    </Image>
   </ItemGroup>
 </Project>

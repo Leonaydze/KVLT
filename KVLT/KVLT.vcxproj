@@ -161,6 +161,7 @@
     <Media Include="Music\mainMusic_4.mp3" />
     <Media Include="Music\mainMusic_5.mp3" />
     <Media Include="Music\mainMusic_6.mp3" />
+    <Media Include="Music\mainMusic_7.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
