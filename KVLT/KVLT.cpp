@@ -132,6 +132,17 @@ int main()
 	float musicVolume = 0.1;
 	Music playMusic = LoadMusicStream("");
 
+	Player player;
+	PlayerService playerS;
+
+	PlayerInventory playerInv;
+	PlayerInventoryService playerInvS;
+
+	PlayerWeapon playerW;
+	PlayerWeaponService playerWS;
+
+	
+
 	while (!GetExitWindow())
 	{
 
@@ -201,6 +212,10 @@ int main()
 		DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
 		EndDrawing();
 	}
+
+	playerS.create(player);
+	playerInvS.create(playerInv);
+	playerWS.create(playerW);
 
 	//Close and unload
 	UnloadMusicStream(playMusic);

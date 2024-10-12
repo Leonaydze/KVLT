@@ -5,17 +5,27 @@ int PlayerWeapon::GetWeaponWeight()
 	return currentWW;
 }
 
-PlayerWeapon::PlayerWeapon(int weaponDamage, float weaponSpeed){
+PlayerWeapon::PlayerWeapon(){
 	if (GetWeaponWeight() == LIGHT) {
-		weaponDamage = 10;
-		weaponSpeed = 1.0;
+		_weaponDamage = 10;
+		_weaponSpeed = 1.0;
 	}
 	if (GetWeaponWeight() == MEDIUM) {
-		weaponDamage = 20;
-		weaponSpeed = 2.0;
+		_weaponDamage = 20;
+		_weaponSpeed = 2.0;
 	}
 	if (GetWeaponWeight() == HEAVY) {
-		weaponDamage = 40;
-		weaponSpeed = 4.0;
+		_weaponDamage = 40;
+		_weaponSpeed = 4.0;
 	}
+}
+
+json PlayerWeapon::toJson() const
+{
+	return json{ {"CurrentWeaponWeight", currentWW}, {"WeaponDamage", _weaponDamage}, {"WeaponSpeed", _weaponSpeed}};
+}
+
+PlayerWeapon PlayerWeapon::fromJson(const json& _filename)
+{
+	return PlayerWeapon(_filename["CurrentWeaponWeight"], _filename["WeaponDamage"], _filename["WeaponSpeed"]);
 }

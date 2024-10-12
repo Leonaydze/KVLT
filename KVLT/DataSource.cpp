@@ -1,5 +1,6 @@
 #include "DataSource.h"
-
+#include "Task.h"
+#include "PlayerInventory.h"
 
 template<typename T>
 void DataSource<T>::readFile() {
@@ -86,3 +87,5 @@ void DataSource<T>::remove(int id) {
 
 template class DataSource<Task>;
 template class DataSource<Player>;
+template class DataSource<PlayerInventory>;
+template class DataSource<PlayerWeapon>;
