@@ -38,7 +38,7 @@ int lastMusicNumber = -1;
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
 	srand(time(0));
-	int randomMusicNumber = rand() % 6;
+	int randomMusicNumber = rand() % 7;
 
 	//Choice music
 	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
@@ -83,6 +83,13 @@ void PlayMusic(Music &music) {
 		}
 		lastMusicNumber = randomMusicNumber;
 	}
+	if (randomMusicNumber == 6 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_7.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
 
 	//How much did the song play
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
@@ -91,7 +98,7 @@ void PlayMusic(Music &music) {
 		StopMusicStream(music);
 		UnloadMusicStream(music);
 		while (lastMusicNumber == randomMusicNumber) {
-			randomMusicNumber = rand() % 6;
+			randomMusicNumber = rand() % 7;
 		}
 	}
 }
@@ -125,11 +132,6 @@ int main()
 	float musicVolume = 0.1;
 	Music playMusic = LoadMusicStream("");
 
-	PlayerService playerService;
-	Player player;
-
-
-	playerService.create(player);
 	while (!GetExitWindow())
 	{
 
