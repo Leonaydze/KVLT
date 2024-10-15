@@ -218,7 +218,6 @@ int main()
 	playerInvS.create(playerInv);
 	playerWS.create(playerW);
 
-
 	//Close and unload
 	UnloadMusicStream(playMusic);
 	CloseWindow();
