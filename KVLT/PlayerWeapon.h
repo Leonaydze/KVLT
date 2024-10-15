@@ -21,7 +21,7 @@ public:
 		: currentWW(currentWW), _weaponDamage(weaponDamage), _weaponSpeed(weaponSpeed) {}
 
 	PlayerWeapon(int id, const PlayerWeapon& other)
-		: id(id), currentWW(other.currentWW), _weaponDamage(other._weaponDamage), _weaponSpeed(other._weaponSpeed) {}
+		: currentWW(other.currentWW), _weaponDamage(other._weaponDamage), _weaponSpeed(other._weaponSpeed) {}
 
 	json toJson() const;
 	static PlayerWeapon fromJson(const json& _filename);

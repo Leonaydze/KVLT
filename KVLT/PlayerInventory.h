@@ -15,7 +15,7 @@ public:
 
 	PlayerInventory(int currentCountFlask) : _currentCountFlask(currentCountFlask) {}
 
-	PlayerInventory(int id, const PlayerInventory& other) : id(id), _currentCountFlask(other._currentCountFlask) {}
+	PlayerInventory(int id, const PlayerInventory& other) : _currentCountFlask(other._currentCountFlask) {}
 
 	int GetCurrentCountFlask();
 
