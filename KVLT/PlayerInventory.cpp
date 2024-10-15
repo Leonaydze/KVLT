@@ -18,7 +18,7 @@ int PlayerInventory::GetCurrentCountFlask()
 
 json PlayerInventory::toJson() const
 {
-	return json{ {"CurrentCountFlask", _currentCountFlask}};
+	return json{ {"id", id} ,{"CurrentCountFlask", _currentCountFlask}};
 }
 
 PlayerInventory PlayerInventory::fromJson(const json& _filename)

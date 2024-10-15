@@ -6,7 +6,7 @@ template<typename T>
 void DataSource<T>::readFile() {
 	ifstream inputFile(filename);
 	if (inputFile) {
-		inputFile >> data;
+		inputFile >> data;		
 		currentId = data.empty() ? 1 : data.back()["id"] + 1;
 	}
 	else {

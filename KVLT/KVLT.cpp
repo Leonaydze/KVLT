@@ -106,6 +106,7 @@ void PlayMusic(Music &music) {
 int main()
 {
 	setlocale(0, "ru");
+	
 
 	//Init window, audio and gui style
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
@@ -216,6 +217,7 @@ int main()
 	playerS.create(player);
 	playerInvS.create(playerInv);
 	playerWS.create(playerW);
+
 
 	//Close and unload
 	UnloadMusicStream(playMusic);

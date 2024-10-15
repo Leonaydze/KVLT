@@ -34,7 +34,7 @@ void Player::SetPlayerPositionY(float playerPosY){
 
 json Player::toJson() const
 {
-	return json{ {"Health", _playerHealth}, {"PosX", _playerPosition.x}, {"PosY", _playerPosition.y}};
+	return json{ {"id", id}, { "Health", _playerHealth }, {"PosX", _playerPosition.x}, {"PosY", _playerPosition.y}};
 }
 
 Player Player::fromJson(const json& _filename)
