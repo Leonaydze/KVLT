@@ -6,8 +6,9 @@ template<typename T>
 void DataSource<T>::readFile() {
 	ifstream inputFile(filename);
 	if (inputFile) {
-		inputFile >> data;		
-		currentId = data.empty() ? 1 : data.back()["id"] + 1;
+		inputFile >> data;	
+		std::cout << data.dump(4);
+		currentId = data["id"] + 1;
 	}
 	else {
 		currentId = 1;
@@ -46,7 +47,7 @@ DataSource<T>::~DataSource () {
 template <typename T>
 void DataSource<T>::create(const T& item) {
 	T next(currentId, item);
-	data.push_back(next.toJson());
+	data = next.toJson();
 	currentId++;
 	writeFile(data);
 }
