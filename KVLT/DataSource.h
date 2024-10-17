@@ -6,6 +6,8 @@
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <fstream>
+#include "PlayerInventory.h"
+#include "Clergy.h"
 
 using namespace std;
 using json = nlohmann::json;

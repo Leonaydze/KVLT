@@ -3,7 +3,6 @@
 
 #include "DataSource.h"
 #include "Service.h"
-#include "PlayerInventory.h"
 
 class PlayerService : public Service<Player> {
 private:
@@ -38,6 +37,18 @@ public:
 	void create(const PlayerWeapon& playerWeapon);
 	vector<PlayerWeapon> read();
 	void update(const PlayerWeapon& playerWeapon);
+	void remove(int id);
+};
+
+class PlayerClergyService : public Service<Clergy> {
+private:
+	DataSource<Clergy> dataSource;
+public:
+	PlayerClergyService();
+
+	void create(const Clergy& playerClergy);
+	vector<Clergy> read();
+	void update(const Clergy& playerClergy);
 	void remove(int id);
 };
 

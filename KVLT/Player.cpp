@@ -6,6 +6,9 @@ int Player::GetPlayerHealth(){
 
 void Player::HealPlayer(int healthAmount){
 	_playerHealth += healthAmount;
+	if (_playerHealth >= 100) {
+		_playerHealth = 100;
+	}
 }
 
 Vector2 Player::GetPlayerPositionV(){

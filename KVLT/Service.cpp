@@ -1,6 +1,5 @@
 #include "Service.h"
 #include "Task.h"
-#include "PlayerInventory.h"
 
 template <typename T>
 void Service<T>::create(DataSource<T>& dataSource, const T& item) {
@@ -24,3 +23,4 @@ template class Service<Task>;
 template class Service<Player>;
 template class Service<PlayerInventory>;
 template class Service<PlayerWeapon>;
+template class Service<Clergy>;

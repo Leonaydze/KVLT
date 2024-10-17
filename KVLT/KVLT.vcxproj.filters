@@ -60,6 +60,9 @@
     <ClCompile Include="PlayerWeapon.cpp">
       <Filter>Исходные файлы\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Clergy.cpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -90,6 +93,9 @@
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerWeapon.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Clergy.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
   </ItemGroup>

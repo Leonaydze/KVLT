@@ -6,6 +6,24 @@
 using json = nlohmann::json;
 using namespace std;
 
+double lastUpdateTime = 0;
+/// <summary>
+/// A function to indicate that the code is stopped for a while
+/// </summary>
+/// <param name="interval - "> The time for which the code will stop</param>
+/// <returns></returns>
+bool TriggerEvent(double interval) {
+	double currentTime = GetTime();
+
+	if (currentTime - lastUpdateTime >= interval) {
+		lastUpdateTime = currentTime;
+
+		return true;
+	}
+
+	return false;
+}
+
 template <typename T>
 void PrintList(vector<T> list) {
 	for (auto& item : list) {
@@ -106,7 +124,6 @@ void PlayMusic(Music &music) {
 int main()
 {
 	setlocale(0, "ru");
-	
 
 	//Init window, audio and gui style
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
@@ -142,7 +159,8 @@ int main()
 	PlayerWeapon playerW;
 	PlayerWeaponService playerWS;
 
-	
+	Clergy c;
+	PlayerClergyService cS;
 
 	while (!GetExitWindow())
 	{
@@ -175,6 +193,7 @@ int main()
 
 		//Play
 		if (playRequest) {
+			//
 		}
 
 		//Open settings window
@@ -214,9 +233,11 @@ int main()
 		EndDrawing();
 	}
 
+	//Test save data
 	playerS.create(player);
 	playerInvS.create(playerInv);
 	playerWS.create(playerW);
+	cS.create(c);
 
 	//Close and unload
 	UnloadMusicStream(playMusic);

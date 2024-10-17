@@ -45,3 +45,19 @@ void PlayerWeaponService::update(const PlayerWeapon& playerWeapon) {
 void PlayerWeaponService::remove(int id) {
 	Service::remove(dataSource, id);
 }
+
+PlayerClergyService::PlayerClergyService() : dataSource("Save\\PlayerClergyData.json") {
+}
+
+void PlayerClergyService::create(const Clergy& playerClergy) {
+	Service::create(dataSource, playerClergy);
+}
+vector<Clergy> PlayerClergyService::read() {
+	return Service::read(dataSource);
+}
+void PlayerClergyService::update(const Clergy& playerClergy) {
+	Service::update(dataSource, playerClergy);
+}
+void PlayerClergyService::remove(int id) {
+	Service::remove(dataSource, id);
+}
