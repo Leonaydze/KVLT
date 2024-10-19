@@ -2,6 +2,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <raylib.h>
 
 using json = nlohmann::json;
 
@@ -12,6 +13,8 @@ private:
 	unsigned short int _weaponDamage = 0;
 	float _weaponSpeed = 0;
 	int GetWeaponWeight();
+
+	void SetDamageAndSpeedDueToWeight();
 public:
 	int id = -1;
 
@@ -25,5 +28,9 @@ public:
 
 	json toJson() const;
 	static PlayerWeapon fromJson(const json& _filename);
+
+	unsigned short int GetWeaponDamage();
+
+	void SetRandomDamege();
 };
 

@@ -11,6 +11,18 @@ private:
 	short int _playerHealth = 100;
 
 	Vector2 _playerPosition = { 10, -100 };
+
+	Vector2 _playerVelocity{ 0.0f, 0.0f };
+
+	float _playerSpeed = 5.0f;
+
+	float _jumpHeight = 0;
+	float _jumpMaxHeight = 200;
+	float _playerJumpSpeed = 6.5f;
+
+	bool _playerCanJump = true;
+	bool _playerJump = false;
+	bool _playerCanWalk = true;
 public:
 	int id = -1;
 	Player() {};
@@ -36,5 +48,16 @@ public:
 
 	json toJson() const;
 	static Player fromJson(const json& _filename);
+
+	void PlayerController();
+
+	bool IsPlayerJump();
+	float GetJumpHeight();
+	bool PlayerMaxJump();
+	void SetPlayerCanJump(bool playerCanJump);
+	bool GetPlayerCanJump();
+
+	void MoveVertically();
+	void MoveVerticallyDown();
 };
 
