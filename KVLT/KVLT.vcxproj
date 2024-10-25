@@ -155,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png" />
+    <Image Include="Sprites\Lich.png" />
+    <Image Include="Sprites\Orc.png" />
+    <Image Include="Sprites\Player.png" />
+    <Image Include="Sprites\Roc.png" />
+    <Image Include="Sprites\Titan.png" />
+    <Image Include="Sprites\Vampire.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Music\mainMusic.mp3" />

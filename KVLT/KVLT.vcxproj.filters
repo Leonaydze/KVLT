@@ -25,6 +25,9 @@
     <Filter Include="Исходные файлы\Player">
       <UniqueIdentifier>{3e92be63-41f8-4233-8584-fe1a3f3d59f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\Sprites">
+      <UniqueIdentifier>{fb090c50-5c2e-448d-b419-6b4912e09a39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
@@ -125,6 +128,24 @@
   <ItemGroup>
     <Image Include="Font.png">
       <Filter>Файлы ресурсов\Font</Filter>
+    </Image>
+    <Image Include="Sprites\Lich.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Orc.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Player.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Roc.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Titan.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Vampire.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
