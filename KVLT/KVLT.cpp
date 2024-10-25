@@ -220,6 +220,9 @@ int main()
 			}
 
 			//Open exit window
+
+			DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
+		}
 			if (GetExitWindowRequest() || exitRequest && !setRequest) {
 				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
@@ -233,9 +236,6 @@ int main()
 					exitRequest = false;
 				}
 			}
-
-			DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
-		}
 		EndDrawing();
 	}
 
