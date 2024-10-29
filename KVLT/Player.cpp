@@ -130,7 +130,7 @@ void Player::PlayerController() {
 		_playerJump = true;
 	}
 
-	if ((IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) && !IsKeyDown(KEY_LEFT_SHIFT)) {
+	if (!IsKeyDown(KEY_LEFT_SHIFT) && (IsKeyDown(KEY_A) || IsKeyDown(KEY_D))) {
 		_frameRec.y = 131;
 	}
 	else if (IsKeyDown(KEY_LEFT_SHIFT)) {
