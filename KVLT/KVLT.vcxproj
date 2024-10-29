@@ -171,6 +171,9 @@
     <Media Include="Music\mainMusic_6.mp3" />
     <Media Include="Music\mainMusic_7.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Save\PlayerData.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
