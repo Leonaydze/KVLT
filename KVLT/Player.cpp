@@ -42,7 +42,7 @@ json Player::toJson() const
 
 Player Player::fromJson(const json& _filename)
 {
-	return Player(_filename["Health"], _filename["PosX"], _filename["PosY"]);
+	return Player(_filename["id"], _filename["Health"], _filename["PosX"], _filename["PosY"]);
 }
 
 void Player::PlayerController() {
@@ -177,8 +177,10 @@ void Player::MoveVerticallyDown() {
 		_playerJumpSpeed += 0.3f;
 }
 
-void Player::Init()
+void Player::Init(Player player)
 {
+	this->SetPlayerPositionX(player.GetPlayerPositionX());
+	this->SetPlayerPositionY(player.GetPlayerPositionY());
 	_playerTexture = LoadTexture("Sprites\\Player.png");
 }
 

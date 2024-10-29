@@ -149,7 +149,8 @@ int main()
 	Player player;
 	PlayerService playerS;
 
-	player.Init();
+	playerS.read();
+	//player.Init(playerS.read()[0]);
 
 	PlayerInventory playerInv;
 	PlayerInventoryService playerInvS;
