@@ -156,6 +156,8 @@ int main()
 	Player player;
 	PlayerService playerS;
 
+	player.Init();
+
 	PlayerInventory playerInv;
 	PlayerInventoryService playerInvS;
 
@@ -198,7 +200,7 @@ int main()
 
 			//Play
 			if (playRequest) {
-				_currentScreen == LVL_TUTORIAL;
+				_currentScreen = LVL_TUTORIAL;
 			}
 
 			//Open settings window
@@ -218,11 +220,9 @@ int main()
 				//Exit frim settings
 				if (result == 1) setRequest = false;
 			}
-
-			//Open exit window
-
 			DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
 		}
+			//Open exit window
 			if (GetExitWindowRequest() || exitRequest && !setRequest) {
 				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
@@ -236,8 +236,14 @@ int main()
 					exitRequest = false;
 				}
 			}
+		if (_currentScreen != mainMenu) {
+			player.PlayerController();
+			player.Draw();
+		}
+
 		EndDrawing();
 	}
+
 
 	//Test save data
 	playerS.create(player);

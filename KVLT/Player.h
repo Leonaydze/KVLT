@@ -9,8 +9,9 @@ using json = nlohmann::json;
 class Player{
 private:
 	short int _playerHealth = 100;
+	unsigned short int _maxPlayerHealth = 100;
 
-	Vector2 _playerPosition = { 10, -100 };
+	Vector2 _playerPosition = { 10, 700 };
 
 	Vector2 _playerVelocity{ 0.0f, 0.0f };
 
@@ -23,6 +24,14 @@ private:
 	bool _playerCanJump = true;
 	bool _playerJump = false;
 	bool _playerCanWalk = true;
+
+	Texture2D _playerTexture;
+	Rectangle _frameRec{0, 131, 131, 131};
+
+	int currentFrame = 0;
+
+	int framesCounter = 0;
+	int framesSpeed = 8;
 public:
 	int id = -1;
 	Player() {};
@@ -59,5 +68,9 @@ public:
 
 	void MoveVertically();
 	void MoveVerticallyDown();
+
+	void Init();
+	void Draw();
+	void DrawHUD();
 };
 

@@ -26,7 +26,7 @@ PlayerWeapon::PlayerWeapon(){
 
 json PlayerWeapon::toJson() const
 {
-	return json{{ "CurrentWeaponWeight", currentWW }, {"WeaponDamage", _weaponDamage}, {"WeaponSpeed", _weaponSpeed}};
+	return json{ {"id", id}, { "CurrentWeaponWeight", currentWW }, {"WeaponDamage", _weaponDamage}, {"WeaponSpeed", _weaponSpeed}};
 }
 
 PlayerWeapon PlayerWeapon::fromJson(const json& _filename)

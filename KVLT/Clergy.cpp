@@ -11,7 +11,7 @@ int Clergy::GetClergyCount()
 
 json Clergy::toJson() const
 {
-	return json{ {"CountClergy", _countClergy}};
+	return json{ {"id", id}, {"CountClergy", _countClergy}};
 }
 
 Clergy Clergy::fromJson(const json& _filename)
