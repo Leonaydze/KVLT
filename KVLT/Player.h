@@ -15,10 +15,10 @@ private:
 
 	Vector2 _playerVelocity{ 0.0f, 0.0f };
 
-	float _playerSpeed = 5.0f;
+	float _playerSpeed = 4.0f;
 
 	float _jumpHeight = 0;
-	float _jumpMaxHeight = 200;
+	float _jumpMaxHeight = 300;
 	float _playerJumpSpeed = 6.5f;
 
 	bool _playerCanJump = true;
@@ -35,7 +35,7 @@ private:
 public:
 	int id = -1;
 	Player() {};
-	Player(short int _playerHealth, double _playerPosX, double _playerPosY) {
+	Player(short int _playerHealth, float _playerPosX, float _playerPosY) {
 		this->_playerHealth = _playerHealth;
 		this->_playerPosition.x = _playerPosX;
 		this->_playerPosition.y = _playerPosY;

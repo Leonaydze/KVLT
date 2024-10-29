@@ -24,13 +24,6 @@ bool TriggerEvent(double interval) {
 	return false;
 }
 
-template <typename T>
-void PrintList(vector<T> list) {
-	for (auto& item : list) {
-		cout << item.ToString() << endl;
-	}
-}
-
 bool _exitWindowRequested = false;
 bool _exitWindow = false;
 
@@ -55,7 +48,7 @@ int lastMusicNumber = -1;
 /// </summary>
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
-	srand(time(0));
+	srand(time(NULL));
 	int randomMusicNumber = rand() % 7;
 
 	//Choice music
@@ -150,7 +143,7 @@ int main()
 
 	float volume = 50;
 
-	float musicVolume = 0.1;
+	float musicVolume = 0.1f;
 	Music playMusic = LoadMusicStream("");
 
 	Player player;

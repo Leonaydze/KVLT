@@ -188,6 +188,6 @@ void Player::Draw()
 }
 
 void Player::DrawHUD() {
-	DrawRectangle(_playerPosition.x - 900, _playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
-	DrawRectangle(_playerPosition.x - 895, _playerPosition.y - 645, GetPlayerHealth() * 2, 20, RED);
+	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
+	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, GetPlayerHealth() * 2, 20, RED);
 }
