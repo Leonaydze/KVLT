@@ -11,14 +11,14 @@ private:
 	short int _playerHealth = 100;
 	unsigned short int _maxPlayerHealth = 100;
 
-	Vector2 _playerPosition = { 0, 700 };
+	Vector2 _playerPosition = { 0, 870 };
 
-	Vector2 _playerVelocity{ 0.0f, 0.0f };
+	Vector2 _playerVelocity = { 0.0f, 0.0f };
 
 	float _playerSpeed = 4.0f;
 
 	float _jumpHeight = 0;
-	float _jumpMaxHeight = 300;
+	float _jumpMaxHeight = 200;
 	float _playerJumpSpeed = 6.5f;
 
 	bool _playerCanJump = true;

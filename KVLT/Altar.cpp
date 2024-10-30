@@ -15,8 +15,8 @@ Altar::Altar(){
 void Altar::Init()
 {
 	_altarTexture = LoadTexture("Sprites\\Altar.png");
-	_altarTexture.height /= 2.5f;
-	_altarTexture.width /= 2.5f;
+	_altarTexture.height /= (int)2.5f;
+	_altarTexture.width /= (int)2.5f;
 }
 
 void Altar::Draw()

@@ -3,9 +3,16 @@
 #include <ctime>
 #include "PlayerService.h"
 #include "Altar.h"
+#include "Ground.h"
 
 using json = nlohmann::json;
 using namespace std;
+
+bool PlayerOnGround(Player player, Ground& ground) {
+	player.SetPlayerCanJump(true);
+	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
+		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() <= ground.GetGroundPositionY() + ground.GetGroundHeight());
+}
 
 double lastUpdateTime = 0;
 /// <summary>
@@ -161,9 +168,16 @@ int main()
 	Clergy c;
 	PlayerClergyService cS;
 
+	Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
+
+	Camera2D _playerCamera;
+
+	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
+	_playerCamera.zoom = 1.0f;
+	_playerCamera.rotation = 0.0f;
+
 	while (!GetExitWindow())
 	{
-
 		//Play, update and customization music
 		PlayMusic(playMusic);
 		if (IsMusicStreamPlaying(playMusic)) {
@@ -231,20 +245,25 @@ int main()
 				}
 			}
 		if (_currentScreen != mainMenu) {
-			ClearBackground(BLACK);
+			if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
+				player.MoveVertically();
+			}
+			else if (PlayerOnGround(player, mainGroundFloor)) {
+				player.SetPlayerCanJump(true);
+			}
+			else if (player.PlayerMaxJump() || !player.IsPlayerJump()) {
+				player.MoveVerticallyDown();
+			}
 			player.PlayerController();
+			ClearBackground(BLACK);
+			_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
+			mainGroundFloor.GroundDraw();
 			player.Draw();
 		}
 
 		EndDrawing();
+		EndMode2D();
 	}
-
-
-	//Test save data
-	playerS.create(player);
-	playerInvS.create(playerInv);
-	playerWS.create(playerW);
-	cS.create(c);
 
 	//Close and unload
 	UnloadMusicStream(playMusic);
