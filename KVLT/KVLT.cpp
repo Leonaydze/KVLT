@@ -2,32 +2,7 @@
 #include <raygui.h>
 #include <ctime>
 #include "PlayerService.h"
-#include "Altar.h"
-#include "Ground.h"
-#include "Border.h"
-
-using json = nlohmann::json;
-using namespace std;
-
-bool PlayerOnGround(Player& player, Ground& ground) {
-	player.SetPlayerCanJump(true);
-	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
-		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() <= ground.GetGroundPositionY() + ground.GetGroundHeight());
-}
-
-void PlayerCantWalk(Player& player, Border& border) {
-	if (player.GetPlayerPositionX() + 100 >= border.GetBorderPosX() && player.GetPlayerPositionX() + 100 <= border.GetBorderPosX() + 10 
-		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1) {
-		player.SetPlayerCanWalk(-1);
-		return;
-	}
-	if (player.GetPlayerPositionX() + 31 <= border.GetBorderPosX() + border.GetBorderWidth() && player.GetPlayerPositionX() + 31 >= border.GetBorderPosX() + border.GetBorderWidth() - 10 
-		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1) {
-		player.SetPlayerCanWalk(1);
-		return;
-	}
-	player.SetPlayerCanWalk(0);
-}
+#include "Level_logic.h"
 
 double lastUpdateTime = 0;
 /// <summary>
@@ -65,7 +40,6 @@ void SetExitWindowRequest(bool exitWindowRequest) {
 }
 
 int lastMusicNumber = -1;
-
 /// <summary>
 /// Function for randomness of tracks
 /// </summary>
@@ -141,9 +115,6 @@ int main()
 {
 	setlocale(0, "ru");
 
-	enum _gameScreen { mainMenu = 0, LVL_TUTORIAL, LVL_1, LVL_2, LVL_3, LVL_4 };
-	_gameScreen _currentScreen = mainMenu;
-
 	//Init window, audio and gui style
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
 	InitAudioDevice();
@@ -169,7 +140,6 @@ int main()
 	float musicVolume = 0.1f;
 	Music playMusic = LoadMusicStream("");
 
-	Player player;
 	PlayerService playerS;
 
 	player.Init(/*playerS.read()[0]*/);
@@ -182,9 +152,6 @@ int main()
 
 	Clergy c;
 	PlayerClergyService cS;
-
-	Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
-	Border mainBorder = Border({300, 700 }, WHITE, 20, 1000);
 
 	Camera2D _playerCamera;
 
@@ -210,7 +177,7 @@ int main()
 		BeginDrawing();
 		
 		
-		if(_currentScreen == mainMenu){
+		if(GetCurrentGameScreen() == mainMenu) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			//Heading
 			DrawTextEx(font, "KVLT", { 100 , 300 }, 92, 3, WHITE);
@@ -224,7 +191,7 @@ int main()
 
 			//Play
 			if (playRequest) {
-				_currentScreen = LVL_TUTORIAL;
+				SetCurrentScreen(LVL_TUTORIAL);
 			}
 
 			//Open settings window
@@ -260,23 +227,8 @@ int main()
 					exitRequest = false;
 				}
 			}
-		if (_currentScreen != mainMenu) {
-			if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
-				player.MoveVertically();
-			}
-			else if (PlayerOnGround(player, mainGroundFloor)) {
-				player.SetPlayerCanJump(true);
-			}
-			else if (player.PlayerMaxJump() || !player.IsPlayerJump()) {
-				player.MoveVerticallyDown();
-			}
-			player.PlayerController();
-			ClearBackground(BLACK);
-			_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
-			mainGroundFloor.GroundDraw();
-			mainBorder.Draw();
-			player.Draw();
-			PlayerCantWalk(player, mainBorder);
+		if (GetCurrentGameScreen() != mainMenu) {
+
 		}
 
 		EndDrawing();
