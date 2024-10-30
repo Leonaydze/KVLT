@@ -55,7 +55,7 @@ Player Player::fromJson(const json& _filename)
 }
 
 void Player::PlayerController() {
-	if (IsKeyDown(KEY_D) && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 1200 && !IsKeyDown(KEY_A) && _playerCanWalk) {
+	if (IsKeyDown(KEY_D) && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 1200 && !IsKeyDown(KEY_A) && _playerCanWalk >= 0) {
 		_playerVelocity.x += _playerSpeed;
 		framesSpeed = 8;
 		if (IsKeyDown(KEY_LEFT_SHIFT)) {
@@ -95,7 +95,7 @@ void Player::PlayerController() {
 			}
 		}
 	}
-	if (IsKeyDown(KEY_A) && _playerHealth > 0 && _playerPosition.x > 0 && !IsKeyDown(KEY_D) && _playerCanWalk) {
+	if (IsKeyDown(KEY_A) && _playerHealth > 0 && _playerPosition.x > 0 && !IsKeyDown(KEY_D) && _playerCanWalk <= 0) {
 		_playerVelocity.x -= _playerSpeed;
 		framesSpeed = 8;
 		if (IsKeyDown(KEY_LEFT_SHIFT)) {
@@ -148,6 +148,10 @@ void Player::PlayerController() {
 
 	_playerVelocity.y = 0;
 	_playerVelocity.x = 0;
+}
+
+void Player::SetPlayerCanWalk(int playerCanWalk){
+	_playerCanWalk = playerCanWalk;
 }
 
 bool Player::IsPlayerJump() {

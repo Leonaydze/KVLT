@@ -48,9 +48,6 @@
     <ClCompile Include="Service.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Task.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Исходные файлы\Player</Filter>
     </ClCompile>
@@ -65,6 +62,15 @@
     </ClCompile>
     <ClCompile Include="Clergy.cpp">
       <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Pugalo.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Border.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,9 +89,6 @@
     <ClInclude Include="Service.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerInventory.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
@@ -100,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="Clergy.h">
       <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Pugalo.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Border.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +158,12 @@
     </Image>
     <Image Include="Sprites\Vampire.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Altar.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Sprites\Pugalo_atlas.png">
+      <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>
 </Project>

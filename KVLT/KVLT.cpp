@@ -4,14 +4,29 @@
 #include "PlayerService.h"
 #include "Altar.h"
 #include "Ground.h"
+#include "Border.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-bool PlayerOnGround(Player player, Ground& ground) {
+bool PlayerOnGround(Player& player, Ground& ground) {
 	player.SetPlayerCanJump(true);
 	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
 		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() <= ground.GetGroundPositionY() + ground.GetGroundHeight());
+}
+
+void PlayerCantWalk(Player& player, Border& border) {
+	if (player.GetPlayerPositionX() + 100 >= border.GetBorderPosX() && player.GetPlayerPositionX() + 100 <= border.GetBorderPosX() + 10 
+		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1) {
+		player.SetPlayerCanWalk(-1);
+		return;
+	}
+	if (player.GetPlayerPositionX() + 31 <= border.GetBorderPosX() + border.GetBorderWidth() && player.GetPlayerPositionX() + 31 >= border.GetBorderPosX() + border.GetBorderWidth() - 10 
+		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1) {
+		player.SetPlayerCanWalk(1);
+		return;
+	}
+	player.SetPlayerCanWalk(0);
 }
 
 double lastUpdateTime = 0;
@@ -169,6 +184,7 @@ int main()
 	PlayerClergyService cS;
 
 	Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
+	Border mainBorder = Border({300, 700 }, WHITE, 20, 1000);
 
 	Camera2D _playerCamera;
 
@@ -258,7 +274,9 @@ int main()
 			ClearBackground(BLACK);
 			_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
 			mainGroundFloor.GroundDraw();
+			mainBorder.Draw();
 			player.Draw();
+			PlayerCantWalk(player, mainBorder);
 		}
 
 		EndDrawing();

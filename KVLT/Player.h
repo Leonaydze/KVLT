@@ -23,7 +23,7 @@ private:
 
 	bool _playerCanJump = true;
 	bool _playerJump = false;
-	bool _playerCanWalk = true;
+	int _playerCanWalk = 0;
 
 	Texture2D _playerTexture;
 	Rectangle _frameRec{0, 131, 131, 131};
@@ -62,6 +62,12 @@ public:
 	static Player fromJson(const json& _filename);
 
 	void PlayerController();
+
+	/// <summary>
+	/// The player can walk in directions
+	/// </summary>
+	/// <param name="playerCanWalk"> -1 -- left, 0 -- all directions, 1 -- right</param>
+	void SetPlayerCanWalk(int playerCanWalk);
 
 	bool IsPlayerJump();
 	float GetJumpHeight();
