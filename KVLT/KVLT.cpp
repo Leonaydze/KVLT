@@ -142,6 +142,7 @@ int main()
 
 	PlayerService playerS;
 
+	Player player;
 	player.Init(/*playerS.read()[0]*/);
 
 	PlayerInventory playerInv;
@@ -175,8 +176,7 @@ int main()
 
 		//Drawing display
 		BeginDrawing();
-		
-		
+
 		if(GetCurrentGameScreen() == mainMenu) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			//Heading
@@ -214,21 +214,23 @@ int main()
 			DrawTextEx(font, "develop. by SVTVN", { (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000 }, 36, 3, GRAY);
 		}
 			//Open exit window
-			if (GetExitWindowRequest() || exitRequest && !setRequest) {
-				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
-					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
+		if (GetExitWindowRequest() || exitRequest && !setRequest) {
+			int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
+				"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
-				//Exit window choice
-				if (result == 1) {
-					SetExitWindow(true);
-				}
-				else if (result == 2 or result == 0) {
-					SetExitWindowRequest(false);
-					exitRequest = false;
-				}
+			//Exit window choice
+			if (result == 1) {
+				SetExitWindow(true);
 			}
-		if (GetCurrentGameScreen() != mainMenu) {
-
+			else if (result == 2 or result == 0) {
+				SetExitWindowRequest(false);
+				exitRequest = false;
+			}
+		}
+		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
+			ClearBackground(BLACK);
+			LEVEL_T_LOGIC(player);
+			LEVEL_T_DRAW(player);
 		}
 
 		EndDrawing();
