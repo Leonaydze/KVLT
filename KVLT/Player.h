@@ -9,9 +9,9 @@ using json = nlohmann::json;
 class Player{
 private:
 	short int _playerHealth = 100;
-	unsigned short int _maxPlayerHealth = 0;
+	unsigned short int _maxPlayerHealth = 100;
 
-	Vector2 _playerPosition = { 0, 0 };
+	Vector2 _playerPosition = { 0, 700 };
 
 	Vector2 _playerVelocity{ 0.0f, 0.0f };
 
@@ -44,7 +44,9 @@ public:
 
 	Player(int id, const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition) {}
 
-	int GetPlayerHealth();
+	short int GetPlayerHealth();
+	void SetPlayerHealth(short int playerHealth);
+	unsigned short int GetMaxPlayerHealth();
 	void HealPlayer(int healthAmount);
 
 	Vector2 GetPlayerPositionV();
@@ -72,6 +74,5 @@ public:
 
 	void Init(/*Player player*/);
 	void Draw();
-	void DrawHUD();
 };
 

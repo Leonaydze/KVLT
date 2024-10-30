@@ -132,13 +132,14 @@
     <ClCompile Include="DataSource.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Flask.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="KVLT.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerService.cpp" />
     <ClCompile Include="PlayerWeapon.cpp" />
+    <ClCompile Include="Pugalo.cpp" />
     <ClCompile Include="Service.cpp" />
-    <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h" />
@@ -146,18 +147,21 @@
     <ClInclude Include="DataSource.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Flask.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerService.h" />
     <ClInclude Include="PlayerWeapon.h" />
+    <ClInclude Include="Pugalo.h" />
     <ClInclude Include="Service.h" />
-    <ClInclude Include="Task.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png" />
+    <Image Include="Sprites\Altar.png" />
     <Image Include="Sprites\Lich.png" />
     <Image Include="Sprites\Orc.png" />
     <Image Include="Sprites\Player.png" />
+    <Image Include="Sprites\Pugalo_atlas.png" />
     <Image Include="Sprites\Roc.png" />
     <Image Include="Sprites\Titan.png" />
     <Image Include="Sprites\Vampire.png" />
@@ -170,9 +174,6 @@
     <Media Include="Music\mainMusic_5.mp3" />
     <Media Include="Music\mainMusic_6.mp3" />
     <Media Include="Music\mainMusic_7.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Save\PlayerData.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

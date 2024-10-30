@@ -2,6 +2,7 @@
 #include <raygui.h>
 #include <ctime>
 #include "PlayerService.h"
+#include "Altar.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -177,10 +178,10 @@ int main()
 
 		//Drawing display
 		BeginDrawing();
-		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 		
 		
 		if(_currentScreen == mainMenu){
+			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			//Heading
 			DrawTextEx(font, "KVLT", { 100 , 300 }, 92, 3, WHITE);
 
@@ -230,6 +231,7 @@ int main()
 				}
 			}
 		if (_currentScreen != mainMenu) {
+			ClearBackground(BLACK);
 			player.PlayerController();
 			player.Draw();
 		}

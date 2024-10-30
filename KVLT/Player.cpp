@@ -1,7 +1,16 @@
 #include "Player.h"
 
-int Player::GetPlayerHealth(){
+short int Player::GetPlayerHealth(){
 	return _playerHealth;
+}
+
+void Player::SetPlayerHealth(short int playerHealth){
+	_playerHealth = playerHealth;
+}
+
+unsigned short int Player::GetMaxPlayerHealth()
+{
+	return _maxPlayerHealth;
 }
 
 void Player::HealPlayer(int healthAmount){
@@ -187,9 +196,6 @@ void Player::Init(/*Player player*/)
 void Player::Draw()
 {
 	DrawTextureRec(_playerTexture, _frameRec, _playerPosition, WHITE);
-}
-
-void Player::DrawHUD() {
 	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
 	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, GetPlayerHealth() * 2, 20, RED);
 }
