@@ -37,7 +37,7 @@ void PlayerCantWalk(Player& player, Border& border) {
 }
 
 Ground mainGroundFloor;
-Border mainBorder
+Border mainBorder;
 
 void LEVEL_T_LOGIC(Player& player) {
 	player.Init();
