@@ -70,7 +70,7 @@ public:
 	void MoveVertically();
 	void MoveVerticallyDown();
 
-	void Init(Player player);
+	void Init(/*Player player*/);
 	void Draw();
 	void DrawHUD();
 };

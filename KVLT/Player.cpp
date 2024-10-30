@@ -177,10 +177,10 @@ void Player::MoveVerticallyDown() {
 		_playerJumpSpeed += 0.3f;
 }
 
-void Player::Init(Player player)
+void Player::Init(/*Player player*/)
 {
-	this->SetPlayerPositionX(player.GetPlayerPositionX());
-	this->SetPlayerPositionY(player.GetPlayerPositionY());
+	//this->SetPlayerPositionX(player.GetPlayerPositionX());
+	//this->SetPlayerPositionY(player.GetPlayerPositionY());
 	_playerTexture = LoadTexture("Sprites\\Player.png");
 }
 

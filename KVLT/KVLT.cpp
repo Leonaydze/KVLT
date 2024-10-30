@@ -48,7 +48,7 @@ int lastMusicNumber = -1;
 /// </summary>
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music) {
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 	int randomMusicNumber = rand() % 7;
 
 	//Choice music
@@ -149,8 +149,7 @@ int main()
 	Player player;
 	PlayerService playerS;
 
-	playerS.read();
-	//player.Init(playerS.read()[0]);
+	player.Init(/*playerS.read()[0]*/);
 
 	PlayerInventory playerInv;
 	PlayerInventoryService playerInvS;
