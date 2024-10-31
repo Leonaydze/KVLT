@@ -224,9 +224,15 @@ void Player::Init(/*Player player*/)
 
 void Player::Draw()
 {
+	//player
 	DrawTextureRec(_playerTexture, _frameRec, _playerPosition, WHITE);
+	//Player health
 	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
 	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, _playerHealth * 2, 20, RED);
+	//Player stamina
 	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 610, _maxStamina * 25 + 10, 30, DARKBROWN);
 	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 605, _stamina * 25, 20, DARKBLUE);
+	DrawRectangle((int)_playerPosition.x - 872, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	DrawRectangle((int)_playerPosition.x - 847, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	DrawRectangle((int)_playerPosition.x - 822, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
 }
