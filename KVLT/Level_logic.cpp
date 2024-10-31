@@ -34,6 +34,13 @@ void PlayerCantWalk(Player& player, Border& border) {
 	player.SetPlayerCanWalk(0);
 }
 
+void ResurrectionPlayer(Player& player, Altar& altar) {
+	if (player.PlayerDeath()) {
+		player.SetPlayerPositionV(altar.GetAltarPosV());
+		player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
+	}
+}
+
 Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
 
 Border lol = Border({ 500, 800 }, RAYWHITE, 40, 1000);

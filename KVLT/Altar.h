@@ -7,7 +7,7 @@ private:
 
 	Vector2 _altarPosition = { 100, 700 };
 
-	Texture2D _altarTexture;
+	Texture2D _altarTexture = LoadTexture("");
 	Rectangle _altarRectangle {0, 0, 102.4f, 102.4f};
 public:
 	Altar();
@@ -19,6 +19,8 @@ public:
 	void Init();
 
 	void Draw();
+
+	Vector2 GetAltarPosV();
 };
 
 #endif // !ALTAR_H

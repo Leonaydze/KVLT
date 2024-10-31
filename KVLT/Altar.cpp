@@ -23,3 +23,8 @@ void Altar::Draw()
 {
 	DrawTextureRec(_altarTexture, _altarRectangle, _altarPosition, WHITE);
 }
+
+Vector2 Altar::GetAltarPosV()
+{
+	return _altarPosition;
+}

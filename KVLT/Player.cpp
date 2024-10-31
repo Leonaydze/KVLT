@@ -149,11 +149,11 @@ void Player::PlayerController() {
 	}
 	if (IsKeyPressed(KEY_LEFT_ALT) && _playerHealth > 0 && _playerPosition.x > 0 && _stamina > 0) {
 		if (IsKeyDown(KEY_A)) {
-			_playerPosition.x -= 100;
+			_playerPosition.x -= 150;
 			_stamina--;
 		}
 		if (IsKeyDown(KEY_D)) {
-			_playerPosition.x += 100;
+			_playerPosition.x += 150;
 			_stamina--;
 		}
 	}
@@ -247,4 +247,8 @@ void Player::Draw()
 	if (_maxStamina == 8) {
 		DrawRectangle((int)_playerPosition.x - 722, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
 	}
+}
+
+bool Player::PlayerDeath(){
+	return _playerHealth <= 0;
 }

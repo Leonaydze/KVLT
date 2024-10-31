@@ -86,5 +86,7 @@ public:
 
 	void Init(/*Player player*/);
 	void Draw();
+
+	bool PlayerDeath();
 };
 
