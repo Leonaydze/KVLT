@@ -1,10 +1,5 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int enemyHealth, int enemyDamage){
-	_enemyHealth = enemyHealth;
-	_enemyDamage = enemyDamage;
-}
-
 float Enemy::GetEnemyPosX(){
 	return _enemyPosition.x;
 }

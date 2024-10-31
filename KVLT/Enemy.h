@@ -16,7 +16,10 @@ protected:
 	Texture2D _enemyTexture = LoadTexture("");
 	Rectangle _frameRec = {};
 public:
-	Enemy(int enemyHealth, int enemyDamage);
+	Enemy() {}
+
+	Enemy(int enemyHealth, int enemyDamage, _enemyClass enemyclass, Vector2 enemyPosition)
+		: _enemyHealth(enemyHealth), _enemyDamage(enemyDamage), enemyClass(enemyclass), _enemyPosition(enemyPosition) {}
 
 	float GetEnemyPosX();
 	void SetEnemyPosX(float enemyPosX);
