@@ -154,12 +154,6 @@ int main()
 	Clergy c;
 	PlayerClergyService cS;
 
-	Camera2D _playerCamera;
-
-	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
-	_playerCamera.zoom = 1.0f;
-	_playerCamera.rotation = 0.0f;
-
 	while (!GetExitWindow())
 	{
 		//Play, update and customization music

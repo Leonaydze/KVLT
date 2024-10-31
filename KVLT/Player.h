@@ -25,13 +25,19 @@ private:
 	bool _playerJump = false;
 	int _playerCanWalk = 0;
 
-	Texture2D _playerTexture;
+	Texture2D _playerTexture = LoadTexture("");
 	Rectangle _frameRec{0, 131, 131, 131};
 
 	int currentFrame = 0;
 
 	int framesCounter = 0;
 	int framesSpeed = 8;
+
+	unsigned short int _maxStamina = 4;
+	unsigned short int _stamina = _maxStamina;
+
+	float _lastUpdateTime = 0;
+	bool TriggerEvent(float interval);
 public:
 	int id = -1;
 	Player() {};

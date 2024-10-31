@@ -2,6 +2,8 @@
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
+Camera2D _playerCamera;
+
 _gameScreen GetCurrentGameScreen()
 {
 	return _currentScreen;
@@ -38,6 +40,11 @@ Border lol = Border({ 500, 800 }, RAYWHITE, 40, 1000);
 Ground lolG = Ground({ 500, 800 }, 20, 10, RAYWHITE);
 
 void LEVEL_T_LOGIC(Player& player) {
+	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
+	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
+	_playerCamera.zoom = 1.0f;
+	_playerCamera.rotation = 0.0f;
+
 	player.PlayerController();
 
 	if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
@@ -53,6 +60,7 @@ void LEVEL_T_LOGIC(Player& player) {
 }
 
 void LEVEL_T_DRAW(Player& player) {
+	BeginMode2D(_playerCamera);
 	lol.Draw();
 	lolG.GroundDraw();
 	mainGroundFloor.GroundDraw();

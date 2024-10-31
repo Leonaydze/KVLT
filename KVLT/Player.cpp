@@ -1,5 +1,17 @@
 #include "Player.h"
 
+bool Player::TriggerEvent(float interval) {
+	float currentTime = (float)GetTime();
+
+	if (currentTime - _lastUpdateTime >= interval) {
+		_lastUpdateTime = currentTime;
+
+		return true;
+	}
+
+	return false;
+}
+
 short int Player::GetPlayerHealth(){
 	return _playerHealth;
 }
@@ -135,6 +147,19 @@ void Player::PlayerController() {
 			}
 		}
 	}
+	if (IsKeyPressed(KEY_LEFT_ALT) && _playerHealth > 0 && _playerPosition.x > 0 && _stamina > 0) {
+		if (IsKeyDown(KEY_A)) {
+			_playerPosition.x -= 100;
+			_stamina--;
+		}
+		if (IsKeyDown(KEY_D)) {
+			_playerPosition.x += 100;
+			_stamina--;
+		}
+	}
+	if (TriggerEvent(5.0f) && _stamina < _maxStamina) {
+		_stamina++;
+	}
 	if (IsKeyPressed(KEY_SPACE) && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE) && _playerCanJump) {
 		_playerJump = true;
 	}
@@ -201,5 +226,7 @@ void Player::Draw()
 {
 	DrawTextureRec(_playerTexture, _frameRec, _playerPosition, WHITE);
 	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
-	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, GetPlayerHealth() * 2, 20, RED);
+	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, _playerHealth * 2, 20, RED);
+	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 610, _maxStamina * 25 + 10, 30, DARKBROWN);
+	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 605, _stamina * 25, 20, DARKBLUE);
 }
