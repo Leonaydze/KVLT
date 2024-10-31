@@ -30,3 +30,6 @@ void Enemy::EnemyDeath(){
 	
 }
 
+void Enemy::EnemyDraw(){
+	DrawTextureRec(_enemyTexture, _frameRec, _enemyPosition, WHITE);
+}

@@ -12,6 +12,9 @@ protected:
 	_enemyClass enemyClass = Default;
 
 	Vector2 _enemyPosition;
+
+	Texture2D _enemyTexture = LoadTexture("");
+	Rectangle _frameRec = {};
 public:
 	Enemy(int enemyHealth, int enemyDamage);
 
@@ -24,6 +27,7 @@ public:
 	_enemyClass GetEnemyClass();
 
 	void EnemyDeath();
+	void EnemyDraw();
 };
 
 #endif // !ENEMY_H
