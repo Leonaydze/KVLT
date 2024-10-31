@@ -8,8 +8,8 @@ using json = nlohmann::json;
 
 class Player{
 private:
-	short int _playerHealth = 100;
 	unsigned short int _maxPlayerHealth = 100;
+	short int _playerHealth = _maxPlayerHealth;
 
 	Vector2 _playerPosition = { 0, 870 };
 
