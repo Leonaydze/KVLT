@@ -235,4 +235,16 @@ void Player::Draw()
 	DrawRectangle((int)_playerPosition.x - 872, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
 	DrawRectangle((int)_playerPosition.x - 847, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
 	DrawRectangle((int)_playerPosition.x - 822, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	if (_maxStamina == 5) {
+		DrawRectangle((int)_playerPosition.x - 797, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	}
+	if (_maxStamina == 6) {
+		DrawRectangle((int)_playerPosition.x - 772, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	}
+	if (_maxStamina == 7) {
+		DrawRectangle((int)_playerPosition.x - 747, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	}
+	if (_maxStamina == 8) {
+		DrawRectangle((int)_playerPosition.x - 722, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	}
 }
