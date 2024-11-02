@@ -136,6 +136,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="KVLT.cpp" />
     <ClCompile Include="Level_logic.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerService.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Flask.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Level_logic.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerService.h" />
