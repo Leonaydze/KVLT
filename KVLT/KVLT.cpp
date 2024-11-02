@@ -135,6 +135,8 @@ int main()
 	GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 2);
 
+	Sound playButton = LoadSound("Sounds\\Play_button.wav");
+
 	float volume = 50;
 
 	float musicVolume = 0.1f;
@@ -185,6 +187,7 @@ int main()
 
 			//Play
 			if (playRequest) {
+				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
 			}
 
@@ -232,6 +235,7 @@ int main()
 	}
 
 	//Close and unload
+	UnloadSound(playButton);
 	UnloadMusicStream(playMusic);
 	CloseWindow();
 	CloseAudioDevice();

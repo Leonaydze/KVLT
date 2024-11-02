@@ -151,16 +151,18 @@ void Player::PlayerController() {
 		if (IsKeyDown(KEY_A)) {
 			_playerPosition.x -= 150;
 			_stamina--;
+			PlaySound(_dash);
 		}
 		if (IsKeyDown(KEY_D)) {
 			_playerPosition.x += 150;
 			_stamina--;
+			PlaySound(_dash);
 		}
 	}
 	if (TriggerEvent(5.0f) && _stamina < _maxStamina) {
 		_stamina++;
 	}
-	if (IsKeyPressed(KEY_SPACE) && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE) && _playerCanJump) {
+	if (IsKeyPressed(KEY_SPACE) && _playerCanJump && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE)) {
 		_playerJump = true;
 	}
 
@@ -220,6 +222,8 @@ void Player::Init(/*Player player*/)
 	//this->SetPlayerPositionX(player.GetPlayerPositionX());
 	//this->SetPlayerPositionY(player.GetPlayerPositionY());
 	_playerTexture = LoadTexture("Sprites\\Player.png");
+	_dash = LoadSound("Sounds\\Dash.wav");
+	_jump = LoadSound("Sounds\\Jump.mp3");
 }
 
 void Player::Draw()

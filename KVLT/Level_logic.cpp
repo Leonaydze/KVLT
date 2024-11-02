@@ -59,6 +59,7 @@ void LEVEL_T_LOGIC(Player& player) {
 	}
 	else if (PlayerOnGround(player, mainGroundFloor) || PlayerOnGround(player, lolG)) {
 		player.SetPlayerCanJump(true);
+		PlaySound(player._jump);
 	}
 	else if (player.PlayerMaxJump() || !player.IsPlayerJump()) {
 		player.MoveVerticallyDown();

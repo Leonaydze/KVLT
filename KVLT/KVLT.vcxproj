@@ -180,6 +180,9 @@
     <Media Include="Music\mainMusic_5.mp3" />
     <Media Include="Music\mainMusic_6.mp3" />
     <Media Include="Music\mainMusic_7.mp3" />
+    <Media Include="Sounds\Dash.wav" />
+    <Media Include="Sounds\Jump.mp3" />
+    <Media Include="Sounds\Play_button.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,8 +38,13 @@ private:
 
 	float _lastUpdateTime = 0;
 	bool TriggerEvent(float interval);
+
+	Sound _dash = LoadSound("");
 public:
+	Sound _jump = LoadSound("");
+
 	int id = -1;
+
 	Player() {};
 	Player(int id, short int _playerHealth, float _playerPosX, float _playerPosY) {
 		this->_playerHealth = _playerHealth;

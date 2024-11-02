@@ -28,6 +28,9 @@
     <Filter Include="Файлы ресурсов\Sprites">
       <UniqueIdentifier>{fb090c50-5c2e-448d-b419-6b4912e09a39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\Sound">
+      <UniqueIdentifier>{d76280cb-fa82-48d6-80ee-f55f845dd29b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
@@ -75,6 +78,9 @@
     <ClCompile Include="Level_logic.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -119,6 +125,9 @@
     <ClInclude Include="Level_logic.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Music\mainMusic.mp3">
@@ -141,6 +150,15 @@
     </Media>
     <Media Include="Music\mainMusic_7.mp3">
       <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Sounds\Dash.wav">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
+    <Media Include="Sounds\Play_button.wav">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
+    <Media Include="Sounds\Jump.mp3">
+      <Filter>Файлы ресурсов\Sound</Filter>
     </Media>
   </ItemGroup>
   <ItemGroup>
@@ -165,11 +183,11 @@
     <Image Include="Sprites\Vampire.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
-    <Image Include="Sprites\Altar.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
     <Image Include="Sprites\Pugalo_atlas.png">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Altar.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
