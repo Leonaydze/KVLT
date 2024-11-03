@@ -2,22 +2,32 @@
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
-Camera2D _playerCamera;
-
 _gameScreen GetCurrentGameScreen()
 {
 	return _currentScreen;
 }
 
 void SetCurrentScreen(_gameScreen curScreen)
-{
+{ 
 	_currentScreen = curScreen;
+}
+
+extern Font font = LoadFont("");
+
+void Init()
+{
+	font = LoadFont("Font.png");;
+}
+
+Font GetCurrentFont()
+{
+	return font;
 }
 
 bool PlayerOnGround(Player& player, Ground& ground) {
 	player.SetPlayerCanJump(true);
 	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
-		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() <= ground.GetGroundPositionY() + ground.GetGroundHeight());
+		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() + 108 <= ground.GetGroundPositionY() + ground.GetGroundHeight());
 }
 
 void PlayerCantWalk(Player& player, Border& border) {
@@ -41,10 +51,13 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 	}
 }
 
+Camera2D _playerCamera;
+
 Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
 
-Border lol = Border({ 500, 800 }, RAYWHITE, 40, 1000);
-Ground lolG = Ground({ 500, 800 }, 20, 10, RAYWHITE);
+//Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
+Ground _firstG = Ground({ 500, 900 }, 150, 30, RAYWHITE);
+Ground _secondG = Ground({850, 800}, 150, 30, RAYWHITE);
 
 void LEVEL_T_LOGIC(Player& player) {
 	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
@@ -57,21 +70,22 @@ void LEVEL_T_LOGIC(Player& player) {
 	if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
 		player.MoveVertically();
 	}
-	else if (PlayerOnGround(player, mainGroundFloor) || PlayerOnGround(player, lolG)) {
+	else if (PlayerOnGround(player, mainGroundFloor) || PlayerOnGround(player, _firstG) || PlayerOnGround(player, _secondG)) {
 		player.SetPlayerCanJump(true);
 		PlaySound(player._jump);
 	}
 	else if (player.PlayerMaxJump() || !player.IsPlayerJump()) {
+		player.SetPlayerCanJump(false);
 		player.MoveVerticallyDown();
 	}
-	PlayerCantWalk(player, lol);
 }
 
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
-	lol.Draw();
-	lolG.GroundDraw();
+	DrawTextEx(font, "PRESS WASD TO MOVE", {-200, 700 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, " PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
+	_firstG.GroundDraw();
+	_secondG.GroundDraw();
 	mainGroundFloor.GroundDraw();
 	player.Draw();
 }
-

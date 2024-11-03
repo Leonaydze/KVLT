@@ -11,9 +11,14 @@ _gameScreen GetCurrentGameScreen();
 
 void SetCurrentScreen(_gameScreen curScreen);
 
+void Init();
+
+Font GetCurrentFont();
+
 void LEVEL_T_LOGIC(Player& player);
 void LEVEL_T_DRAW(Player& player);
 
-void ResurrectionPlayer(Player& player);
+void ResurrectionPlayer(Player& player, Altar& altar);
+
 
 #endif // !LEVEL_LOGIC_H
