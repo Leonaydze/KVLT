@@ -1,4 +1,5 @@
 #include "Level_logic.h"
+#include "Priest.h"
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
@@ -48,6 +49,17 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 	if (player.PlayerDeath()) {
 		player.SetPlayerPositionV(altar.GetAltarPosV());
 		player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
+	}
+}
+
+template<typename T>
+bool PlayerCanTalkWithNpc(Player& player, T& other) {
+	return (player.GetPlayerPositionX() + 88 >= other.GetNpcPosX() && player.GetPlayerPositionX() + 40 <= other.GetNpcPosX() + 128
+		&& player.GetPlayerPositionY() + 20 >= other.GetNpcPosY() && player.GetPlayerPositionY() + 108 <= other.GetNpcPosY() + 128);
+}
+void UpgradePlayerLevel(Player& player, Priest& priest) {
+	if (PlayerCanTalkWithNpc(player, priest) && !priest.NpcDeath()) {
+
 	}
 }
 

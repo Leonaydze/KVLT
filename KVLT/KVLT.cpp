@@ -3,6 +3,7 @@
 #include <ctime>
 #include "PlayerService.h"
 #include "Level_logic.h"
+#include "Priest.h"
 
 double lastUpdateTime = 0;
 /// <summary>
@@ -157,6 +158,8 @@ int main()
 	Clergy c;
 	PlayerClergyService cS;
 
+	Priest p;
+
 	while (!GetExitWindow())
 	{
 		//Play, update and customization music
@@ -190,6 +193,7 @@ int main()
 			if (playRequest) {
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
+				std::cout <<  p.GetNpcHealth();
 			}
 
 			//Open settings window
