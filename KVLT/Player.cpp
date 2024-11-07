@@ -32,6 +32,17 @@ void Player::HealPlayer(int healthAmount){
 	}
 }
 
+unsigned short int Player::GetHealthLevel()
+{
+	return _maxPlayerHealth / 10 % 10;
+}
+
+void Player::UpgradeHealthLevel(){
+	if (_maxPlayerHealth / 10 % 10 < 6) {
+		_maxPlayerHealth += 10;
+	}
+}
+
 Vector2 Player::GetPlayerPositionV(){
 	return _playerPosition;
 }
@@ -64,6 +75,17 @@ json Player::toJson() const
 Player Player::fromJson(const json& _filename)
 {
 	return Player(_filename["id"], _filename["Health"], _filename["PosX"], _filename["PosY"]);
+}
+
+unsigned short int Player::GetStaminaLevel()
+{
+	return _staminaLevel;
+}
+
+void Player::UpgradeStaminaLevel(){
+	if (_staminaLevel < 5) {
+		_staminaLevel++;
+	}
 }
 
 void Player::PlayerController() {
@@ -149,12 +171,12 @@ void Player::PlayerController() {
 	}
 	if (IsKeyPressed(KEY_LEFT_ALT) && _playerHealth > 0 && _playerPosition.x > 0 && _stamina > 0) {
 		if (IsKeyDown(KEY_A)) {
-			_playerPosition.x -= 150;
+			_playerPosition.x -= _dashDistance + _dashLevel * 10;
 			_stamina--;
 			PlaySound(_dash);
 		}
 		if (IsKeyDown(KEY_D)) {
-			_playerPosition.x += 150;
+			_playerPosition.x += _dashDistance + _dashLevel * 10;
 			_stamina--;
 			PlaySound(_dash);
 		}
@@ -215,6 +237,17 @@ void Player::MoveVerticallyDown() {
 	_playerPosition.y += _playerJumpSpeed;
 	if (_playerJumpSpeed <= 6.5f)
 		_playerJumpSpeed += 0.3f;
+}
+
+unsigned short int Player::GetDashLevel()
+{
+	return _dashLevel;
+}
+
+void Player::UpgradeDashLevel(){
+	if (_dashLevel < 6) {
+		_dashLevel++;
+	}
 }
 
 void Player::Init(/*Player player*/)
