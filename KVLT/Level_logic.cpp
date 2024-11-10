@@ -78,19 +78,19 @@ void UpgradePlayerLevel(Player& player, Priest& priest) {
 
 Camera2D _playerCamera;
 
-Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 14400, 1500, DARKGRAY });
+Ground mainGroundFloor = Ground({ { -1000.0f , 1000.0f } , 14400, 1500, DARKGRAY });
 
 //Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
-Ground _firstG = Ground({ 500, 875 }, 150, 30, RAYWHITE);
-Ground _secondG = Ground({850, 750}, 150, 30, RAYWHITE);
+Ground _firstG = Ground({ 500.0f, 875.0f }, 150, 30, RAYWHITE);
+Ground _secondG = Ground({850.0f, 750.0f }, 150, 30, RAYWHITE);
 
-Border _border = Border({ 1200, 650 }, 1000, 150,  DARKGRAY);
-Ground _borderG = Ground({ 1200, 650 }, 150, 20, DARKGRAY);
+Border _border = Border({ 1200.0f, 650.0f }, 1000, 150,  DARKGRAY);
+Ground _borderG = Ground({ 1200.0f, 650.0f }, 150, 20, DARKGRAY);
 
-Border _groundBorder = Border({ 1349, 650 }, 50, 450, DARKBROWN);
-Border _border2 = Border({ 1798, -600 }, 1300, 810, DARKGRAY);
+Border _groundBorder = Border({ 1349.0f, 650.0f }, 50, 450, DARKBROWN);
+Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
-Border _borderAlt = Border({ 2600, -300 }, 3000, 40, DARKGRAY);
+Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
 void LEVEL_T_LOGIC(Player& player) {
 	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
@@ -126,12 +126,12 @@ void LEVEL_T_LOGIC(Player& player) {
 
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
-	DrawTextEx(font, "PRESS WASD TO MOVE", {-200, 700 }, 30, 3, RAYWHITE);
-	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270, 730 }, 30, 3, RAYWHITE);
-	DrawTextEx(font, "PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
-	DrawTextEx(font, "JUMP DOWN", { 1485, 500 }, 30, 3, RAYWHITE);
-	DrawTextEx(font, "PUSH ALT TO DASH", { 2250, 800 }, 30, 3, RAYWHITE);
-	DrawTextEx(font, "(come close)", { 2300, 830 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PRESS WASD TO MOVE", {-200.0f, 700.0f }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270.0f, 730.0f }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PRESS SPACE TO JUMP", {400.0f, 700.0f }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "JUMP DOWN", { 1485.0f, 500.0f }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PUSH ALT TO DASH", { 2250.0f, 800.0f }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "(come close)", { 2300.0f, 830.0f }, 30, 3, RAYWHITE);
 	_firstG.GroundDraw();
 	_secondG.GroundDraw();
 	_groundBorder.Draw();
