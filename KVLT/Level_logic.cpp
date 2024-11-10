@@ -140,6 +140,5 @@ void LEVEL_T_DRAW(Player& player) {
 	_borderAlt.Draw();
 	mainGroundFloor.GroundDraw();
 	player.Draw();
-
 	_playerClergy.Draw(player, font);
 }
