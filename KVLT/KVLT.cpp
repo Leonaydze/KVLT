@@ -140,7 +140,7 @@ int main()
 
 	float volume = 50;
 
-	float musicVolume = 0.1f;
+	float musicVolume = 0.2f;
 	Music playMusic = LoadMusicStream("");
 
 	PlayerService playerS;
@@ -161,6 +161,7 @@ int main()
 	{
 		//Play, update and customization music
 		PlayMusic(playMusic);
+		SetMusicVolume(playMusic, musicVolume);
 		if (IsMusicStreamPlaying(playMusic)) {
 			UpdateMusicStream(playMusic);
 		}
@@ -201,12 +202,13 @@ int main()
 				//Slider and master volume change
 				DrawTextEx(GetCurrentFont(), "MasterVolume", { 650, 250 }, 20, 2, RAYWHITE);
 				GuiSlider({ 650, 275, 100, 25 }, "", "100%", &volume, 0, 100);
+				GuiDrawIcon(ICON_AUDIO, 800, 280, 1, WHITE);
 				SetMasterVolume(volume);
 
 				//Slider and musiv volume change
 				DrawTextEx(GetCurrentFont(), "MusicVolume", { 650, 325 }, 20, 2, RAYWHITE);
 				GuiSlider({ 650, 350, 100, 25 }, "", "100%", &musicVolume, 0, 1);
-				SetMusicVolume(playMusic, musicVolume);
+				GuiDrawIcon(ICON_AUDIO, 800, 355, 1, WHITE);
 
 				//Exit frim settings
 				if (result == 1) setRequest = false;
@@ -234,8 +236,8 @@ int main()
 		}
 
 		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu) {
-			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 100, (float)player.GetPlayerPositionY() - 250, 250, 100},
-				"#193#Quit?", "Are You Want To Quit?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
+			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125, (float)player.GetPlayerPositionY() - 250, 300, 100},
+				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 
 			//Exit window choice
 			if (result == 1 || IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {

@@ -34,7 +34,7 @@ bool PlayerOnGround(Player& player, Ground& ground) {
 }
 
 bool PlayerCantWalk(Player& player, Border& border) {
-	if (player.GetPlayerPositionX() + 110 >= border.GetBorderPosX() && player.GetPlayerPositionX() + 110 <= border.GetBorderPosX() + 10
+	if (player.GetPlayerPositionX() + 120 >= border.GetBorderPosX() && player.GetPlayerPositionX() + 120 <= border.GetBorderPosX() + 10
 		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 1) {
 		player.SetPlayerCanWalk(-1);
 		return true;
@@ -44,9 +44,14 @@ bool PlayerCantWalk(Player& player, Border& border) {
 		player.SetPlayerCanWalk(1);
 		return true;
 	}
-	if (player.GetPlayerPositionX() + 110 >= border.GetBorderPosX() + 20 && player.GetPlayerPositionX() + 21 <= border.GetBorderPosX() + border.GetBorderWidth() - 20 
+	if (player.GetPlayerPositionX() + 120 >= border.GetBorderPosX() + 20 && player.GetPlayerPositionX() + 64 <= border.GetBorderPosX() + border.GetBorderWidth() / 2
 		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 30 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
 		player.SetPlayerPositionX((float)border.GetBorderPosX() - (float)130);
+		return true;
+	}
+	if (player.GetPlayerPositionX() + 11 <= border.GetBorderPosX() + border.GetBorderWidth() - 20 && player.GetPlayerPositionX()  + 64 >= border.GetBorderPosX() + border.GetBorderWidth() / 2
+		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 30 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
+		player.SetPlayerPositionX((float)border.GetBorderPosX() + (float)border.GetBorderWidth() + (float)5);
 		return true;
 	}
 	player.SetPlayerCanWalk(0);
@@ -62,7 +67,7 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 
 template<typename T>
 bool PlayerCanTalkWithNpc(Player& player, T& other) {
-	return (player.GetPlayerPositionX() + 88 >= other.GetNpcPosX() && player.GetPlayerPositionX() + 40 <= other.GetNpcPosX() + 128
+	return (player.GetPlayerPositionX() + 108 >= other.GetNpcPosX() && player.GetPlayerPositionX() <= other.GetNpcPosX() + 168
 		&& player.GetPlayerPositionY() + 20 >= other.GetNpcPosY() && player.GetPlayerPositionY() + 108 <= other.GetNpcPosY() + 128);
 }
 void UpgradePlayerLevel(Player& player, Priest& priest) {
@@ -124,7 +129,7 @@ void LEVEL_T_DRAW(Player& player) {
 	DrawTextEx(font, "PRESS WASD TO MOVE", {-200, 700 }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270, 730 }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
-	DrawTextEx(font, "JUMP DOWN", { 1485, 450 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "JUMP DOWN", { 1485, 500 }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PUSH ALT TO DASH", { 2250, 800 }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "(come close)", { 2300, 830 }, 30, 3, RAYWHITE);
 	_firstG.GroundDraw();
