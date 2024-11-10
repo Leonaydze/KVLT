@@ -189,5 +189,8 @@
     <Image Include="Sprites\Altar.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
+    <Image Include="Sprites\Clergy_icon.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

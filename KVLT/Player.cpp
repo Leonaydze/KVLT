@@ -89,7 +89,7 @@ void Player::UpgradeStaminaLevel(){
 }
 
 void Player::PlayerController() {
-	if (IsKeyDown(KEY_D) && _playerCanWalk >= 0 && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 1200 && !IsKeyDown(KEY_A)) {
+	if (IsKeyDown(KEY_D) && _playerCanWalk >= 0 && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 8000 && !IsKeyDown(KEY_A)) {
 		_playerVelocity.x += _playerSpeed;
 		framesSpeed = 8;
 		if (IsKeyDown(KEY_LEFT_SHIFT)) {

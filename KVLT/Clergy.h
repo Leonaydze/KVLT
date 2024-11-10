@@ -1,7 +1,7 @@
 #ifndef CLERGY_H
 #define CLERGY_H
 
-#include <raylib.h>
+#include "Player.h"
 #include <string>
 #include <nlohmann/json.hpp>
 #include <fstream>
@@ -12,6 +12,7 @@ class Clergy {
 private:
 	int _countClergy;
 
+	Texture2D _clergyIcon = LoadTexture("");
 public:
 	int id = -1;
 	
@@ -25,6 +26,10 @@ public:
 
 	json toJson() const;
 	static Clergy fromJson(const json& _filename);
+
+	void Draw(Player& player, Font& font);
+
+	void Init();
 };
 
 #endif // !CLERGY_H

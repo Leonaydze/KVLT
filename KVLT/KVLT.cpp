@@ -190,6 +190,8 @@ int main()
 			if (playRequest) {
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
+				playRequest = false;
+				player.SetPlayerPositionV({ 0, 870 });
 			}
 
 			//Open settings window
@@ -211,7 +213,7 @@ int main()
 			}
 			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000}, 36, 3, GRAY);
 			//Open exit window
-			if (GetExitWindowRequest() && !setRequest) {
+			if ((GetExitWindowRequest() || exitRequest) && !setRequest ) {
 				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
@@ -237,7 +239,9 @@ int main()
 
 			//Exit window choice
 			if (result == 1 || IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {
-				SetExitWindow(true);
+				SetCurrentScreen(mainMenu);
+				SetExitWindowRequest(false);
+				exitRequest = false;
 			}
 			else if (result == 2 || result == 0 || IsKeyPressed(KEY_N)) {
 				SetExitWindowRequest(false);

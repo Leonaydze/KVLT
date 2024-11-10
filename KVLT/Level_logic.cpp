@@ -15,9 +15,12 @@ void SetCurrentScreen(_gameScreen curScreen)
 
 extern Font font = LoadFont("");
 
+Clergy _playerClergy = Clergy(); 
+
 void Init()
 {
 	font = LoadFont("Font.png");;
+	_playerClergy.Init();
 }
 
 Font GetCurrentFont()
@@ -70,7 +73,7 @@ void UpgradePlayerLevel(Player& player, Priest& priest) {
 
 Camera2D _playerCamera;
 
-Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
+Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 14400, 1500, DARKGRAY });
 
 //Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
 Ground _firstG = Ground({ 500, 875 }, 150, 30, RAYWHITE);
@@ -80,7 +83,7 @@ Border _border = Border({ 1200, 650 }, 1000, 150,  DARKGRAY);
 Ground _borderG = Ground({ 1200, 650 }, 150, 20, DARKGRAY);
 
 Border _groundBorder = Border({ 1349, 650 }, 50, 450, DARKBROWN);
-Border _border2 = Border({ 1798, -300 }, 1000, 810, DARKGRAY);
+Border _border2 = Border({ 1798, -600 }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600, -300 }, 3000, 40, DARKGRAY);
 
@@ -132,4 +135,5 @@ void LEVEL_T_DRAW(Player& player) {
 	_borderAlt.Draw();
 	mainGroundFloor.GroundDraw();
 	player.Draw();
+	_playerClergy.Draw(player, font);
 }
