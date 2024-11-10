@@ -182,10 +182,8 @@ void Player::PlayerController() {
 			PlaySound(_dash);
 		}
 	}
-	if (_stamina < _maxStamina && !IsKeyDown(KEY_LEFT_SHIFT)) {
-		if (TriggerEvent(2.5f)) {
-			_stamina++;
-		}
+	if (TriggerEvent(2.5f) && _stamina < _maxStamina && !IsKeyDown(KEY_LEFT_SHIFT)) {
+		_stamina++;
 	}
 	if (IsKeyPressed(KEY_SPACE) && _playerCanJump && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE)) {
 		_playerJump = true;
