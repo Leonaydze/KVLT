@@ -193,6 +193,7 @@ int main()
 				SetCurrentScreen(LVL_TUTORIAL);
 				playRequest = false;
 				player.SetPlayerPositionV({ 0, 870 });
+
 				setRequest = false;
 			}
 
