@@ -3,7 +3,6 @@
 #include <ctime>
 #include "PlayerService.h"
 #include "Level_logic.h"
-#include "Priest.h"
 
 double lastUpdateTime = 0;
 /// <summary>
@@ -158,8 +157,6 @@ int main()
 	Clergy c;
 	PlayerClergyService cS;
 
-	Priest p;
-
 	while (!GetExitWindow())
 	{
 		//Play, update and customization music
@@ -193,7 +190,6 @@ int main()
 			if (playRequest) {
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
-				std::cout <<  p.GetNpcHealth();
 			}
 
 			//Open settings window
@@ -215,7 +211,7 @@ int main()
 			}
 			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000}, 36, 3, GRAY);
 			//Open exit window
-			if (GetExitWindowRequest() || exitRequest && !setRequest) {
+			if (GetExitWindowRequest() && !setRequest) {
 				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
@@ -235,9 +231,9 @@ int main()
 			LEVEL_T_DRAW(player);
 		}
 
-		if (GetExitWindowRequest() || exitRequest && !setRequest  && GetCurrentGameScreen() != mainMenu) {
-			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 75, (float)player.GetPlayerPositionY() - 150, 250, 100},
-				"#193#Quit?", "Are You Want To Quit?(Y/N)", "Yes;No");
+		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu) {
+			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 100, (float)player.GetPlayerPositionY() - 250, 250, 100},
+				"#193#Quit?", "Are You Want To Quit?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 
 			//Exit window choice
 			if (result == 1 || IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {

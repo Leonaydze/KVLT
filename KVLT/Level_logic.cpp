@@ -31,18 +31,24 @@ bool PlayerOnGround(Player& player, Ground& ground) {
 		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() + 108 <= ground.GetGroundPositionY() + ground.GetGroundHeight());
 }
 
-void PlayerCantWalk(Player& player, Border& border) {
+bool PlayerCantWalk(Player& player, Border& border) {
 	if (player.GetPlayerPositionX() + 110 >= border.GetBorderPosX() && player.GetPlayerPositionX() + 110 <= border.GetBorderPosX() + 10
 		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 1) {
 		player.SetPlayerCanWalk(-1);
-		return;
+		return true;
 	}
 	if (player.GetPlayerPositionX() + 21 <= border.GetBorderPosX() + border.GetBorderWidth() && player.GetPlayerPositionX() + 21 >= border.GetBorderPosX() + border.GetBorderWidth() - 10
 		&& player.GetPlayerPositionY() + 131 >= border.GetBorderPosY() + 1 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 1) {
 		player.SetPlayerCanWalk(1);
-		return;
+		return true;
+	}
+	if (player.GetPlayerPositionX() + 110 >= border.GetBorderPosX() + 20 && player.GetPlayerPositionX() + 21 <= border.GetBorderPosX() + border.GetBorderWidth() - 20 
+		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 20 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
+		player.SetPlayerPositionX((float)border.GetBorderPosX() - (float)130);
+		return true;
 	}
 	player.SetPlayerCanWalk(0);
+	return false;
 }
 
 void ResurrectionPlayer(Player& player, Altar& altar) {
@@ -71,6 +77,12 @@ Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
 Ground _firstG = Ground({ 500, 900 }, 150, 30, RAYWHITE);
 Ground _secondG = Ground({850, 800}, 150, 30, RAYWHITE);
 
+Border _border = Border({ 1200, 700 }, 1000, 150,  DARKGRAY);
+Ground _borderG = Ground({ 1200, 700 }, 150, 20, DARKGRAY);
+
+Border _groundBorder = Border({ 1349, 700 }, 50, 350, WHITE);
+Border _border2 = Border({ 1698, -250 }, 1000, 150, DARKGRAY);
+
 void LEVEL_T_LOGIC(Player& player) {
 	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
 	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
@@ -82,7 +94,8 @@ void LEVEL_T_LOGIC(Player& player) {
 	if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
 		player.MoveVertically();
 	}
-	else if (PlayerOnGround(player, mainGroundFloor) || PlayerOnGround(player, _firstG) || PlayerOnGround(player, _secondG)) {
+	else if (PlayerOnGround(player, mainGroundFloor) || PlayerOnGround(player, _firstG) || PlayerOnGround(player, _secondG) 
+		|| PlayerOnGround(player, _borderG)) {
 		player.SetPlayerCanJump(true);
 		PlaySound(player._jump);
 	}
@@ -90,14 +103,25 @@ void LEVEL_T_LOGIC(Player& player) {
 		player.SetPlayerCanJump(false);
 		player.MoveVerticallyDown();
 	}
+
+	if (PlayerCantWalk(player, _border)) {
+		PlayerCantWalk(player, _border);
+	}
+	else if (PlayerCantWalk(player, _border2)) {
+		PlayerCantWalk(player, _border2);
+	}
 }
 
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
 	DrawTextEx(font, "PRESS WASD TO MOVE", {-200, 700 }, 30, 3, RAYWHITE);
-	DrawTextEx(font, " PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
+	DrawTextEx(font, "JUMP DOWN", { 1435, 500 }, 30, 3, RAYWHITE);
 	_firstG.GroundDraw();
 	_secondG.GroundDraw();
+	_groundBorder.Draw();
+	_border.Draw();
+	_border2.Draw();
 	mainGroundFloor.GroundDraw();
 	player.Draw();
 }

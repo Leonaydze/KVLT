@@ -11,7 +11,7 @@ private:
 public:
 	Border();
 
-	Border(Vector2 borderPosition, Color borderColor, int borderWidth, int borderHeight) 
+	Border(Vector2 borderPosition, int borderHeight, int borderWidth, Color borderColor)
 		: _borderPosition(borderPosition), _borderColor(borderColor), _borderWidth(borderWidth), _borderHeight(borderHeight) {}
 
 	int GetBorderPosX();

@@ -89,7 +89,7 @@ void Player::UpgradeStaminaLevel(){
 }
 
 void Player::PlayerController() {
-	if (IsKeyDown(KEY_D) && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 1200 && !IsKeyDown(KEY_A) && _playerCanWalk >= 0) {
+	if (IsKeyDown(KEY_D) && _playerCanWalk >= 0 && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 1200 && !IsKeyDown(KEY_A)) {
 		_playerVelocity.x += _playerSpeed;
 		framesSpeed = 8;
 		if (IsKeyDown(KEY_LEFT_SHIFT)) {
@@ -129,7 +129,7 @@ void Player::PlayerController() {
 			}
 		}
 	}
-	if (IsKeyDown(KEY_A) && _playerHealth > 0 && _playerPosition.x > 0 && !IsKeyDown(KEY_D) && _playerCanWalk <= 0) {
+	if (IsKeyDown(KEY_A) && _playerCanWalk <= 0 && _playerHealth > 0 && _playerPosition.x > 0 && !IsKeyDown(KEY_D)) {
 		_playerVelocity.x -= _playerSpeed;
 		framesSpeed = 8;
 		if (IsKeyDown(KEY_LEFT_SHIFT)) {
@@ -181,7 +181,7 @@ void Player::PlayerController() {
 			PlaySound(_dash);
 		}
 	}
-	if (TriggerEvent(5.0f) && _stamina < _maxStamina) {
+	if (TriggerEvent(3.5f) && _stamina < _maxStamina && !IsKeyDown(KEY_LEFT_SHIFT)) {
 		_stamina++;
 	}
 	if (IsKeyPressed(KEY_SPACE) && _playerCanJump && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE)) {
