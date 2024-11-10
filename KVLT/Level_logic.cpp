@@ -26,7 +26,6 @@ Font GetCurrentFont()
 }
 
 bool PlayerOnGround(Player& player, Ground& ground) {
-	player.SetPlayerCanJump(true);
 	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
 		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() + 108 <= ground.GetGroundPositionY() + ground.GetGroundHeight());
 }
@@ -43,7 +42,7 @@ bool PlayerCantWalk(Player& player, Border& border) {
 		return true;
 	}
 	if (player.GetPlayerPositionX() + 110 >= border.GetBorderPosX() + 20 && player.GetPlayerPositionX() + 21 <= border.GetBorderPosX() + border.GetBorderWidth() - 20 
-		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 20 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
+		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 30 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
 		player.SetPlayerPositionX((float)border.GetBorderPosX() - (float)130);
 		return true;
 	}
@@ -74,14 +73,16 @@ Camera2D _playerCamera;
 Ground mainGroundFloor = Ground({ { -1000 , 1000 } , 5400, 1500, DARKGRAY });
 
 //Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
-Ground _firstG = Ground({ 500, 900 }, 150, 30, RAYWHITE);
-Ground _secondG = Ground({850, 800}, 150, 30, RAYWHITE);
+Ground _firstG = Ground({ 500, 875 }, 150, 30, RAYWHITE);
+Ground _secondG = Ground({850, 750}, 150, 30, RAYWHITE);
 
-Border _border = Border({ 1200, 700 }, 1000, 150,  DARKGRAY);
-Ground _borderG = Ground({ 1200, 700 }, 150, 20, DARKGRAY);
+Border _border = Border({ 1200, 650 }, 1000, 150,  DARKGRAY);
+Ground _borderG = Ground({ 1200, 650 }, 150, 20, DARKGRAY);
 
-Border _groundBorder = Border({ 1349, 700 }, 50, 350, WHITE);
-Border _border2 = Border({ 1698, -250 }, 1000, 150, DARKGRAY);
+Border _groundBorder = Border({ 1349, 650 }, 50, 450, DARKBROWN);
+Border _border2 = Border({ 1798, -300 }, 1000, 810, DARKGRAY);
+
+Border _borderAlt = Border({ 2600, -300 }, 3000, 40, DARKGRAY);
 
 void LEVEL_T_LOGIC(Player& player) {
 	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
@@ -110,18 +111,25 @@ void LEVEL_T_LOGIC(Player& player) {
 	else if (PlayerCantWalk(player, _border2)) {
 		PlayerCantWalk(player, _border2);
 	}
+	else if (PlayerCantWalk(player, _borderAlt)) {
+		PlayerCantWalk(player, _borderAlt);
+	}
 }
 
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
 	DrawTextEx(font, "PRESS WASD TO MOVE", {-200, 700 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270, 730 }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PRESS SPACE TO JUMP", {400, 700}, 30, 3, RAYWHITE);
-	DrawTextEx(font, "JUMP DOWN", { 1435, 500 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "JUMP DOWN", { 1485, 450 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "PUSH ALT TO DASH", { 2250, 800 }, 30, 3, RAYWHITE);
+	DrawTextEx(font, "(come close)", { 2300, 830 }, 30, 3, RAYWHITE);
 	_firstG.GroundDraw();
 	_secondG.GroundDraw();
 	_groundBorder.Draw();
 	_border.Draw();
 	_border2.Draw();
+	_borderAlt.Draw();
 	mainGroundFloor.GroundDraw();
 	player.Draw();
 }
