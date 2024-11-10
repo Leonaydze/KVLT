@@ -173,12 +173,12 @@ void Player::PlayerController() {
 	if (IsKeyPressed(KEY_LEFT_ALT) && _playerHealth > 0 && _playerPosition.x > 0 && _stamina > 0) {
 		if (IsKeyDown(KEY_A)) {
 			_playerPosition.x -= _dashDistance + _dashLevel * 10;
-			_stamina--;
+			--_stamina;
 			PlaySound(_dash);
 		}
 		if (IsKeyDown(KEY_D)) {
 			_playerPosition.x += _dashDistance + _dashLevel * 10;
-			_stamina--;
+			--_stamina;
 			PlaySound(_dash);
 		}
 	}
@@ -247,7 +247,7 @@ unsigned short int Player::GetDashLevel()
 
 void Player::UpgradeDashLevel(){
 	if (_dashLevel < 5) {
-		_dashLevel++;
+		++_dashLevel;
 	}
 }
 

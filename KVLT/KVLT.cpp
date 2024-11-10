@@ -260,11 +260,11 @@ int main()
 				//Exit frim settings
 				if (result == 1 || IsKeyPressed(KEY_ESCAPE)) setRequest = false;
 			}
-			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150.0f , 1000.0f }, 36, 3, GRAY);
+			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / (float)2 - 150.0f , 1000.0f }, 36, 3, GRAY);
 
 			//Open exit window
 			if ((GetExitWindowRequest() || exitRequest) && !setRequest ) {
-				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125.0f, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50.0f, 250.0f, 100.0f },
+				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / (float)2 - 125.0f, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50.0f, 250.0f, 100.0f },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
 				//Exit window choice
@@ -284,15 +284,12 @@ int main()
 			LEVEL_T_DRAW(player);
 
 			if (IsKeyPressed(KEY_LEFT)) {
-				std::cout << "Dash distance lvl: " << player.GetDashLevel() << std::endl;
 				player.UpgradeDashLevel();
 			}
 			else if (IsKeyPressed(KEY_RIGHT)) {
-				std::cout << "Stamina lvl: " << player.GetStaminaLevel() << std::endl;
 				player.UpgradeStaminaLevel();
 			}
 			else if (IsKeyPressed(KEY_UP)) {
-				std::cout << "Health lvl: " << player.GetHealthLevel() << std::endl;
 				player.UpgradeHealthLevel();
 			}
 		}
