@@ -221,7 +221,7 @@ int main()
 		if(GetCurrentGameScreen() == mainMenu) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			//Heading
-			DrawTextEx(GetCurrentFont(), "KVLT", { 100 , 300 }, 92, 3, WHITE);
+			DrawTextEx(GetCurrentFont(), "KVLT", { (float)100 , (float)300 }, 92, 3, WHITE);
 
 			//Buttons
 			GuiSetStyle(DEFAULT, TEXT_SIZE, 24);
@@ -235,66 +235,79 @@ int main()
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
 				playRequest = false;
-				player.SetPlayerPositionV({ 0, 870 });
+				player.SetPlayerPositionV({ 0.0f, 870.0f });
 				setRequest = false;
 			}
 
 			//Open settings window
 			if (setRequest) {
-				int result = GuiWindowBox({ 600, 200, 800, 600 }, "Settings");
+				int result = GuiWindowBox({ 600.0f, 200.0f, 800.0f, 600.0f }, "Settings");
 
 				//Slider and master volume change
-				DrawTextEx(GetCurrentFont(), "MasterVolume", { 650, 250 }, 20, 2, RAYWHITE);
-				GuiSlider({ 650, 275, 100, 25 }, "", "100%", &volume, 0, 100);
+				DrawTextEx(GetCurrentFont(), "MasterVolume", { 650.0f, 250.0f }, 20, 2, RAYWHITE);
+				GuiSlider({ 650.0f, 275.0f, 100.0f, 25.0f }, "", "100%", &volume, 0, 100);
 				GuiDrawIcon(ICON_AUDIO, 800, 280, 1, WHITE);
 				SetMasterVolume(volume);
 
 				//Slider and musiv volume change
-				DrawTextEx(GetCurrentFont(), "MusicVolume", { 650, 325 }, 20, 2, RAYWHITE);
-				GuiSlider({ 650, 350, 100, 25 }, "", "100%", &musicVolume, 0, 1);
+				DrawTextEx(GetCurrentFont(), "MusicVolume", { 650.0f, 325.0f }, 20, 2, RAYWHITE);
+				GuiSlider({ 650.0f, 350.0f, 100.0f, 25.0f }, "", "100%", &musicVolume, 0, 1);
 				GuiDrawIcon(ICON_AUDIO, 800, 355, 1, WHITE);
 
 				DrawTextEx(GetCurrentFont(), "Reroll track", { 650.0f, 410.0f }, 20, 2, RAYWHITE);
-				if (GuiButton({ 800, 405, 30, 30 }, "#60#")) {
-					setMusicReroll = true;
-				}
+				if (GuiButton({ 800.0f, 405.0f, 30.0f, 30.0f }, "#60#")) setMusicReroll = true;
 
 				//Exit frim settings
-				if (result == 1) setRequest = false;
+				if (result == 1 || IsKeyPressed(KEY_ESCAPE)) setRequest = false;
 			}
-			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150 , 1000}, 36, 3, GRAY);
+			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 150.0f , 1000.0f }, 36, 3, GRAY);
+
 			//Open exit window
 			if ((GetExitWindowRequest() || exitRequest) && !setRequest ) {
-				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50, 250, 100 },
+				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / 2 - 125.0f, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50.0f, 250.0f, 100.0f },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
 				//Exit window choice
 				if (result == 1) {
 					SetExitWindow(true);
 				}
-				else if (result == 2 or result == 0) {
+				else if (result == 2 || result == 0) {
 					SetExitWindowRequest(false);
 					exitRequest = false;
 				}
 			}
 		}
+
 		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
 			ClearBackground(BLACK);
 			LEVEL_T_LOGIC(player);
 			LEVEL_T_DRAW(player);
+
+			if (IsKeyPressed(KEY_LEFT)) {
+				std::cout << "Dash distance lvl: " << player.GetDashLevel() << std::endl;
+				player.UpgradeDashLevel();
+			}
+			else if (IsKeyPressed(KEY_RIGHT)) {
+				std::cout << "Stamina lvl: " << player.GetStaminaLevel() << std::endl;
+				player.UpgradeStaminaLevel();
+			}
+			else if (IsKeyPressed(KEY_UP)) {
+				std::cout << "Health lvl: " << player.GetHealthLevel() << std::endl;
+				player.UpgradeHealthLevel();
+			}
 		}
 
 		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu) {
-			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125, (float)player.GetPlayerPositionY() - 250, 300, 100},
+			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125.0f, (float)player.GetPlayerPositionY() - 250.0f, 300.0f, 100.0f },
 				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 
 			//Exit window choice
-			if (result == 1 || IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {
+			if (IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {
 				SetCurrentScreen(mainMenu);
 				SetExitWindowRequest(false);
 				exitRequest = false;
 			}
-			else if (result == 2 || result == 0 || IsKeyPressed(KEY_N)) {
+			else if (IsKeyPressed(KEY_N)) {
 				SetExitWindowRequest(false);
 				exitRequest = false;
 			}

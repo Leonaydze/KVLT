@@ -38,7 +38,7 @@ unsigned short int Player::GetHealthLevel()
 }
 
 void Player::UpgradeHealthLevel(){
-	if (_maxPlayerHealth / 10 % 10 < 6) {
+	if (_maxPlayerHealth / 10 % 10 < 5) {
 		_maxPlayerHealth += 10;
 	}
 }
@@ -83,8 +83,9 @@ unsigned short int Player::GetStaminaLevel()
 }
 
 void Player::UpgradeStaminaLevel(){
-	if (_staminaLevel < 5) {
-		_staminaLevel++;
+	if (_staminaLevel < 4) {
+		++_staminaLevel;
+		++_maxStamina;
 	}
 }
 
@@ -181,8 +182,10 @@ void Player::PlayerController() {
 			PlaySound(_dash);
 		}
 	}
-	if (TriggerEvent(2.5f) && _stamina < _maxStamina && !IsKeyDown(KEY_LEFT_SHIFT)) {
-		_stamina++;
+	if (_stamina < _maxStamina && !IsKeyDown(KEY_LEFT_SHIFT)) {
+		if (TriggerEvent(2.5f)) {
+			_stamina++;
+		}
 	}
 	if (IsKeyPressed(KEY_SPACE) && _playerCanJump && _playerHealth > 0 && !IsKeyPressedRepeat(KEY_SPACE)) {
 		_playerJump = true;
@@ -245,7 +248,7 @@ unsigned short int Player::GetDashLevel()
 }
 
 void Player::UpgradeDashLevel(){
-	if (_dashLevel < 6) {
+	if (_dashLevel < 5) {
 		_dashLevel++;
 	}
 }

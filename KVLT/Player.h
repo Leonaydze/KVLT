@@ -34,7 +34,7 @@ private:
 	int framesSpeed = 8;
 
 	unsigned short int _staminaLevel = 0;
-	unsigned short int _maxStamina = 4 + _staminaLevel;
+	unsigned short int _maxStamina = 4;
 	unsigned short int _stamina = _maxStamina;
 	unsigned short int _dashLevel = 1;
 	unsigned short int _dashDistance = 100;
