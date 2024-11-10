@@ -160,6 +160,21 @@
     <Media Include="Sounds\Jump.mp3">
       <Filter>Файлы ресурсов\Sound</Filter>
     </Media>
+    <Media Include="Music\mainMusic_8.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_9.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_10.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_11.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
+    <Media Include="Music\mainMusic_12.mp3">
+      <Filter>Файлы ресурсов\Music</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png">

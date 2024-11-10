@@ -175,12 +175,17 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Music\mainMusic.mp3" />
+    <Media Include="Music\mainMusic_10.mp3" />
+    <Media Include="Music\mainMusic_11.mp3" />
+    <Media Include="Music\mainMusic_12.mp3" />
     <Media Include="Music\mainMusic_2.mp3" />
     <Media Include="Music\mainMusic_3.mp3" />
     <Media Include="Music\mainMusic_4.mp3" />
     <Media Include="Music\mainMusic_5.mp3" />
     <Media Include="Music\mainMusic_6.mp3" />
     <Media Include="Music\mainMusic_7.mp3" />
+    <Media Include="Music\mainMusic_8.mp3" />
+    <Media Include="Music\mainMusic_9.mp3" />
     <Media Include="Sounds\Dash.wav" />
     <Media Include="Sounds\Jump.mp3" />
     <Media Include="Sounds\Play_button.wav" />

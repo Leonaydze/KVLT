@@ -44,9 +44,9 @@ int lastMusicNumber = -1;
 /// Function for randomness of tracks
 /// </summary>
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
-void PlayMusic(Music &music) {
+void PlayMusic(Music &music, bool& reroll) {
 	srand((unsigned)time(NULL));
-	int randomMusicNumber = rand() % 7;
+	int randomMusicNumber = rand() % 12;
 
 	//Choice music
 	if (randomMusicNumber == 0 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
@@ -98,7 +98,41 @@ void PlayMusic(Music &music) {
 		}
 		lastMusicNumber = randomMusicNumber;
 	}
-
+	if (randomMusicNumber == 7 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_8.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
+	if (randomMusicNumber == 8 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_9.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
+	if (randomMusicNumber == 9 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_10.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
+	if (randomMusicNumber == 10 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_11.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
+	if (randomMusicNumber == 11 && !IsMusicStreamPlaying(music) && randomMusicNumber != lastMusicNumber) {
+		music = LoadMusicStream("Music\\mainMusic_12.mp3");
+		if (GetMusicTimePlayed(music) < GetMusicTimeLength(music)) {
+			PlayMusicStream(music);
+		}
+		lastMusicNumber = randomMusicNumber;
+	}
 	//How much did the song play
 	float timePlayed = GetMusicTimePlayed(music) / (GetMusicTimeLength(music) - 1);
 
@@ -106,8 +140,16 @@ void PlayMusic(Music &music) {
 		StopMusicStream(music);
 		UnloadMusicStream(music);
 		while (lastMusicNumber == randomMusicNumber) {
-			randomMusicNumber = rand() % 7;
+			randomMusicNumber = rand() % 12;
 		}
+	}
+	if (reroll) {
+		StopMusicStream(music);
+		UnloadMusicStream(music);
+		while (lastMusicNumber == randomMusicNumber) {
+			randomMusicNumber = rand() % 12;
+		}
+		reroll = false;
 	}
 }
 
@@ -128,6 +170,7 @@ int main()
 	bool exitRequest = false;
 	bool playRequest = false;
 	bool setRequest = false;
+	bool setMusicReroll = false;
 
 	Init();
 
@@ -160,7 +203,7 @@ int main()
 	while (!GetExitWindow())
 	{
 		//Play, update and customization music
-		PlayMusic(playMusic);
+		PlayMusic(playMusic, setMusicReroll);
 		SetMusicVolume(playMusic, musicVolume);
 		if (IsMusicStreamPlaying(playMusic)) {
 			UpdateMusicStream(playMusic);
@@ -210,6 +253,11 @@ int main()
 				DrawTextEx(GetCurrentFont(), "MusicVolume", { 650, 325 }, 20, 2, RAYWHITE);
 				GuiSlider({ 650, 350, 100, 25 }, "", "100%", &musicVolume, 0, 1);
 				GuiDrawIcon(ICON_AUDIO, 800, 355, 1, WHITE);
+
+				DrawTextEx(GetCurrentFont(), "Reroll track", { 650.0f, 410.0f }, 20, 2, RAYWHITE);
+				if (GuiButton({ 800, 405, 30, 30 }, "#60#")) {
+					setMusicReroll = true;
+				}
 
 				//Exit frim settings
 				if (result == 1) setRequest = false;
