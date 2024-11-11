@@ -3,6 +3,24 @@
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
+double _lastUpdateTime = (double)0;
+/// <summary>
+/// A function to indicate that the code is stopped for a while
+/// </summary>
+/// <param name="interval - "> The time for which the code will stop</param>
+/// <returns></returns>
+bool TriggerEvent(float interval) {
+	float currentTime = (float)GetTime();
+
+	if (currentTime - _lastUpdateTime >= interval) {
+		_lastUpdateTime = currentTime;
+
+		return true;
+	}
+
+	return false;
+}
+
 _gameScreen GetCurrentGameScreen()
 {
 	return _currentScreen;
@@ -75,6 +93,7 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 	}
 }
 
+
 template<typename T>
 bool PlayerCanTalkWithNpc(Player& player, T& other) {
 	return (player.GetPlayerPositionX() + 128 >= other.GetNpcPosX() - 40 && player.GetPlayerPositionX() <= other.GetNpcPosX() + 168
@@ -106,11 +125,6 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
 void LEVEL_T_LOGIC(Player& player) {
-	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
-	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
-	_playerCamera.zoom = 1.0f;
-	_playerCamera.rotation = 0.0f;
-
 	if (!UpgradePlayerLevel(player, priest)) {
 		player.PlayerController();
 	}
@@ -141,6 +155,11 @@ void LEVEL_T_LOGIC(Player& player) {
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
 
+	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
+	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
+	_playerCamera.zoom = 1.0f;
+	_playerCamera.rotation = 0.0f;
+
 	DrawTextEx(font, "PRESS WASD TO MOVE", {-200.0f, 700.0f }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270.0f, 730.0f }, 30, 3, RAYWHITE);
 
@@ -168,6 +187,6 @@ void LEVEL_T_DRAW(Player& player) {
 	priest.Draw();
 
 	if (PlayerCanTalkWithNpc(player, priest)) {
-		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, WHITE);
+		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, RAYWHITE);
 	}
 }

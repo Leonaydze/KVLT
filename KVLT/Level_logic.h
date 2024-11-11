@@ -4,6 +4,8 @@
 #include "Border.h"
 #include "Altar.h"
 
+bool TriggerEvent(float interval);
+
 enum _gameScreen { mainMenu, LVL_TUTORIAL, LVL_1, LVL_2, LVL_3, LVL_4, UpgradeLevels };
 
 _gameScreen GetCurrentGameScreen();

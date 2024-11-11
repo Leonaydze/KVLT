@@ -5,24 +5,6 @@
 #include "Clergy.h"
 #include <raygui.h>
 
-double lastUpdateTime = 0;
-/// <summary>
-/// A function to indicate that the code is stopped for a while
-/// </summary>
-/// <param name="interval - "> The time for which the code will stop</param>
-/// <returns></returns>
-bool TriggerEvent(double interval) {
-	double currentTime = GetTime();
-
-	if (currentTime - lastUpdateTime >= interval) {
-		lastUpdateTime = currentTime;
-
-		return true;
-	}
-
-	return false;
-}
-
 bool _exitWindowRequested = false;
 bool _exitWindow = false;
 
@@ -291,8 +273,8 @@ int main()
 
 		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
 			ClearBackground(BLACK);
-			LEVEL_T_LOGIC(player);
 			LEVEL_T_DRAW(player);
+			LEVEL_T_LOGIC(player);
 			_playerClergy.Draw(player, GetCurrentFont());
 		}
 
