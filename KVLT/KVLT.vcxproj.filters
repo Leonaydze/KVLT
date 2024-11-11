@@ -175,6 +175,9 @@
     <Media Include="Music\mainMusic_12.mp3">
       <Filter>Файлы ресурсов\Music</Filter>
     </Media>
+    <Media Include="Sounds\Drink_Flask.mp3">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png">

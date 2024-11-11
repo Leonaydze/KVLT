@@ -189,6 +189,7 @@
     <Media Include="Music\mainMusic_8.mp3" />
     <Media Include="Music\mainMusic_9.mp3" />
     <Media Include="Sounds\Dash.wav" />
+    <Media Include="Sounds\Drink_Flask.mp3" />
     <Media Include="Sounds\Jump.mp3" />
     <Media Include="Sounds\Play_button.wav" />
   </ItemGroup>

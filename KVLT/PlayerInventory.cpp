@@ -4,6 +4,7 @@ void PlayerInventory::HealFlask(Player &player){
 	if (_currentCountFlask >= 1 && IsKeyPressed(KEY_Q)) {
 		player.HealPlayer(flask.GetMaxHealCount());
 		_currentCountFlask--;
+		PlaySound(_drinkFlask);
 	}
 }
 
@@ -29,6 +30,7 @@ PlayerInventory PlayerInventory::fromJson(const json& _filename)
 void PlayerInventory::Init()
 {
 	flask.Init();
+	_drinkFlask = LoadSound("Sounds\\Drink_Flask.mp3");
 }
 
 void PlayerInventory::Draw(Player& player, Font font){
