@@ -210,5 +210,8 @@
     <Image Include="Sprites\Priest.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
+    <Image Include="Sprites\Flask.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

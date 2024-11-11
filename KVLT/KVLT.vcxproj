@@ -165,6 +165,7 @@
     <Image Include="Font.png" />
     <Image Include="Sprites\Altar.png" />
     <Image Include="Sprites\Clergy_icon.png" />
+    <Image Include="Sprites\Flask.png" />
     <Image Include="Sprites\Lich.png" />
     <Image Include="Sprites\Orc.png" />
     <Image Include="Sprites\Player.png" />

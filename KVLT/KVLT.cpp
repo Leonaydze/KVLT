@@ -178,6 +178,8 @@ int main()
 	_playerClergy.Init();
 
 	PlayerInventory playerInv;
+	playerInv.Init();
+
 	PlayerInventoryService playerInvS;
 
 	PlayerWeapon playerW;
@@ -276,6 +278,8 @@ int main()
 			LEVEL_T_DRAW(player);
 			LEVEL_T_LOGIC(player);
 			_playerClergy.Draw(player, GetCurrentFont());
+			playerInv.Draw(player, GetCurrentFont());
+			playerInv.HealFlask(player);
 		}
 
 		unsigned short int neededClergy = (hpLvl + dashLvl + staminaLvl) * 10;

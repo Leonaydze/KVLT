@@ -1,7 +1,7 @@
 #include "PlayerInventory.h"
 
-void PlayerInventory::HealFlask(Player &player, Flask flask){
-	if (_currentCountFlask >= 1) {
+void PlayerInventory::HealFlask(Player &player){
+	if (_currentCountFlask >= 1 && IsKeyPressed(KEY_Q)) {
 		player.HealPlayer(flask.GetMaxHealCount());
 		_currentCountFlask--;
 	}
@@ -24,4 +24,16 @@ json PlayerInventory::toJson() const
 PlayerInventory PlayerInventory::fromJson(const json& _filename)
 {
 	return PlayerInventory(_filename["CurrentCountFlask"]);
+}
+
+void PlayerInventory::Init()
+{
+	flask.Init();
+}
+
+void PlayerInventory::Draw(Player& player, Font font){
+	DrawRectangle((int)player.GetPlayerPositionX() - 900, (int)player.GetPlayerPositionY() + 200, 98, 98, DARKBROWN);
+	DrawRectangle((int)player.GetPlayerPositionX() - 898, (int)player.GetPlayerPositionY() + 202, 96, 96, BROWN);
+	DrawTexture(flask.GetTexture(), (int)player.GetPlayerPositionX() - 898, (int)player.GetPlayerPositionY() + 202, WHITE);
+	DrawTextEx(font, TextFormat("%i", _currentCountFlask), { player.GetPlayerPositionX() - 820, player.GetPlayerPositionY() + 270 }, 20, 2, RAYWHITE );
 }

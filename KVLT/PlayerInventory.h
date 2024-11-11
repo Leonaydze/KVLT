@@ -8,7 +8,7 @@ private:
 	unsigned short int _currentCountFlask = 0;
 	unsigned short int _maxCountFlask = 5;
 	
-	void HealFlask(Player &player, Flask flask);
+	Flask flask;
 public:
 	int id = -1;
 	PlayerInventory();
@@ -21,5 +21,11 @@ public:
 
 	json toJson() const;
 	static PlayerInventory fromJson(const json& _filename);
+
+	void Init();
+
+	void Draw(Player& player, Font font);
+
+	void HealFlask(Player &player);
 };
 
