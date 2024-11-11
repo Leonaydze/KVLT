@@ -37,9 +37,12 @@ unsigned short int Player::GetHealthLevel()
 	return _maxPlayerHealth / 10 % 10;
 }
 
-void Player::UpgradeHealthLevel(){
-	if (_maxPlayerHealth / 10 % 10 < 5) {
+void Player::UpgradeHealthLevel(unsigned short int hpLvl){
+	while (_maxPlayerHealth / 10 % 10 < hpLvl) {
 		_maxPlayerHealth += 10;
+	}
+	if (_maxPlayerHealth / 10 % 10 > 5) {
+		_maxPlayerHealth = 150;
 	}
 }
 
@@ -82,10 +85,14 @@ unsigned short int Player::GetStaminaLevel()
 	return _staminaLevel;
 }
 
-void Player::UpgradeStaminaLevel(){
-	if (_staminaLevel < 4) {
-		++_staminaLevel;
-		++_maxStamina;
+void Player::UpgradeStaminaLevel(unsigned short int staminaLvl){
+	_staminaLevel = staminaLvl;
+	while (_lastStaminaLevel < _staminaLevel) {
+		_maxStamina++;
+		_lastStaminaLevel++;
+	}
+	if (_staminaLevel > 4) {
+		_maxStamina = 4;
 	}
 }
 
@@ -245,9 +252,13 @@ unsigned short int Player::GetDashLevel()
 	return _dashLevel;
 }
 
-void Player::UpgradeDashLevel(){
-	if (_dashLevel < 5) {
-		++_dashLevel;
+void Player::UpgradeDashLevel(unsigned short int dashLvl){
+	_dashLevel = dashLvl;
+	while (_lastDashLevel < _dashLevel) {
+		_lastDashLevel++;
+	}
+	if (_dashLevel > 5 ) {
+		_dashLevel = 5;
 	}
 }
 

@@ -9,6 +9,10 @@ int Clergy::GetClergyCount()
 	return _countClergy;
 }
 
+void Clergy::TakeOffClergy(int neededClergy){
+	_countClergy -= neededClergy;
+}
+
 json Clergy::toJson() const
 {
 	return json{ {"id", id}, {"CountClergy", _countClergy}};
@@ -19,7 +23,7 @@ Clergy Clergy::fromJson(const json& _filename)
 	return Clergy(_filename["CountClergy"]);
 }
 
-void Clergy::Draw(Player& player, Font& font){
+void Clergy::Draw(Player& player, Font font){
 	DrawRectangle((int)player.GetPlayerPositionX() + 700, (int)player.GetPlayerPositionY() + 230, 130, 50, DARKBROWN);
 	DrawRectangle((int)player.GetPlayerPositionX() + 705, (int)player.GetPlayerPositionY() + 235, 120, 40, BROWN);
 	DrawTextEx(font, TextFormat(": %i", _countClergy), {player.GetPlayerPositionX() + 750, player.GetPlayerPositionY() + 245 }, 25, 3, RAYWHITE);

@@ -27,3 +27,14 @@ bool Priest::NpcDeath()
     }
     return false;
 }
+
+void Priest::Init(){
+    _npcTexture = LoadTexture("Sprites\\Priest.png");
+    _npcTexture.height /= 1.28f;
+    _npcTexture.width /= 1.28f;
+}
+
+void Priest::Draw()
+{
+    DrawTextureRec(_npcTexture, _frameRec, _npcPosition, WHITE);
+}

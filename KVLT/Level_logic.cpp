@@ -13,14 +13,24 @@ void SetCurrentScreen(_gameScreen curScreen)
 	_currentScreen = curScreen;
 }
 
+Vector2 _lastPlayerPosition;
+
+Vector2 GetLastPlayerPosition() {
+	return _lastPlayerPosition;
+}
+
+void SetLastPlayerPosition(Vector2 lastPlayerPosition) {
+	_lastPlayerPosition = lastPlayerPosition;
+}
+
 extern Font font = LoadFont("");
 
-Clergy _playerClergy = Clergy(); 
+Priest priest = Priest({ 2900, 910 });
 
 void Init()
 {
 	font = LoadFont("Font.png");;
-	_playerClergy.Init();
+	priest.Init();
 }
 
 Font GetCurrentFont()
@@ -67,13 +77,16 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 
 template<typename T>
 bool PlayerCanTalkWithNpc(Player& player, T& other) {
-	return (player.GetPlayerPositionX() + 108 >= other.GetNpcPosX() && player.GetPlayerPositionX() <= other.GetNpcPosX() + 168
-		&& player.GetPlayerPositionY() + 20 >= other.GetNpcPosY() && player.GetPlayerPositionY() + 108 <= other.GetNpcPosY() + 128);
+	return (player.GetPlayerPositionX() + 128 >= other.GetNpcPosX() - 40 && player.GetPlayerPositionX() <= other.GetNpcPosX() + 168
+		&& player.GetPlayerPositionY() + 20 >= other.GetNpcPosY() - 20 && player.GetPlayerPositionY() + 108 <= other.GetNpcPosY() + 148);
 }
-void UpgradePlayerLevel(Player& player, Priest& priest) {
-	if (PlayerCanTalkWithNpc(player, priest) && !priest.NpcDeath()) {
-
+bool UpgradePlayerLevel(Player& player, Priest& priest) {
+	if (IsKeyPressed(KEY_E) && PlayerCanTalkWithNpc(player, priest) && !priest.NpcDeath() && !player.PlayerDeath()) {
+		SetLastPlayerPosition(player.GetPlayerPositionV());
+		_currentScreen = UpgradeLevels;
+		return true;
 	}
+	return false;
 }
 
 Camera2D _playerCamera;
@@ -98,8 +111,9 @@ void LEVEL_T_LOGIC(Player& player) {
 	_playerCamera.zoom = 1.0f;
 	_playerCamera.rotation = 0.0f;
 
-	player.PlayerController();
-
+	if (!UpgradePlayerLevel(player, priest)) {
+		player.PlayerController();
+	}
 	if (player.IsPlayerJump() && !player.PlayerMaxJump() && player.GetPlayerCanJump()) {
 		player.MoveVertically();
 	}
@@ -126,19 +140,34 @@ void LEVEL_T_LOGIC(Player& player) {
 
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
+
 	DrawTextEx(font, "PRESS WASD TO MOVE", {-200.0f, 700.0f }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "PRESS SHIFT TO MOVE FASTER", { -270.0f, 730.0f }, 30, 3, RAYWHITE);
+
 	DrawTextEx(font, "PRESS SPACE TO JUMP", {400.0f, 700.0f }, 30, 3, RAYWHITE);
+
 	DrawTextEx(font, "JUMP DOWN", { 1485.0f, 500.0f }, 30, 3, RAYWHITE);
+
 	DrawTextEx(font, "PUSH ALT TO DASH", { 2250.0f, 800.0f }, 30, 3, RAYWHITE);
 	DrawTextEx(font, "(come close)", { 2300.0f, 830.0f }, 30, 3, RAYWHITE);
+
 	_firstG.GroundDraw();
 	_secondG.GroundDraw();
+
 	_groundBorder.Draw();
 	_border.Draw();
+
 	_border2.Draw();
+
 	_borderAlt.Draw();
+
 	mainGroundFloor.GroundDraw();
+
 	player.Draw();
-	_playerClergy.Draw(player, font);
+
+	priest.Draw();
+
+	if (PlayerCanTalkWithNpc(player, priest)) {
+		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, WHITE);
+	}
 }

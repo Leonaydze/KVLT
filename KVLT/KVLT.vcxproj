@@ -168,6 +168,7 @@
     <Image Include="Sprites\Lich.png" />
     <Image Include="Sprites\Orc.png" />
     <Image Include="Sprites\Player.png" />
+    <Image Include="Sprites\Priest.png" />
     <Image Include="Sprites\Pugalo_atlas.png" />
     <Image Include="Sprites\Roc.png" />
     <Image Include="Sprites\Titan.png" />

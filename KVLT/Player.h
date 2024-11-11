@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 class Player{
 private:
-	unsigned short int _maxPlayerHealth = 110;
+	unsigned short int _maxPlayerHealth = 100;
 	short int _playerHealth = _maxPlayerHealth;
 
 	Vector2 _playerPosition = { 0, 870 };
@@ -34,15 +34,16 @@ private:
 	int framesSpeed = 8;
 
 	unsigned short int _staminaLevel = 0;
+	unsigned short int _lastStaminaLevel = _staminaLevel;
 	unsigned short int _maxStamina = 4;
 	unsigned short int _stamina = _maxStamina;
-	unsigned short int _dashLevel = 1;
+	unsigned short int _dashLevel = 0;
+	unsigned short int _lastDashLevel = _dashLevel;
 	unsigned short int _dashDistance = 100;
 	Sound _dash = LoadSound("");
 
 	float _lastUpdateTime = 0;
 	bool TriggerEvent(float interval);
-
 public:
 	Sound _jump = LoadSound("");
 
@@ -65,7 +66,7 @@ public:
 	void HealPlayer(int healthAmount);
 
 	unsigned short int GetHealthLevel();
-	void UpgradeHealthLevel();
+	void UpgradeHealthLevel(unsigned short int hpLvl);
 
 	Vector2 GetPlayerPositionV();
 	void SetPlayerPositionV(Vector2 playerPosition);
@@ -80,7 +81,7 @@ public:
 	static Player fromJson(const json& _filename);
 
 	unsigned short int GetStaminaLevel();
-	void UpgradeStaminaLevel();
+	void UpgradeStaminaLevel(unsigned short int staminaLvl);
 
 	void PlayerController();
 
@@ -100,7 +101,7 @@ public:
 	void MoveVerticallyDown();
 
 	unsigned short int GetDashLevel();
-	void UpgradeDashLevel();
+	void UpgradeDashLevel(unsigned short int dashLvl);
 
 	void Init(/*Player player*/);
 	void Draw();

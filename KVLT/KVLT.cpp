@@ -1,8 +1,9 @@
-﻿#define RAYGUI_IMPLEMENTATION
-#include <raygui.h>
-#include <ctime>
+﻿#include <ctime>
 #include "PlayerService.h"
 #include "Level_logic.h"
+#define RAYGUI_IMPLEMENTATION
+#include "Clergy.h"
+#include <raygui.h>
 
 double lastUpdateTime = 0;
 /// <summary>
@@ -191,6 +192,9 @@ int main()
 	Player player;
 	player.Init(/*playerS.read()[0]*/);
 
+	Clergy _playerClergy = Clergy();
+	_playerClergy.Init();
+
 	PlayerInventory playerInv;
 	PlayerInventoryService playerInvS;
 
@@ -199,6 +203,12 @@ int main()
 
 	Clergy c;
 	PlayerClergyService cS;
+
+	_gameScreen lastScreen = GetCurrentGameScreen();
+
+	unsigned short int hpLvl = player.GetHealthLevel();
+	unsigned short int dashLvl = player.GetDashLevel();
+	unsigned short int staminaLvl = player.GetStaminaLevel();
 
 	while (!GetExitWindow())
 	{
@@ -234,6 +244,7 @@ int main()
 			if (playRequest) {
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
+				lastScreen = LVL_TUTORIAL;
 				playRequest = false;
 				player.SetPlayerPositionV({ 0.0f, 870.0f });
 				setRequest = false;
@@ -282,19 +293,82 @@ int main()
 			ClearBackground(BLACK);
 			LEVEL_T_LOGIC(player);
 			LEVEL_T_DRAW(player);
+			_playerClergy.Draw(player, GetCurrentFont());
+		}
 
-			if (IsKeyPressed(KEY_LEFT)) {
-				player.UpgradeDashLevel();
+		unsigned short int neededClergy = (hpLvl + dashLvl + staminaLvl) * 10;
+
+		if (GetCurrentGameScreen() == UpgradeLevels) {
+			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "Stats");
+
+			DrawTextEx(GetCurrentFont(), "HP LEVEL", { 500.0f, 200.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current health level: %i", hpLvl), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
+			if (GuiButton({ 700.0f, 260.0f, 24.0f, 24.0f }, "->") && hpLvl < 5) {
+				hpLvl++;
 			}
-			else if (IsKeyPressed(KEY_RIGHT)) {
-				player.UpgradeStaminaLevel();
+			else if (GuiButton({ 500.0f, 260.0f, 24.0f, 24.0f }, "<-") && hpLvl > 0 && hpLvl != 5 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl ) {
+				hpLvl--;
 			}
-			else if (IsKeyPressed(KEY_UP)) {
-				player.UpgradeHealthLevel();
+			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetMaxPlayerHealth()), { 500.0f, 350.0f }, 20, 2, WHITE);
+			if (player.GetMaxPlayerHealth() / 10 % 10 < hpLvl && player.GetMaxPlayerHealth() / 10 % 10 != hpLvl) {
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated health: %i", player.GetMaxPlayerHealth() + hpLvl * 10), { 500.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+			else {
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated health: %i", player.GetMaxPlayerHealth()), { 500.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+
+			DrawTextEx(GetCurrentFont(), "DASH DISTANCE", { 800.0f, 200.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current dash level: %i", dashLvl), { 800.0f, 240.0f }, 20, 2, RAYWHITE);
+			if (GuiButton({ 1000.0f, 260.0f, 24.0f, 24.0f }, "->") && dashLvl < 5) {
+				dashLvl++;
+			}
+			else if (GuiButton({ 800.0f, 260.0f, 24.0f, 24.0f }, "<-") && dashLvl > 0 && dashLvl != 5 && player.GetDashLevel() < dashLvl) {
+				dashLvl--;
+			}
+			DrawTextEx(GetCurrentFont(), TextFormat("Current dash: %i", player.GetDashLevel()), { 800.0f, 350.0f }, 20, 2, WHITE);
+			if (player.GetDashLevel() != dashLvl && player.GetDashLevel() < dashLvl) {
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated dash: %i", player.GetDashLevel() + dashLvl), { 800.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+			else {
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated dash: %i", player.GetDashLevel()), { 800.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+
+			DrawTextEx(GetCurrentFont(), "STAMINA LEVEL", { 1100.0f, 200.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina level: %i", staminaLvl), { 1100.0f, 240.0f }, 20, 2, RAYWHITE);
+			if (GuiButton({ 1300.0f, 260.0f, 24.0f, 24.0f }, "->") && staminaLvl < 4) {
+				staminaLvl++;
+			}
+			else if (GuiButton({ 1100.0f, 260.0f, 24.0f, 24.0f }, "<-") && staminaLvl > 0 && staminaLvl != 4 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl) {
+				staminaLvl--;
+			}
+			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina: %i", player.GetStaminaLevel()), { 1100.0f, 350.0f }, 20, 2, WHITE);
+			if (player.GetStaminaLevel() < staminaLvl && player.GetStaminaLevel() != staminaLvl) {
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated stamina: %i", player.GetStaminaLevel() + staminaLvl), { 1100.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+			else{
+				DrawTextEx(GetCurrentFont(), TextFormat("Updated stamina: %i", player.GetStaminaLevel()), { 1100.0f, 400.0f }, 20, 2, RAYWHITE);
+			}
+
+			if (GuiButton({1300.0f, 850.0f, 80.0f, 40.0f },"Accept") && neededClergy <= _playerClergy.GetClergyCount() ) {
+				player.UpgradeDashLevel(dashLvl);
+				player.UpgradeHealthLevel(hpLvl);
+				player.UpgradeStaminaLevel(staminaLvl);
+				player.SetPlayerPositionV(GetLastPlayerPosition());
+				_playerClergy.TakeOffClergy(neededClergy);
+				SetCurrentScreen(lastScreen);
+			}
+
+			DrawTextEx(GetCurrentFont(), TextFormat("Needed Clergy: %i", neededClergy), { 500.0f, 840.0f}, 20, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("You have Clergy: %i", _playerClergy.GetClergyCount()), {500.0f, 880.0f}, 20, 2, RAYWHITE);
+
+			if (result == 1 || IsKeyPressed(KEY_ESCAPE)) { 
+				player.SetPlayerPositionV(GetLastPlayerPosition());
+				SetCurrentScreen(lastScreen); 
 			}
 		}
 
-		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu) {
+		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
 			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125.0f, (float)player.GetPlayerPositionY() - 250.0f, 300.0f, 100.0f },
 				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 

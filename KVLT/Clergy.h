@@ -24,10 +24,12 @@ public:
 
 	int GetClergyCount();
 
+	void TakeOffClergy(int neededClergy);
+
 	json toJson() const;
 	static Clergy fromJson(const json& _filename);
 
-	void Draw(Player& player, Font& font);
+	void Draw(Player& player, Font font);
 
 	void Init();
 };
