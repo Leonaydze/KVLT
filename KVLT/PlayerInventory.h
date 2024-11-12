@@ -23,6 +23,8 @@ public:
 	json toJson() const;
 	static PlayerInventory fromJson(const json& _filename);
 
+	int GetFlaskHeal();
+
 	void Init();
 
 	void Draw(Player& player, Font font);

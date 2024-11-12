@@ -1,27 +1,32 @@
 #include "PlayerWeapon.h"
 
-int PlayerWeapon::GetWeaponWeight()
-{
-	return currentWW;
+
+PlayerWeapon::PlayerWeapon(_WeaponWeight currentWW) {
+	SetDamageAndSpeedDueToWeight(currentWW);
 }
 
-void PlayerWeapon::SetDamageAndSpeedDueToWeight()
+void PlayerWeapon::SetDamageAndSpeedDueToWeight(_WeaponWeight currentWW)
 {
-	if (GetWeaponWeight() == LIGHT) {
+	if (currentWW == LIGHT) {
 		_weaponDamage = 10;
-		_weaponSpeed = 1.0;
+		_weaponSpeed = 1.0f;
+		return;
 	}
-	if (GetWeaponWeight() == MEDIUM) {
+	if (currentWW == MEDIUM) {
 		_weaponDamage = 20;
-		_weaponSpeed = 2.0;
+		_weaponSpeed = 2.0f;
+		return;
 	}
-	if (GetWeaponWeight() == HEAVY) {
+	if (currentWW == HEAVY) {
 		_weaponDamage = 40;
-		_weaponSpeed = 4.0;
+		_weaponSpeed = 4.0f;
+		return;
 	}
+	return;
 }
 
 PlayerWeapon::PlayerWeapon(){
+
 }
 
 json PlayerWeapon::toJson() const
@@ -39,7 +44,17 @@ unsigned short int PlayerWeapon::GetWeaponDamage()
 	return _weaponDamage;
 }
 
-void PlayerWeapon::SetRandomDamege(){
+float PlayerWeapon::GetWeaponSpeed()
+{
+	return _weaponSpeed;
+}
+
+PlayerWeapon::_WeaponWeight PlayerWeapon::GetCurrentWeight()
+{
+	return currentWW;
+}
+
+void PlayerWeapon::SetRandomDamage(){
 	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		int result = rand() % 2;
 		switch (result){
@@ -52,7 +67,7 @@ void PlayerWeapon::SetRandomDamege(){
 		}
 	}
 	else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-		SetDamageAndSpeedDueToWeight();
+		SetDamageAndSpeedDueToWeight(currentWW);
 	}
 }
 

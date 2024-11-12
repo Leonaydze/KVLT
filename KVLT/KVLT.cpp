@@ -2,8 +2,8 @@
 #include "PlayerService.h"
 #include "Level_logic.h"
 #define RAYGUI_IMPLEMENTATION
-#include "Clergy.h"
 #include <raygui.h>
+#include "Clergy.h"
 
 bool _exitWindowRequested = false;
 bool _exitWindow = false;
@@ -144,7 +144,6 @@ int main()
 	InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "KVLT");
 	InitAudioDevice();
 	GuiLoadStyle("style_ui.rgs");
-
 	SetTargetFPS(60);
 
 	SetExitKey(KEY_NULL);
@@ -182,7 +181,7 @@ int main()
 
 	PlayerInventoryService playerInvS;
 
-	PlayerWeapon playerW;
+	PlayerWeapon playerW = PlayerWeapon(PlayerWeapon::_WeaponWeight::LIGHT);
 	PlayerWeaponService playerWS;
 
 	Clergy c;
@@ -236,7 +235,7 @@ int main()
 
 			//Open settings window
 			if (setRequest) {
-				int result = GuiWindowBox({ 600.0f, 200.0f, 800.0f, 600.0f }, "Settings");
+				int result = GuiWindowBox({ 600.0f, 200.0f, 800.0f, 600.0f }, "#141# Settings");
 
 				//Slider and master volume change
 				DrawTextEx(GetCurrentFont(), "MasterVolume", { 650.0f, 250.0f }, 20, 2, RAYWHITE);
@@ -286,7 +285,7 @@ int main()
 
 		if (GetCurrentGameScreen() == UpgradeLevels) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "Stats");
+			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "#148# Stats");
 
 			DrawTextEx(GetCurrentFont(), "HP LEVEL", { 500.0f, 200.0f }, 25, 2, WHITE);
 			DrawTextEx(GetCurrentFont(), TextFormat("Current health level: %i", hpLvl), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
@@ -352,6 +351,58 @@ int main()
 				player.SetPlayerPositionV(GetLastPlayerPosition());
 				SetCurrentScreen(lastScreen); 
 			}
+		}
+		
+		if (GetCurrentGameScreen() == Inventory) {
+			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "#157# Player Inventory");
+
+			DrawTextEx(GetCurrentFont(), "CURRENT HP", { 500.0f, 200.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetMaxPlayerHealth()), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "CURRENT DASH DISTANCE", { 500.0f, 300.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current dash level: %i", 100 + player.GetDashLevel() * 10), { 500.0f, 340.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "CURRENT STAMINA", { 500.0f, 400.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Stamina charges: %i", player.GetStaminaLevel() + 4), { 500.0f, 440.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "WEAPON WEIGHT", { 500.0f, 600.0f }, 25, 2, WHITE);
+			if (playerW.GetCurrentWeight() == 0) {
+				DrawTextEx(GetCurrentFont(), "Current weapon weight: Light", { 500.0f, 640.0f }, 20, 2, RAYWHITE);
+			}
+			if (playerW.GetCurrentWeight() == 1) {
+				DrawTextEx(GetCurrentFont(), "Current weapon weight: Medium", { 500.0f, 640.0f }, 20, 2, RAYWHITE);
+			}
+			if (playerW.GetCurrentWeight() == 2) {
+				DrawTextEx(GetCurrentFont(), "Current weapon weight: Heavy", { 500.0f, 640.0f }, 20, 2, RAYWHITE);
+			}
+
+			DrawTextEx(GetCurrentFont(), "WEAPON DAMAGE", { 500.0f, 700.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current weapon damage: %i", playerW.GetWeaponDamage()), { 500.0f, 740.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "WEAPON SPEED ATTACK", { 500.0f, 800.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current weapon speed attack: %01.01f", playerW.GetWeaponSpeed()), { 500.0f, 840.0f }, 20, 2, RAYWHITE);
+
+			//right column
+			DrawTextEx(GetCurrentFont(), "FLASK COUNT", { 1000.0f, 200.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current flask count: %i", playerInv.GetCurrentCountFlask()), { 1000.0f, 240.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "FLASK HEAL", { 1000.0f, 300.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current flask count: %i", playerInv.GetFlaskHeal()), { 1000.0f, 340.0f }, 20, 2, RAYWHITE);
+
+			DrawTextEx(GetCurrentFont(), "CLETGY COUNT", { 1000.0f, 400.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current cletgy count: %i", _playerClergy.GetClergyCount()), { 1000.0f, 440.0f }, 20, 2, RAYWHITE);
+
+			if (result == 1 || IsKeyPressed(KEY_ESCAPE)) {
+				player.SetPlayerPositionV(GetLastPlayerPosition());
+				SetCurrentScreen(lastScreen);
+			}
+		}
+
+		if (IsKeyDown(KEY_TAB) && GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
+			lastScreen = GetCurrentGameScreen();
+			SetLastPlayerPosition(player.GetPlayerPositionV());
+			SetCurrentScreen(Inventory);		
 		}
 
 		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
