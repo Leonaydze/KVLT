@@ -82,6 +82,7 @@ public:
 
 	unsigned short int GetStaminaLevel();
 	void UpgradeStaminaLevel(unsigned short int staminaLvl);
+	unsigned short int GetCurrentStamina();
 
 	void PlayerController();
 

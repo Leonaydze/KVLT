@@ -289,10 +289,10 @@ int main()
 
 			DrawTextEx(GetCurrentFont(), "HP LEVEL", { 500.0f, 200.0f }, 25, 2, WHITE);
 			DrawTextEx(GetCurrentFont(), TextFormat("Current health level: %i", hpLvl), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
-			if (GuiButton({ 700.0f, 260.0f, 24.0f, 24.0f }, "->") && hpLvl < 5) {
+			if (GuiButton({ 700.0f, 280.0f, 24.0f, 24.0f }, "->") && hpLvl < 5) {
 				hpLvl++;
 			}
-			else if (GuiButton({ 500.0f, 260.0f, 24.0f, 24.0f }, "<-") && hpLvl > 0 && hpLvl != 5 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl ) {
+			else if (GuiButton({ 500.0f, 280.0f, 24.0f, 24.0f }, "<-") && hpLvl > 0 && hpLvl != 5 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl ) {
 				hpLvl--;
 			}
 			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetMaxPlayerHealth()), { 500.0f, 350.0f }, 20, 2, WHITE);
@@ -305,10 +305,10 @@ int main()
 
 			DrawTextEx(GetCurrentFont(), "DASH DISTANCE", { 800.0f, 200.0f }, 25, 2, WHITE);
 			DrawTextEx(GetCurrentFont(), TextFormat("Current dash level: %i", dashLvl), { 800.0f, 240.0f }, 20, 2, RAYWHITE);
-			if (GuiButton({ 1000.0f, 260.0f, 24.0f, 24.0f }, "->") && dashLvl < 5) {
+			if (GuiButton({ 990.0f, 280.0f, 24.0f, 24.0f }, "->") && dashLvl < 5) {
 				dashLvl++;
 			}
-			else if (GuiButton({ 800.0f, 260.0f, 24.0f, 24.0f }, "<-") && dashLvl > 0 && dashLvl != 5 && player.GetDashLevel() < dashLvl) {
+			else if (GuiButton({ 800.0f, 280.0f, 24.0f, 24.0f }, "<-") && dashLvl > 0 && dashLvl != 5 && player.GetDashLevel() < dashLvl) {
 				dashLvl--;
 			}
 			DrawTextEx(GetCurrentFont(), TextFormat("Current dash: %i", player.GetDashLevel()), { 800.0f, 350.0f }, 20, 2, WHITE);
@@ -321,10 +321,10 @@ int main()
 
 			DrawTextEx(GetCurrentFont(), "STAMINA LEVEL", { 1100.0f, 200.0f }, 25, 2, WHITE);
 			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina level: %i", staminaLvl), { 1100.0f, 240.0f }, 20, 2, RAYWHITE);
-			if (GuiButton({ 1300.0f, 260.0f, 24.0f, 24.0f }, "->") && staminaLvl < 4) {
+			if (GuiButton({ 1320.0f, 280.0f, 24.0f, 24.0f }, "->") && staminaLvl < 4) {
 				staminaLvl++;
 			}
-			else if (GuiButton({ 1100.0f, 260.0f, 24.0f, 24.0f }, "<-") && staminaLvl > 0 && staminaLvl != 4 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl) {
+			else if (GuiButton({ 1100.0f, 280.0f, 24.0f, 24.0f }, "<-") && staminaLvl > 0 && staminaLvl != 4 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl) {
 				staminaLvl--;
 			}
 			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina: %i", player.GetStaminaLevel()), { 1100.0f, 350.0f }, 20, 2, WHITE);
@@ -358,13 +358,15 @@ int main()
 			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "#157# Player Inventory");
 
 			DrawTextEx(GetCurrentFont(), "CURRENT HP", { 500.0f, 200.0f }, 25, 2, WHITE);
-			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetMaxPlayerHealth()), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Max health: %i", player.GetMaxPlayerHealth()), { 500.0f, 240.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetPlayerHealth()), { 500.0f, 270.0f }, 20, 2, RAYWHITE);
 
-			DrawTextEx(GetCurrentFont(), "CURRENT DASH DISTANCE", { 500.0f, 300.0f }, 25, 2, WHITE);
-			DrawTextEx(GetCurrentFont(), TextFormat("Current dash level: %i", 100 + player.GetDashLevel() * 10), { 500.0f, 340.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), "CURRENT DASH DISTANCE", { 500.0f, 330.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current dash level: %i", 100 + player.GetDashLevel() * 10), { 500.0f, 370.0f }, 20, 2, RAYWHITE);
 
-			DrawTextEx(GetCurrentFont(), "CURRENT STAMINA", { 500.0f, 400.0f }, 25, 2, WHITE);
-			DrawTextEx(GetCurrentFont(), TextFormat("Stamina charges: %i", player.GetStaminaLevel() + 4), { 500.0f, 440.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), "CURRENT STAMINA", { 500.0f, 430.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Max stamina charges: %i", player.GetStaminaLevel() + 4), { 500.0f, 470.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina charges: %i", player.GetCurrentStamina()), { 500.0f, 500.0f }, 20, 2, RAYWHITE);
 
 			DrawTextEx(GetCurrentFont(), "WEAPON WEIGHT", { 500.0f, 600.0f }, 25, 2, WHITE);
 			if (playerW.GetCurrentWeight() == 0) {

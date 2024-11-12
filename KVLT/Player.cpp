@@ -96,6 +96,11 @@ void Player::UpgradeStaminaLevel(unsigned short int staminaLvl){
 	}
 }
 
+unsigned short int Player::GetCurrentStamina()
+{
+	return _stamina;
+}
+
 void Player::PlayerController() {
 	if (IsKeyDown(KEY_D) && _playerCanWalk >= 0 && _playerHealth > 0 && _playerPosition.x < GetMonitorWidth(GetCurrentMonitor()) + 8000 && !IsKeyDown(KEY_A)) {
 		_playerVelocity.x += _playerSpeed;
