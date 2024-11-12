@@ -1,5 +1,4 @@
 #include "Level_logic.h"
-#include "Priest.h"
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
@@ -56,6 +55,49 @@ Font GetCurrentFont()
 	return font;
 }
 
+template <typename T>
+void EnemyAttacksThePlayer(T& enemy, Player& player) {
+	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 100
+		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 232
+		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 90
+		&& player.GetPlayerPositionY() + 198 <= enemy.GetEnemyPosY() + 222 && enemy.GetEnemyHealth() > 0) {
+		if (EventTriggered(enemy.GetEnemyAttackSpeed)) {
+			player.PlayerTakesDamage(enemy.GetEnemyDamage());
+		}
+	}
+}
+
+template <typename T>
+void PlayerAttacksEnemy(T& enemy, Player& player, PlayerWeapon& pw) {
+	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPositionX() - 80
+		&& player.GetPlayerPositionX() <= enemy.GetEnemyPositionX() + 212
+		&& player.GetPlayerPositionY() >= enemy.GetEnemyPositionY() - 80
+		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPositionY() + 212) {
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && EventTriggered(pw.GetWeaponSpeed())) {
+			enemy.EnemyGetDamage(pw.GetWeaponDamage());
+			RandomizePlayerAttack();
+		}
+	}
+}
+
+template <typename T>
+void EnemyGoesToThePlayer(T& enemy, Player& player) {
+	if (player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 250
+		&& player.GetPlayerPositionX() + 128 <= enemy.GetEnemyPosX() + 128 && enemy.GetEnemyHealth() > 0) {
+		enemy.EnemyMoveX(-5.5f);
+	}
+	if (player.GetPlayerPositionX() + 128 <= enemy.GetEnemyPosX() + 378
+		&& player.GetPlayerPositionX() >= enemy.GetEnemyPosX() && enemy.GetEnemyHealth() > 0) {
+		enemy.EnemyMoveX(5.5f);
+	}
+}
+
+template <typename T>
+bool EnemyOnGround(T& enemy, Ground& ground) {
+	return (enemy.GetEnemyPosX() + 80 >= ground.GetGroundPositionX() && enemy.GetEnemyPosX() <= ground.GetGroundPositionX() + ground.GetGroundWidth()
+		&& enemy.GetEnemyPosY() + 132 >= ground.GetGroundPositionY() + 15 && enemy.GetEnemyPosY() <= ground.GetGroundPositionY() + ground.GetGroundHeight());
+}
+
 bool PlayerOnGround(Player& player, Ground& ground) {
 	return (player.GetPlayerPositionX() + 88 >= ground.GetGroundPositionX() && player.GetPlayerPositionX() + 40 <= ground.GetGroundPositionX() + ground.GetGroundWidth()
 		&& player.GetPlayerPositionY() + 128 >= ground.GetGroundPositionY() + 15 && player.GetPlayerPositionY() + 108 <= ground.GetGroundPositionY() + ground.GetGroundHeight());
@@ -87,9 +129,13 @@ bool PlayerCantWalk(Player& player, Border& border) {
 }
 
 void ResurrectionPlayer(Player& player, Altar& altar) {
-	if (player.PlayerDeath()) {
+	if (player.PlayerDeath() && altar.GetPlayerWasAtAltar()) {
 		player.SetPlayerPositionV(altar.GetAltarPosV());
 		player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
+	}
+	else if(player.PlayerDeath()) {
+		SetCurrentScreen(mainMenu);
+		player.Nullification();
 	}
 }
 

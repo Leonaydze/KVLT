@@ -3,6 +3,8 @@
 #include "Ground.h"
 #include "Border.h"
 #include "Altar.h"
+#include "Priest.h"
+#include "PlayerWeapon.h"
 
 bool TriggerEvent(float interval);
 

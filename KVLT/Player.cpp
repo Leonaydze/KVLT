@@ -306,3 +306,20 @@ void Player::Draw()
 bool Player::PlayerDeath(){
 	return _playerHealth <= 0;
 }
+
+void Player::PlayerTakesDamage(unsigned short int damage){
+	_playerHealth -= damage;
+}
+
+void Player::Nullification()
+{
+	_staminaLevel = 0;
+	_maxPlayerHealth = 100;
+	_playerHealth = _maxPlayerHealth;
+	_lastDashLevel = 0;
+	_dashLevel = 0;
+	_staminaLevel = 0;
+	_maxStamina = 4;
+	_stamina = _maxStamina;
+	_playerPosition = { 0, 870 };
+}

@@ -7,6 +7,8 @@ protected:
 	short int _enemyHealth = 0;
 	unsigned short int _enemyDamage = 0;
 
+	float _enemyAttackSpeed = 0;
+
 	Vector2 _enemyPosition {};
 
 	Texture2D _enemyTexture = LoadTexture("");
@@ -15,7 +17,8 @@ protected:
 public:
 	Enemy();
 
-	Enemy(Vector2 enemyPos,short int enemyHealth,  unsigned short int enemyDamage) : _enemyPosition(enemyPos), _enemyDamage(enemyDamage), _enemyHealth(enemyHealth) {}
+	Enemy(Vector2 enemyPos,short int enemyHealth,  unsigned short int enemyDamage, float enemyAttackSpeed)
+		: _enemyPosition(enemyPos), _enemyDamage(enemyDamage), _enemyHealth(enemyHealth), _enemyAttackSpeed(enemyAttackSpeed) {}
 
 	Enemy(int enemyHealth, int enemyDamage, Vector2 enemyPosition)
 		: _enemyHealth(enemyHealth), _enemyDamage(enemyDamage), _enemyPosition(enemyPosition) {}
@@ -48,6 +51,10 @@ public:
 
 	float GetFrameRecHeight();
 	void SetFrameRecHeight(float frameRecH);
+
+	void EnemyMoveX(float enemyMoveX);
+
+	float GetEnemyAttackSpeed();
 };
 
 #endif // !ENEMY_H

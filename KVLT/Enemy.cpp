@@ -87,3 +87,12 @@ void Enemy::SetFrameRecHeight(float frameRecH)
 {
 	_frameRec.height = frameRecH;
 }
+
+void Enemy::EnemyMoveX(float enemyMoveX){
+	_enemyPosition.x += enemyMoveX;
+}
+
+float Enemy::GetEnemyAttackSpeed()
+{
+	return _enemyAttackSpeed;
+}

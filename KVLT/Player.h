@@ -108,5 +108,9 @@ public:
 	void Draw();
 
 	bool PlayerDeath();
+
+	void PlayerTakesDamage(unsigned short int damage);
+
+	void Nullification();
 };
 

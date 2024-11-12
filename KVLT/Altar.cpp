@@ -28,3 +28,13 @@ Vector2 Altar::GetAltarPosV()
 {
 	return _altarPosition;
 }
+
+bool Altar::GetPlayerWasAtAltar()
+{
+	return _playerWasAtAltar;
+}
+
+void Altar::SetPlayerWasAtAltar(bool flag)
+{
+	_playerWasAtAltar = flag;
+}

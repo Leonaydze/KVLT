@@ -9,6 +9,8 @@ private:
 
 	Texture2D _altarTexture = LoadTexture("");
 	Rectangle _altarRectangle {0, 0, 102.4f, 102.4f};
+
+	bool _playerWasAtAltar = false;
 public:
 	Altar();
 
@@ -21,6 +23,9 @@ public:
 	void Draw();
 
 	Vector2 GetAltarPosV();
+
+	bool GetPlayerWasAtAltar();
+	void SetPlayerWasAtAltar(bool flag);
 };
 
 #endif // !ALTAR_H
