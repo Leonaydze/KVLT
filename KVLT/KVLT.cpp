@@ -194,9 +194,6 @@ int main()
 	unsigned short int dashLvl = player.GetDashLevel();
 	unsigned short int staminaLvl = player.GetStaminaLevel();
 
-	Vampire vamp = Vampire({200, 800}, 100 ,10);
-	vamp.Init();
-
 	while (!GetExitWindow())
 	{	
 		//Play, update and customization music
@@ -283,7 +280,6 @@ int main()
 			_playerClergy.Draw(player, GetCurrentFont());
 			playerInv.Draw(player, GetCurrentFont());
 			playerInv.HealFlask(player);
-			vamp.Draw();
 		}
 
 		unsigned short int neededClergy = (hpLvl + dashLvl + staminaLvl) * 10;

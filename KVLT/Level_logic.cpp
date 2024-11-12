@@ -61,7 +61,7 @@ void EnemyAttacksThePlayer(T& enemy, Player& player) {
 		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 232
 		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 90
 		&& player.GetPlayerPositionY() + 198 <= enemy.GetEnemyPosY() + 222 && enemy.GetEnemyHealth() > 0) {
-		if (EventTriggered(enemy.GetEnemyAttackSpeed)) {
+		if (TriggerEvent(enemy.GetEnemyAttackSpeed)) {
 			player.PlayerTakesDamage(enemy.GetEnemyDamage());
 		}
 	}
@@ -73,9 +73,8 @@ void PlayerAttacksEnemy(T& enemy, Player& player, PlayerWeapon& pw) {
 		&& player.GetPlayerPositionX() <= enemy.GetEnemyPositionX() + 212
 		&& player.GetPlayerPositionY() >= enemy.GetEnemyPositionY() - 80
 		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPositionY() + 212) {
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && EventTriggered(pw.GetWeaponSpeed())) {
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && TriggerEvent(pw.GetWeaponSpeed())) {
 			enemy.EnemyGetDamage(pw.GetWeaponDamage());
-			RandomizePlayerAttack();
 		}
 	}
 }
