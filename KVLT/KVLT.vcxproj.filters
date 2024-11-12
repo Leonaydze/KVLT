@@ -31,12 +31,18 @@
     <Filter Include="Файлы ресурсов\Sound">
       <UniqueIdentifier>{d76280cb-fa82-48d6-80ee-f55f845dd29b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Enemy">
+      <UniqueIdentifier>{71990a4c-0452-42b5-bb7b-4a215012fab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Enemy">
+      <UniqueIdentifier>{66da014f-c260-4645-a260-4dd78f2fa5e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Sprites\Enemy">
+      <UniqueIdentifier>{2afa5b89-dc89-4ce5-a0d7-90c2d6d3b5a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Altar.cpp">
@@ -81,11 +87,14 @@
     <ClCompile Include="Priest.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Исходные файлы\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Vampire.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Altar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -126,6 +135,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Priest.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Файлы заголовков\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Vampire.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,25 +198,7 @@
     <Image Include="Font.png">
       <Filter>Файлы ресурсов\Font</Filter>
     </Image>
-    <Image Include="Sprites\Lich.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
-    <Image Include="Sprites\Orc.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
     <Image Include="Sprites\Player.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
-    <Image Include="Sprites\Roc.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
-    <Image Include="Sprites\Titan.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
-    <Image Include="Sprites\Vampire.png">
-      <Filter>Файлы ресурсов\Sprites</Filter>
-    </Image>
-    <Image Include="Sprites\Pugalo_atlas.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
     <Image Include="Sprites\Altar.png">
@@ -215,6 +212,24 @@
     </Image>
     <Image Include="Sprites\Flask.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Lich.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
+    </Image>
+    <Image Include="Sprites\Orc.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
+    </Image>
+    <Image Include="Sprites\Roc.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
+    </Image>
+    <Image Include="Sprites\Titan.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
+    </Image>
+    <Image Include="Sprites\Vampire.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
+    </Image>
+    <Image Include="Sprites\Pugalo_atlas.png">
+      <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
     </Image>
   </ItemGroup>
 </Project>

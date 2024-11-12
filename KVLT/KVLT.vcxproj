@@ -143,6 +143,7 @@
     <ClCompile Include="Priest.cpp" />
     <ClCompile Include="Pugalo.cpp" />
     <ClCompile Include="Service.cpp" />
+    <ClCompile Include="Vampire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Priest.h" />
     <ClInclude Include="Pugalo.h" />
     <ClInclude Include="Service.h" />
+    <ClInclude Include="Vampire.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png" />

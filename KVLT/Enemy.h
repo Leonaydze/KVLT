@@ -4,22 +4,21 @@
 
 class Enemy{
 protected:
-	int _enemyHealth = 0;
-	int _enemyDamage = 0;
+	short int _enemyHealth = 0;
+	unsigned short int _enemyDamage = 0;
 
-	enum _enemyClass { Default, Vampire, Titan, Roc, Orc, Lich};
-
-	_enemyClass enemyClass = Default;
-
-	Vector2 _enemyPosition;
+	Vector2 _enemyPosition {};
 
 	Texture2D _enemyTexture = LoadTexture("");
-	Rectangle _frameRec = {};
-public:
-	Enemy() {}
+	Rectangle _frameRec = {0, 0, 0, 0};
 
-	Enemy(int enemyHealth, int enemyDamage, _enemyClass enemyclass, Vector2 enemyPosition)
-		: _enemyHealth(enemyHealth), _enemyDamage(enemyDamage), enemyClass(enemyclass), _enemyPosition(enemyPosition) {}
+public:
+	Enemy();
+
+	Enemy(Vector2 enemyPos,short int enemyHealth,  unsigned short int enemyDamage) : _enemyPosition(enemyPos), _enemyDamage(enemyDamage), _enemyHealth(enemyHealth) {}
+
+	Enemy(int enemyHealth, int enemyDamage, Vector2 enemyPosition)
+		: _enemyHealth(enemyHealth), _enemyDamage(enemyDamage), _enemyPosition(enemyPosition) {}
 
 	float GetEnemyPosX();
 	void SetEnemyPosX(float enemyPosX);
@@ -27,10 +26,28 @@ public:
 	float GetEnemyPosY();
 	void SetEnemyPosY(float enemyPosY);
 
-	_enemyClass GetEnemyClass();
+	unsigned short int GetEnemyDamage();
+	void SetEnemyDamage(int damage);
 
-	void EnemyDeath();
-	void EnemyDraw();
+	bool EnemyDeath();
+
+	short int GetEnemyHealth();
+	void EnemyGetDamage(unsigned short int damage);
+
+	virtual void Init();
+	void Draw();
+
+	float GetFrameRecX();
+	void SetFrameRecX(float frameRecX);
+
+	float GetFrameRecY();
+	void SetFrameRecY(float frameRecY);
+
+	float GetFrameRecWidth();
+	void SetFrameRecWidth(float frameRecW);
+
+	float GetFrameRecHeight();
+	void SetFrameRecHeight(float frameRecH);
 };
 
 #endif // !ENEMY_H
