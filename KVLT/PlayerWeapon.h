@@ -12,7 +12,7 @@ private:
 	float _weaponSpeed = 0;
 public:
 	enum _WeaponWeight { LIGHT, MEDIUM, HEAVY };
-	_WeaponWeight currentWW = LIGHT;
+	_WeaponWeight currentWW = MEDIUM;
 
 	int id = -1;
 

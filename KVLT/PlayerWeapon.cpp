@@ -1,5 +1,8 @@
 #include "PlayerWeapon.h"
 
+PlayerWeapon::PlayerWeapon() {
+	SetDamageAndSpeedDueToWeight(currentWW);
+}
 
 PlayerWeapon::PlayerWeapon(_WeaponWeight currentWW) {
 	SetDamageAndSpeedDueToWeight(currentWW);
@@ -23,10 +26,6 @@ void PlayerWeapon::SetDamageAndSpeedDueToWeight(_WeaponWeight currentWW)
 		return;
 	}
 	return;
-}
-
-PlayerWeapon::PlayerWeapon(){
-
 }
 
 json PlayerWeapon::toJson() const

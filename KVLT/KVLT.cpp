@@ -181,7 +181,7 @@ int main()
 
 	PlayerInventoryService playerInvS;
 
-	PlayerWeapon playerW = PlayerWeapon(PlayerWeapon::_WeaponWeight::LIGHT);
+	PlayerWeapon playerW = PlayerWeapon();
 	PlayerWeaponService playerWS;
 
 	Clergy c;
@@ -348,6 +348,9 @@ int main()
 			DrawTextEx(GetCurrentFont(), TextFormat("You have Clergy: %i", _playerClergy.GetClergyCount()), {500.0f, 880.0f}, 20, 2, RAYWHITE);
 
 			if (result == 1 || IsKeyPressed(KEY_ESCAPE)) { 
+				hpLvl = player.GetHealthLevel();
+				dashLvl = player.GetDashLevel();
+				staminaLvl = player.GetStaminaLevel();
 				player.SetPlayerPositionV(GetLastPlayerPosition());
 				SetCurrentScreen(lastScreen); 
 			}
