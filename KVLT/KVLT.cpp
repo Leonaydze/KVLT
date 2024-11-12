@@ -392,8 +392,8 @@ int main()
 			DrawTextEx(GetCurrentFont(), "FLASK HEAL", { 1000.0f, 300.0f }, 25, 2, WHITE);
 			DrawTextEx(GetCurrentFont(), TextFormat("Current flask count: %i", playerInv.GetFlaskHeal()), { 1000.0f, 340.0f }, 20, 2, RAYWHITE);
 
-			DrawTextEx(GetCurrentFont(), "CLETGY COUNT", { 1000.0f, 400.0f }, 25, 2, WHITE);
-			DrawTextEx(GetCurrentFont(), TextFormat("Current cletgy count: %i", _playerClergy.GetClergyCount()), { 1000.0f, 440.0f }, 20, 2, RAYWHITE);
+			DrawTextEx(GetCurrentFont(), "CLERGY COUNT", { 1000.0f, 400.0f }, 25, 2, WHITE);
+			DrawTextEx(GetCurrentFont(), TextFormat("Current clergy count: %i", _playerClergy.GetClergyCount()), { 1000.0f, 440.0f }, 20, 2, RAYWHITE);
 
 			if (result == 1 || IsKeyPressed(KEY_ESCAPE)) {
 				player.SetPlayerPositionV(GetLastPlayerPosition());
