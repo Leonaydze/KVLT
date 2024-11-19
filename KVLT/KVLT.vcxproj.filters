@@ -249,5 +249,8 @@
     <Image Include="Sprites\Pugalo_atlas.png">
       <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
     </Image>
+    <Image Include="Sprites\Boulder.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

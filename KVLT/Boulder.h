@@ -13,6 +13,8 @@ private:
 	Color _boulderColor = {};
 
 	float _boulderSpeed = 0.0f;
+
+	Texture2D _boulderText = LoadTexture("");
 public:
 	Boulder();
 
@@ -30,6 +32,8 @@ public:
 	void BoulderSpeedNull();
 
 	float GetBoulderSpeed();
+
+	void Init();
 };
 
 #endif // !BOULDER_H

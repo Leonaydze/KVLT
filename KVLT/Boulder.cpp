@@ -20,7 +20,7 @@ void Boulder::MoveVerticallyDown(){
 
 void Boulder::Draw()
 {
-	DrawCircle((int)_boulderPos.x, (int)_boulderPos.y, _radius, _boulderColor);
+	DrawTexture(_boulderText, (int)_boulderPos.x, (int)_boulderPos.y, _boulderColor);
 }
 
 float Boulder::BoulderPosY()
@@ -46,4 +46,16 @@ void Boulder::BoulderSpeedNull()
 float Boulder::GetBoulderSpeed()
 {
 	return _boulderSpeed;
+}
+
+void Boulder::Init(){
+	_boulderText = LoadTexture("Sprites\\Boulder.png");
+	if (_radius < _boulderText.width) {
+		_boulderText.width = (int)_radius;
+		_boulderText.height = (int)_radius;
+	}
+	if (_radius > _boulderText.width) {
+		_boulderText.width = (int)_radius;
+		_boulderText.height = (int)_radius;
+	}
 }

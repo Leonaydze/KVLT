@@ -44,10 +44,16 @@ extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
+Boulder boulderTest = Boulder({ 3400.0f, 500.0f }, 50.0f, WHITE);
+
+Altar entity = Altar();
+
+
 void Init()
 {
 	font = LoadFont("Font.png");;
 	priest.Init();
+	boulderTest.Init();
 }
 
 Font GetCurrentFont()
@@ -169,10 +175,7 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
-Button buttonTest = Button({ 3100.0f, 990.0f }, Button::_buttonAction::DROP);
-Boulder boulderTest = Boulder({ 3300.0f, 500.0f }, 25.0f, WHITE);
-
-Altar entity = Altar();
+Button buttonTest = Button({ 3200.0f, 990.0f }, Button::_buttonAction::DROP);
 
 bool PlayerEnabledButton(Player& player, Button& button) {
 	if (player.GetPlayerPositionX() + 128 >= button.GetButtonPosX() && player.GetPlayerPositionX() <= button.GetButtonPosX() + button.GetButtonWidth()
@@ -198,7 +201,7 @@ void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
 }
 
 void BoulderKillPlayer(Player& player, Boulder& boulder) {
-	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionX() + 128 >= boulder.BoulderPosX() - boulder.GetBoulderRadius()
+	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionX() + 128 >= boulder.BoulderPosX()
 		&& player.GetPlayerPositionX() <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
 		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
 	}

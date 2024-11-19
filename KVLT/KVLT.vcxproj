@@ -170,6 +170,7 @@
   <ItemGroup>
     <Image Include="Font.png" />
     <Image Include="Sprites\Altar.png" />
+    <Image Include="Sprites\Boulder.png" />
     <Image Include="Sprites\Clergy_icon.png" />
     <Image Include="Sprites\Flask.png" />
     <Image Include="Sprites\Lich.png" />
