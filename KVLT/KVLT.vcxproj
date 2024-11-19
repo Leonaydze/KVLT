@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="Altar.cpp" />
     <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Boulder.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Clergy.cpp" />
     <ClCompile Include="DataSource.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -148,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="Altar.h" />
     <ClInclude Include="Border.h" />
+    <ClInclude Include="Boulder.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Clergy.h" />
     <ClInclude Include="DataSource.h" />
     <ClInclude Include="Enemy.h" />

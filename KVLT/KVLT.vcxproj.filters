@@ -40,6 +40,12 @@
     <Filter Include="Файлы ресурсов\Sprites\Enemy">
       <UniqueIdentifier>{2afa5b89-dc89-4ce5-a0d7-90c2d6d3b5a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Trap">
+      <UniqueIdentifier>{bfa10b1b-4b31-43a1-b920-800d61aec8f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Trap">
+      <UniqueIdentifier>{f9518586-9410-4303-a296-3a2fc0b6e0fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
@@ -93,6 +99,12 @@
     <ClCompile Include="Vampire.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Boulder.cpp">
+      <Filter>Исходные файлы\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h">
@@ -141,6 +153,12 @@
       <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Vampire.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Boulder.h">
+      <Filter>Файлы заголовков\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,8 @@
 #include "Altar.h"
 #include "Priest.h"
 #include "PlayerWeapon.h"
+#include "Boulder.h"
+#include "Button.h"
 
 bool TriggerEvent(float interval);
 

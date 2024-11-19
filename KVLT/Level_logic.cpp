@@ -169,6 +169,41 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
+Button buttonTest = Button({ 3100.0f, 990.0f }, Button::_buttonAction::DROP);
+Boulder boulderTest = Boulder({ 3300.0f, 500.0f }, 25.0f, WHITE);
+
+Altar a = Altar();
+
+bool PlayerEnabledButton(Player& player, Button& button) {
+	if (player.GetPlayerPositionX() + 128 >= button.GetButtonPosX() && player.GetPlayerPositionX() <= button.GetButtonPosX() + button.GetButtonWidth()
+		&& player.GetPlayerPositionY() + 120 >= button.GetButtonPosY() && player.GetPlayerPositionY() + 128 <= button.GetButtonPosY() + button.GetButtonHeight() + 20) {
+		button.EnableButton(true);
+		return true;
+	}
+	if (button.IsButtonEnabled()) {
+		return true;
+	}
+	return false;
+}
+
+void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
+	if (button.curAction == Button::_buttonAction::DROP && button.IsButtonEnabled()) {
+		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() <= ground.GetGroundPositionY()) {
+			boulder.MoveVerticallyDown();
+		}
+		else {
+			boulder.BoulderSpeedNull();
+		}
+	}
+}
+
+void BoulderKillPlayer(Player& player, Boulder& boulder) {
+	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionX() + 128 >= boulder.BoulderPosX() - boulder.GetBoulderRadius()
+		&& player.GetPlayerPositionX() <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
+		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
+	}
+}
+
 void LEVEL_T_LOGIC(Player& player) {
 	if (!UpgradePlayerLevel(player, priest)) {
 		player.PlayerController();
@@ -195,6 +230,13 @@ void LEVEL_T_LOGIC(Player& player) {
 	else if (PlayerCantWalk(player, _borderAlt)) {
 		PlayerCantWalk(player, _borderAlt);
 	}
+	if (PlayerEnabledButton(player, buttonTest)) {
+		DropBoulder(boulderTest, buttonTest, mainGroundFloor);
+	}
+
+	BoulderKillPlayer(player, boulderTest);
+
+	ResurrectionPlayer(player, a);
 }
 
 void LEVEL_T_DRAW(Player& player) {
@@ -225,11 +267,16 @@ void LEVEL_T_DRAW(Player& player) {
 
 	_borderAlt.Draw();
 
+	buttonTest.Draw();
+
+	boulderTest.Draw();
+
 	mainGroundFloor.GroundDraw();
 
 	player.Draw();
 
 	priest.Draw();
+
 
 	if (PlayerCanTalkWithNpc(player, priest)) {
 		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, RAYWHITE);
