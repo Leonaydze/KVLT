@@ -172,7 +172,7 @@ Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 Button buttonTest = Button({ 3100.0f, 990.0f }, Button::_buttonAction::DROP);
 Boulder boulderTest = Boulder({ 3300.0f, 500.0f }, 25.0f, WHITE);
 
-Altar a = Altar();
+Altar entity = Altar();
 
 bool PlayerEnabledButton(Player& player, Button& button) {
 	if (player.GetPlayerPositionX() + 128 >= button.GetButtonPosX() && player.GetPlayerPositionX() <= button.GetButtonPosX() + button.GetButtonWidth()
@@ -236,7 +236,7 @@ void LEVEL_T_LOGIC(Player& player) {
 
 	BoulderKillPlayer(player, boulderTest);
 
-	ResurrectionPlayer(player, a);
+	ResurrectionPlayer(player, entity);
 }
 
 void LEVEL_T_DRAW(Player& player) {
