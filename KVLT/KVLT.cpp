@@ -204,7 +204,7 @@ int main()
 		}
 
 		//If the game is closed, a window pops up
-		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest) {
+		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory) {
 			SetExitWindowRequest(true);
 			exitRequest = true;
 		}
@@ -411,7 +411,7 @@ int main()
 			SetCurrentScreen(Inventory);		
 		}
 
-		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
+		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory) {
 			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125.0f, (float)player.GetPlayerPositionY() - 250.0f, 300.0f, 100.0f },
 				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 

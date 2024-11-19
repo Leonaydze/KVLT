@@ -4,10 +4,10 @@
 
 class Border {
 private:
-	int _borderWidth;
-	int _borderHeight;
-	Vector2 _borderPosition;
-	Color _borderColor;
+	int _borderWidth = 0;
+	int _borderHeight = 0;
+	Vector2 _borderPosition = {};
+	Color _borderColor = {};
 public:
 	Border();
 

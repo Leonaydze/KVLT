@@ -8,7 +8,7 @@ private:
 
 	Vector2 _pugaloPosition{ 0.0f, 0.0f };
 
-	Texture2D _pugaloTexture;
+	Texture2D _pugaloTexture = LoadTexture("");
 	Rectangle _frameRec = { 0, 0, 124, 164 };
 
 	/*bool PugaloOnTheGround();*/
