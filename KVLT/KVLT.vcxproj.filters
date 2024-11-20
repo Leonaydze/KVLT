@@ -54,9 +54,6 @@
     <ClCompile Include="Altar.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Flask.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="DataSource.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -96,21 +93,24 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Исходные файлы\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Vampire.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Boulder.cpp">
       <Filter>Исходные файлы\Trap</Filter>
     </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>Исходные файлы\Trap</Filter>
+    </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Flask.cpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Vampire.cpp">
+      <Filter>Исходные файлы\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Flask.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="DataSource.h">
@@ -152,14 +152,20 @@
     <ClInclude Include="Enemy.h">
       <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Vampire.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Boulder.h">
       <Filter>Файлы заголовков\Trap</Filter>
     </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>Файлы заголовков\Trap</Filter>
+    </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Flask.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Vampire.h">
+      <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +256,9 @@
       <Filter>Файлы ресурсов\Sprites\Enemy</Filter>
     </Image>
     <Image Include="Sprites\Boulder.png">
+      <Filter>Файлы ресурсов\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\Thorns.png">
       <Filter>Файлы ресурсов\Sprites</Filter>
     </Image>
   </ItemGroup>

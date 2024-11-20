@@ -145,6 +145,7 @@
     <ClCompile Include="Priest.cpp" />
     <ClCompile Include="Pugalo.cpp" />
     <ClCompile Include="Service.cpp" />
+    <ClCompile Include="Thorn.cpp" />
     <ClCompile Include="Vampire.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="Priest.h" />
     <ClInclude Include="Pugalo.h" />
     <ClInclude Include="Service.h" />
+    <ClInclude Include="Thorn.h" />
     <ClInclude Include="Vampire.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,7 @@
     <Image Include="Sprites\Priest.png" />
     <Image Include="Sprites\Pugalo_atlas.png" />
     <Image Include="Sprites\Roc.png" />
+    <Image Include="Sprites\Thorns.png" />
     <Image Include="Sprites\Titan.png" />
     <Image Include="Sprites\Vampire.png" />
   </ItemGroup>

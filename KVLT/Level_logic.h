@@ -7,6 +7,7 @@
 #include "PlayerWeapon.h"
 #include "Boulder.h"
 #include "Button.h"
+#include "Thorn.h"
 
 bool TriggerEvent(float interval);
 

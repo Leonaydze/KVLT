@@ -20,6 +20,24 @@ bool TriggerEvent(float interval) {
 	return false;
 }
 
+double _lUT = (double)0;
+/// <summary>
+/// A function to indicate that the code is stopped for a while
+/// </summary>
+/// <param name="interval - "> The time for which the code will stop</param>
+/// <returns></returns>
+bool TakeDamageTime(float interval) {
+	float currentTime = (float)GetTime();
+
+	if (currentTime - _lUT >= interval) {
+		_lUT = currentTime;
+
+		return true;
+	}
+
+	return false;
+}
+
 _gameScreen GetCurrentGameScreen()
 {
 	return _currentScreen;
@@ -44,7 +62,8 @@ extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
-Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
+//Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
+
 
 Altar entity = Altar();
 
@@ -52,7 +71,7 @@ void Init()
 {
 	font = LoadFont("Font.png");;
 	priest.Init();
-	boulderTest.Init();
+	//boulderTest.Init();
 }
 
 Font GetCurrentFont()
@@ -170,7 +189,7 @@ bool PlayerEnabledButton(Player& player, Button& button) {
 	return false;
 }
 
-void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
+void DropBoulder(Boulder& boulder, Button button, Ground ground) {
 	if (button.curAction == Button::_buttonAction::DROP && button.IsButtonEnabled()) {
 		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() - 3 <= ground.GetGroundPositionY()) {
 			boulder.MoveVerticallyDown();
@@ -181,7 +200,7 @@ void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
 	}
 }
 
-void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, float distance) {
+void MoveBoulder(Boulder& boulder, Button button, Ground ground, int key, float distance) {
 	if (button.curAction == Button::_buttonAction::MOVE && button.IsButtonEnabled()) {
 		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() - 2 <= ground.GetGroundPositionY()) {
 			boulder.MoveVerticallyDown();
@@ -192,10 +211,33 @@ void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, floa
 	}
 }
 
+void DropThorn(Thorn& thorn, Button button, Ground ground) {
+	if (button.curAction == Button::_buttonAction::DROP && button.IsButtonEnabled() && thorn.GetThornDirection() == Thorn::DOWN) {
+		if (thorn.GetThornPosY() + thorn.GetThornHeight() - 3 <= ground.GetGroundPositionY()) {
+			thorn.MoveVerticallyDown();
+		}
+		else {
+			thorn.ThornSpeedNull();
+		}
+	}
+}
+
 void BoulderKillPlayer(Player& player, Boulder& boulder) {
 	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() + 3 >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >= boulder.BoulderPosY() - 3 && player.GetPlayerPositionX() + 80 >= boulder.BoulderPosX() + 3
 		&& player.GetPlayerPositionX() + 48 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() - 3 && boulder.GetBoulderSpeedH() >= 0.1f && boulder.GetBoulderSpeed() >= 0.1f) {
 		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
+	}
+}
+void ThornKillPlayer(Player& player, Thorn thorn) {
+	if (thorn.GetThornPosY() + thorn.GetThornHeight() + 3 >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >= thorn.GetThornPosY() - 3 && player.GetPlayerPositionX() + 80 >= thorn.GetThornPosX() + 3
+		&& player.GetPlayerPositionX() + 48 <= thorn.GetThornPosX() + thorn.GetThornWidth() - 3 && thorn.GetThornSpeed() >= 0.1f && thorn.GetThornDirection() == Thorn::DOWN) {
+		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
+		return;
+	}
+	if (thorn.GetThornPosY() + thorn.GetThornHeight() + 3 >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >= thorn.GetThornPosY() - 3 && player.GetPlayerPositionX() + 80 >= thorn.GetThornPosX() + 3
+		&& player.GetPlayerPositionX() + 48 <= thorn.GetThornPosX() + thorn.GetThornWidth() - 3 && thorn.GetThornSpeed() < 0.1f && thorn.GetThornDirection() == Thorn::UP && TakeDamageTime(1.0f)) {
+		player.PlayerTakesDamage(10);
+		return;
 	}
 }
 
@@ -215,7 +257,7 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
-Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::MOVE);
+Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::DROP);
 
 void LEVEL_T_LOGIC(Player& player) {
 	if (!UpgradePlayerLevel(player, priest)) {
@@ -243,11 +285,11 @@ void LEVEL_T_LOGIC(Player& player) {
 	else if (PlayerCantWalk(player, _borderAlt)) {
 		PlayerCantWalk(player, _borderAlt);
 	}
-	if (PlayerEnabledButton(player, buttonTest)) {
+	/*if (PlayerEnabledButton(player, buttonTest)) {
 		MoveBoulder(boulderTest, buttonTest, mainGroundFloor, 1, 500);
-	}
+	}*/
 
-	BoulderKillPlayer(player, boulderTest);
+	//BoulderKillPlayer(player, boulderTest);
 
 	ResurrectionPlayer(player, entity);
 }
@@ -284,7 +326,7 @@ void LEVEL_T_DRAW(Player& player) {
 
 	mainGroundFloor.GroundDraw();
 
-	boulderTest.Draw();
+	/*boulderTest.Draw();*/
 
 	player.Draw();
 
