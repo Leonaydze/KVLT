@@ -172,7 +172,7 @@ bool PlayerEnabledButton(Player& player, Button& button) {
 
 void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
 	if (button.curAction == Button::_buttonAction::DROP && button.IsButtonEnabled()) {
-		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() <= ground.GetGroundPositionY()) {
+		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() - 3 <= ground.GetGroundPositionY()) {
 			boulder.MoveVerticallyDown();
 		}
 		else {
@@ -183,7 +183,7 @@ void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
 
 void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, float distance) {
 	if (button.curAction == Button::_buttonAction::MOVE && button.IsButtonEnabled()) {
-		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() <= ground.GetGroundPositionY()) {
+		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() - 2 <= ground.GetGroundPositionY()) {
 			boulder.MoveVerticallyDown();
 		}
 		else {
@@ -193,8 +193,8 @@ void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, floa
 }
 
 void BoulderKillPlayer(Player& player, Boulder& boulder) {
-	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >=  boulder.BoulderPosY() && player.GetPlayerPositionX() + 100 >= boulder.BoulderPosX()
-		&& player.GetPlayerPositionX() - 28 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
+	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() + 3 >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >= boulder.BoulderPosY() - 3 && player.GetPlayerPositionX() + 80 >= boulder.BoulderPosX() + 3
+		&& player.GetPlayerPositionX() + 48 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() - 3 && boulder.GetBoulderSpeedH() >= 0.1f && boulder.GetBoulderSpeed() >= 0.1f) {
 		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
 	}
 }
@@ -282,9 +282,9 @@ void LEVEL_T_DRAW(Player& player) {
 
 	buttonTest.Draw();
 
-	boulderTest.Draw();
-
 	mainGroundFloor.GroundDraw();
+
+	boulderTest.Draw();
 
 	player.Draw();
 

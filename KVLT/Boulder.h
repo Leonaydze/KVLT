@@ -37,6 +37,8 @@ public:
 
 	float GetBoulderSpeed();
 
+	float GetBoulderSpeedH();
+
 	void Init();
 };
 

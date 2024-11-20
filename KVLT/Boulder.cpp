@@ -69,6 +69,10 @@ float Boulder::GetBoulderSpeed()
 {
 	return _boulderSpeed;
 }
+float Boulder::GetBoulderSpeedH()
+{
+	return _boulderSpeedH;
+}
 
 void Boulder::Init(){
 	_boulderText = LoadTexture("Sprites\\Boulder.png");
