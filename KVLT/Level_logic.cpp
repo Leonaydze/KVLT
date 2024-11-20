@@ -44,7 +44,7 @@ extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
-Boulder boulderTest = Boulder({ 3700.0f, 300.0f }, 50.0f, WHITE);
+Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
 
 Altar entity = Altar();
 
@@ -193,8 +193,8 @@ void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, floa
 }
 
 void BoulderKillPlayer(Player& player, Boulder& boulder) {
-	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >=  boulder.BoulderPosY() && player.GetPlayerPositionX() + 110 >= boulder.BoulderPosX()
-		&& player.GetPlayerPositionX() - 18 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
+	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >=  boulder.BoulderPosY() && player.GetPlayerPositionX() + 100 >= boulder.BoulderPosX()
+		&& player.GetPlayerPositionX() - 28 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
 		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
 	}
 }
@@ -215,7 +215,7 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
-Button buttonTest = Button({ 3200.0f, 990.0f }, Button::_buttonAction::DROP);
+Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::MOVE);
 
 void LEVEL_T_LOGIC(Player& player) {
 	if (!UpgradePlayerLevel(player, priest)) {
@@ -244,7 +244,7 @@ void LEVEL_T_LOGIC(Player& player) {
 		PlayerCantWalk(player, _borderAlt);
 	}
 	if (PlayerEnabledButton(player, buttonTest)) {
-		DropBoulder(boulderTest, buttonTest, mainGroundFloor);
+		MoveBoulder(boulderTest, buttonTest, mainGroundFloor, 1, 500);
 	}
 
 	BoulderKillPlayer(player, boulderTest);
