@@ -18,6 +18,28 @@ void Boulder::MoveVerticallyDown(){
 	_boulderSpeed += 0.1f;
 }
 
+void Boulder::MoveHorizontally(int key, float distance){
+	if (key == -1 && _boulderPos.x - _boulderStartPos.x >= -distance) {
+		_boulderPos.x -= _boulderSpeedH;
+		_boulderSpeedH += 0.1f;
+		if (_boulderPos.x - _boulderStartPos.x <= -distance) {
+			BoulderSpeedNull();
+		}
+		return;
+	}
+	if (key == 1 && _boulderPos.x - _boulderStartPos.x <= distance) {
+		_boulderPos.x += _boulderSpeedH;
+		_boulderSpeedH += 0.1f;
+		if (_boulderPos.x - _boulderStartPos.x >= distance) {
+			BoulderSpeedNull();
+		}
+		return;
+	}
+	if (key == 0) {
+		std::cout << "Wrong Key For Boulder" << std::endl;
+	}
+}
+
 void Boulder::Draw()
 {
 	DrawTexture(_boulderText, (int)_boulderPos.x, (int)_boulderPos.y, _boulderColor);

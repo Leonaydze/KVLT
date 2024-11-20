@@ -44,10 +44,9 @@ extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
-Boulder boulderTest = Boulder({ 3400.0f, 500.0f }, 50.0f, WHITE);
+Boulder boulderTest = Boulder({ 3700.0f, 300.0f }, 50.0f, WHITE);
 
 Altar entity = Altar();
-
 
 void Init()
 {
@@ -144,12 +143,12 @@ void ResurrectionPlayer(Player& player, Altar& altar) {
 	}
 }
 
-
 template<typename T>
 bool PlayerCanTalkWithNpc(Player& player, T& other) {
 	return (player.GetPlayerPositionX() + 128 >= other.GetNpcPosX() - 40 && player.GetPlayerPositionX() <= other.GetNpcPosX() + 168
 		&& player.GetPlayerPositionY() + 20 >= other.GetNpcPosY() - 20 && player.GetPlayerPositionY() + 108 <= other.GetNpcPosY() + 148);
 }
+
 bool UpgradePlayerLevel(Player& player, Priest& priest) {
 	if (IsKeyPressed(KEY_E) && PlayerCanTalkWithNpc(player, priest) && !priest.NpcDeath() && !player.PlayerDeath()) {
 		SetLastPlayerPosition(player.GetPlayerPositionV());
@@ -158,24 +157,6 @@ bool UpgradePlayerLevel(Player& player, Priest& priest) {
 	}
 	return false;
 }
-
-Camera2D _playerCamera;
-
-Ground mainGroundFloor = Ground({ { -1000.0f , 1000.0f } , 14400, 1500, DARKGRAY });
-
-//Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
-Ground _firstG = Ground({ 500.0f, 875.0f }, 150, 30, RAYWHITE);
-Ground _secondG = Ground({850.0f, 750.0f }, 150, 30, RAYWHITE);
-
-Border _border = Border({ 1200.0f, 650.0f }, 1000, 150,  DARKGRAY);
-Ground _borderG = Ground({ 1200.0f, 650.0f }, 150, 20, DARKGRAY);
-
-Border _groundBorder = Border({ 1349.0f, 650.0f }, 50, 450, DARKBROWN);
-Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
-
-Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
-
-Button buttonTest = Button({ 3200.0f, 990.0f }, Button::_buttonAction::DROP);
 
 bool PlayerEnabledButton(Player& player, Button& button) {
 	if (player.GetPlayerPositionX() + 128 >= button.GetButtonPosX() && player.GetPlayerPositionX() <= button.GetButtonPosX() + button.GetButtonWidth()
@@ -200,12 +181,41 @@ void DropBoulder(Boulder& boulder, Button& button, Ground& ground) {
 	}
 }
 
+void MoveBoulder(Boulder& boulder, Button& button, Ground& ground, int key, float distance) {
+	if (button.curAction == Button::_buttonAction::MOVE && button.IsButtonEnabled()) {
+		if (boulder.BoulderPosY() + boulder.GetBoulderRadius() <= ground.GetGroundPositionY()) {
+			boulder.MoveVerticallyDown();
+		}
+		else {
+			boulder.MoveHorizontally(key, distance);
+		}
+	}
+}
+
 void BoulderKillPlayer(Player& player, Boulder& boulder) {
-	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionX() + 128 >= boulder.BoulderPosX()
-		&& player.GetPlayerPositionX() <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
+	if (boulder.GetBoulderRadius() + boulder.BoulderPosY() >= player.GetPlayerPositionY() && player.GetPlayerPositionY() + 128 >=  boulder.BoulderPosY() && player.GetPlayerPositionX() + 110 >= boulder.BoulderPosX()
+		&& player.GetPlayerPositionX() - 18 <= boulder.BoulderPosX() + boulder.GetBoulderRadius() && boulder.GetBoulderSpeed() >= 0.1f) {
 		player.PlayerTakesDamage(player.GetMaxPlayerHealth() + 10);
 	}
 }
+
+Camera2D _playerCamera;
+
+Ground mainGroundFloor = Ground({ { -1000.0f , 1000.0f } , 14400, 1500, DARKGRAY });
+
+//Border  = Border({ 500, 800 }, RAYWHITE, 40, 1000);
+Ground _firstG = Ground({ 500.0f, 875.0f }, 150, 30, RAYWHITE);
+Ground _secondG = Ground({850.0f, 750.0f }, 150, 30, RAYWHITE);
+
+Border _border = Border({ 1200.0f, 650.0f }, 1000, 150,  DARKGRAY);
+Ground _borderG = Ground({ 1200.0f, 650.0f }, 150, 20, DARKGRAY);
+
+Border _groundBorder = Border({ 1349.0f, 650.0f }, 50, 450, DARKBROWN);
+Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
+
+Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
+
+Button buttonTest = Button({ 3200.0f, 990.0f }, Button::_buttonAction::DROP);
 
 void LEVEL_T_LOGIC(Player& player) {
 	if (!UpgradePlayerLevel(player, priest)) {
