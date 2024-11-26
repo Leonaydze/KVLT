@@ -62,7 +62,7 @@ extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
-//Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
+Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
 
 
 Altar entity = Altar();
@@ -71,7 +71,7 @@ void Init()
 {
 	font = LoadFont("Font.png");;
 	priest.Init();
-	//boulderTest.Init();
+	boulderTest.Init();
 }
 
 Font GetCurrentFont()
@@ -257,7 +257,7 @@ Border _border2 = Border({ 1798.0f, -600.0f }, 1300, 810, DARKGRAY);
 
 Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
-Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::DROP);
+Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::MOVE);
 
 void LEVEL_T_LOGIC(Player& player) {
 	if (!UpgradePlayerLevel(player, priest)) {
@@ -285,11 +285,10 @@ void LEVEL_T_LOGIC(Player& player) {
 	else if (PlayerCantWalk(player, _borderAlt)) {
 		PlayerCantWalk(player, _borderAlt);
 	}
-	/*if (PlayerEnabledButton(player, buttonTest)) {
+	if (PlayerEnabledButton(player, buttonTest)) {
 		MoveBoulder(boulderTest, buttonTest, mainGroundFloor, 1, 500);
-	}*/
-
-	//BoulderKillPlayer(player, boulderTest);
+	}
+	BoulderKillPlayer(player, boulderTest);
 
 	ResurrectionPlayer(player, entity);
 }
@@ -326,7 +325,7 @@ void LEVEL_T_DRAW(Player& player) {
 
 	mainGroundFloor.GroundDraw();
 
-	/*boulderTest.Draw();*/
+	boulderTest.Draw();
 
 	player.Draw();
 
