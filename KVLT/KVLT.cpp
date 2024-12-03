@@ -188,8 +188,6 @@ int main()
 	Clergy c;
 	PlayerClergyService cS;
 
-	_gameScreen lastScreen = GetCurrentGameScreen();
-
 	unsigned short int hpLvl = player.GetHealthLevel();
 	unsigned short int dashLvl = player.GetDashLevel();
 	unsigned short int staminaLvl = player.GetStaminaLevel();
@@ -228,7 +226,7 @@ int main()
 			if (playRequest) {
 				PlaySound(playButton);
 				SetCurrentScreen(LVL_TUTORIAL);
-				lastScreen = LVL_TUTORIAL;
+				SetLastGameScreen(LVL_TUTORIAL);
 				playRequest = false;
 				player.SetPlayerPositionV({ 0.0f, 870.0f });
 				setRequest = false;
@@ -342,7 +340,7 @@ int main()
 				player.UpgradeStaminaLevel(staminaLvl);
 				player.SetPlayerPositionV(GetLastPlayerPosition());
 				_playerClergy.TakeOffClergy(neededClergy);
-				SetCurrentScreen(lastScreen);
+				SetCurrentScreen(GetLastGameScreen());
 			}
 
 			DrawTextEx(GetCurrentFont(), TextFormat("Needed Clergy: %i", neededClergy), { 500.0f, 840.0f}, 20, 2, WHITE);
@@ -353,7 +351,7 @@ int main()
 				dashLvl = player.GetDashLevel();
 				staminaLvl = player.GetStaminaLevel();
 				player.SetPlayerPositionV(GetLastPlayerPosition());
-				SetCurrentScreen(lastScreen); 
+				SetCurrentScreen(GetLastGameScreen()); 
 			}
 		}
 		
@@ -401,12 +399,12 @@ int main()
 
 			if (result == 1 || IsKeyPressed(KEY_ESCAPE)) {
 				player.SetPlayerPositionV(GetLastPlayerPosition());
-				SetCurrentScreen(lastScreen);
+				SetCurrentScreen(GetLastGameScreen());
 			}
 		}
 
 		if (IsKeyDown(KEY_TAB) && GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
-			lastScreen = GetCurrentGameScreen();
+			SetLastGameScreen(GetCurrentGameScreen());
 			SetLastPlayerPosition(player.GetPlayerPositionV());
 			SetCurrentScreen(Inventory);		
 		}
@@ -425,6 +423,11 @@ int main()
 				SetExitWindowRequest(false);
 				exitRequest = false;
 			}
+		}
+
+		if (GetCurrentGameScreen() == DEATH_SCREEN) {
+			ClearBackground(BLACK);
+			DEATH_SCREEN_DRAW(player);
 		}
 
 		EndDrawing();

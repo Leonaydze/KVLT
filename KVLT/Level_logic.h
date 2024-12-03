@@ -11,9 +11,12 @@
 
 bool TriggerEvent(float interval);
 
-enum _gameScreen { mainMenu, LVL_TUTORIAL, LVL_1, LVL_2, LVL_3, LVL_4, UpgradeLevels, Inventory };
+enum _gameScreen { mainMenu, LVL_TUTORIAL, LVL_1, LVL_2, LVL_3, LVL_4, UpgradeLevels, Inventory, DEATH_SCREEN };
 
 _gameScreen GetCurrentGameScreen();
+
+_gameScreen GetLastGameScreen();
+void SetLastGameScreen(_gameScreen gameScreen);
 
 Vector2 GetLastPlayerPosition();
 void SetLastPlayerPosition(Vector2 lastPlayerPosition);
@@ -27,6 +30,6 @@ Font GetCurrentFont();
 void LEVEL_T_LOGIC(Player& player);
 void LEVEL_T_DRAW(Player& player);
 
-void ResurrectionPlayer(Player& player, Altar& altar);
+void DEATH_SCREEN_DRAW(Player& player);
 
 #endif // !LEVEL_LOGIC_H

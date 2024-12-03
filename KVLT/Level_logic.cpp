@@ -48,6 +48,19 @@ void SetCurrentScreen(_gameScreen curScreen)
 	_currentScreen = curScreen;
 }
 
+_gameScreen lastScreen = GetCurrentGameScreen();
+
+_gameScreen GetLastGameScreen()
+{
+	return lastScreen;
+}
+
+void SetLastGameScreen(_gameScreen gameScreen)
+{
+	lastScreen = gameScreen;
+}
+
+
 Vector2 _lastPlayerPosition = {};
 
 Vector2 GetLastPlayerPosition() {
@@ -173,20 +186,21 @@ bool PlayerWasAtAltar(Player& player, Altar& altar) {
 
 void ResurrectionPlayer(Player& player, Altar* altar) {
 	for (unsigned short int i = 0; i < 5; ++i) {
-		if (altar[i].GetPlayerWasAtAltar() && player.PlayerDeath()) {
+		if (altar[i].GetPlayerWasAtAltar()) {
 			player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
 			player.SetPlayerPositionV(_lastAltarPosition);
+			SetCurrentScreen(lastScreen);
 			return;
 		}
 		if (altar[i].GetPlayerWasAtAltar() && _lastAltarPosition.x != altar[i].GetAltarPosX() && _lastAltarPosition.y != altar[i].GetAltarPosY()) {
 			altar[i].SetPlayerWasAtAltar(false);
 		}
 	}
-	if (player.PlayerDeath()) {
-		SetCurrentScreen(mainMenu);
-		player.Nullification();
-		return;
-	}
+
+	SetCurrentScreen(mainMenu);
+	player.Nullification();
+
+	return;
 }
 
 template<typename T>
@@ -322,7 +336,8 @@ void LEVEL_T_LOGIC(Player& player) {
 	}
 
 	if (player.PlayerDeath()) {
-		ResurrectionPlayer(player, _altars);
+		EndMode2D();
+		SetCurrentScreen(DEATH_SCREEN);
 	}
 }
 
@@ -368,5 +383,15 @@ void LEVEL_T_DRAW(Player& player) {
 
 	if (PlayerCanTalkWithNpc(player, priest)) {
 		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, RAYWHITE);
+	}
+}
+
+void DEATH_SCREEN_DRAW(Player& player)
+{
+	DrawTextEx(font, "YOU ARE DEAD", { 700.0f, 200.0f }, 84, 4, WHITE);
+	DrawTextEx(font, "PRESS SPACE TO REVIVE", { 830.0f, 900.0f }, 24, 2, RAYWHITE);
+
+	if (player.PlayerDeath() && IsKeyDown(KEY_SPACE)) {
+		ResurrectionPlayer(player, _altars);
 	}
 }
