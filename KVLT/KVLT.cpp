@@ -275,6 +275,7 @@ int main()
 
 		unsigned short int neededClergy = (hpLvl + dashLvl + staminaLvl) * 10;
 		if (GetCurrentGameScreen() == UpgradeLevels) {
+			StopSound(player._jump);
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "#148# Stats");
 
