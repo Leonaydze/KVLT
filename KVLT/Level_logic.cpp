@@ -80,8 +80,14 @@ Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
 Vector2 _lastAltarPosition = {};
 Altar _altars[5];
 
+Texture2D _deathScreen = LoadTexture("");
+Sound _deathScreenS = LoadSound("");
+
 void Init()
 {
+	_deathScreen = LoadTexture("Sprites\\Death_screen.png");
+	_deathScreenS = LoadSound("Sounds\\Death_screen.mp3");
+	SetSoundVolume(_deathScreenS, 0.8f);
 	_altars[0] = Altar();
 	_altars[1] = Altar({3200.0f, 900.0f});
 	_altars[1].Init();
@@ -170,7 +176,7 @@ bool PlayerCantWalk(Player& player, Border& border) {
 bool PlayerWasAtAltar(Player& player, Altar& altar) {
 	if (player.GetPlayerPositionX() + 128 >= altar.GetAltarPosX() - 40 && player.GetPlayerPositionX() <= altar.GetAltarPosX() + 168
 		&& player.GetPlayerPositionY() + 20 >= altar.GetAltarPosY() - 20 && player.GetPlayerPositionY() + 108 <= altar.GetAltarPosY() + 148) {
-		DrawTextEx(font, "PRESS E TO HEAL\n\n   AT  ALTAR", {altar.GetAltarPosX() - 50, altar.GetAltarPosY() - 60}, 30, 2, RAYWHITE);
+		DrawTextEx(font, "PRESS E TO HEAL\n\n    AT  ALTAR", {altar.GetAltarPosX() - 50, altar.GetAltarPosY() - 60}, 30, 2, RAYWHITE);
 		if (IsKeyDown(KEY_E)) {
 			altar.RegeneratePlayerHealth(player);
 			altar.SetPlayerWasAtAltar(true);
@@ -338,6 +344,7 @@ void LEVEL_T_LOGIC(Player& player) {
 	if (player.PlayerDeath()) {
 		EndMode2D();
 		SetCurrentScreen(DEATH_SCREEN);
+		PlaySound(_deathScreenS);
 	}
 }
 
@@ -388,10 +395,12 @@ void LEVEL_T_DRAW(Player& player) {
 
 void DEATH_SCREEN_DRAW(Player& player)
 {
-	DrawTextEx(font, "YOU ARE DEAD", { 700.0f, 200.0f }, 84, 4, WHITE);
-	DrawTextEx(font, "PRESS SPACE TO REVIVE", { 830.0f, 900.0f }, 24, 2, RAYWHITE);
+	DrawTextEx(font, "YOU ARE DEAD", { 680.0f, 100.0f }, 84, 4, WHITE);
+	DrawTextEx(font, "PRESS SPACE TO REVIVE", { 820.0f, 1000.0f }, 24, 2, RAYWHITE);
 
-	if (player.PlayerDeath() && IsKeyDown(KEY_SPACE)) {
+	DrawTexture(_deathScreen, 720, 300, WHITE);
+
+	if (player.PlayerDeath() && (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_ESCAPE))) {
 		ResurrectionPlayer(player, _altars);
 	}
 }

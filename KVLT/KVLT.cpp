@@ -192,6 +192,8 @@ int main()
 	unsigned short int dashLvl = player.GetDashLevel();
 	unsigned short int staminaLvl = player.GetStaminaLevel();
 
+	Sound _inventorySound = LoadSound("Sounds\\Inventory_sound.mp3");
+
 	while (!GetExitWindow())
 	{	
 		//Play, update and customization music
@@ -271,17 +273,7 @@ int main()
 			}
 		}
 
-		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
-			ClearBackground(BLACK);
-			LEVEL_T_DRAW(player);
-			LEVEL_T_LOGIC(player);
-			_playerClergy.Draw(player, GetCurrentFont());
-			playerInv.Draw(player, GetCurrentFont());
-			playerInv.HealFlask(player);
-		}
-
 		unsigned short int neededClergy = (hpLvl + dashLvl + staminaLvl) * 10;
-
 		if (GetCurrentGameScreen() == UpgradeLevels) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			int result = GuiWindowBox({ 460.0f, 140.0f, 1000.0f, 800.0f }, "#148# Stats");
@@ -403,15 +395,27 @@ int main()
 			}
 		}
 
-		if (IsKeyDown(KEY_TAB) && GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels) {
+		if (IsKeyDown(KEY_TAB) && GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != DEATH_SCREEN) {
+			StopSound(player._jump);
 			SetLastGameScreen(GetCurrentGameScreen());
 			SetLastPlayerPosition(player.GetPlayerPositionV());
-			SetCurrentScreen(Inventory);		
+			SetCurrentScreen(Inventory);
+			PlaySound(_inventorySound);
 		}
 
-		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory) {
+		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
+			ClearBackground(BLACK);
+			LEVEL_T_DRAW(player);
+			LEVEL_T_LOGIC(player);
+			_playerClergy.Draw(player, GetCurrentFont());
+			playerInv.Draw(player, GetCurrentFont());
+			playerInv.HealFlask(player);
+		}
+
+		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != DEATH_SCREEN) {
 			int result = GuiMessageBox({ static_cast<float>(player.GetPlayerPositionX()) - 125.0f, static_cast<float>(player.GetPlayerPositionY()) - 250.0f, 300.0f, 100.0f },
 				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
+			StopSound(player._jump);
 
 			//Exit window choice
 			if (IsKeyPressed(KEY_Y) || IsKeyPressed(KEY_ENTER)) {
