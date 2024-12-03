@@ -42,7 +42,7 @@ private:
 	unsigned short int _dashDistance = 100;
 	Sound _dash = LoadSound("");
 
-	float _lastUpdateTime = 0;
+	float _lastUpdateTime = 0.0f;
 	bool TriggerEvent(float interval);
 public:
 	Sound _jump = LoadSound("");

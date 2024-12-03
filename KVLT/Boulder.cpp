@@ -42,7 +42,7 @@ void Boulder::MoveHorizontally(int key, float distance){
 
 void Boulder::Draw()
 {
-	DrawTexture(_boulderText, (int)_boulderPos.x, (int)_boulderPos.y, _boulderColor);
+	DrawTexture(_boulderText, static_cast<int>(_boulderPos.x), static_cast<int>(_boulderPos.y), _boulderColor);
 }
 
 float Boulder::BoulderPosY()
@@ -77,11 +77,11 @@ float Boulder::GetBoulderSpeedH()
 void Boulder::Init(){
 	_boulderText = LoadTexture("Sprites\\Boulder.png");
 	if (_radius < _boulderText.width) {
-		_boulderText.width = (int)_radius;
-		_boulderText.height = (int)_radius;
+		_boulderText.width = static_cast<int>(_radius);
+		_boulderText.height = static_cast<int>(_radius);
 	}
 	if (_radius > _boulderText.width) {
-		_boulderText.width = (int)_radius;
-		_boulderText.height = (int)_radius;
+		_boulderText.width = static_cast<int>(_radius);
+		_boulderText.height = static_cast<int>(_radius);
 	}
 }

@@ -61,6 +61,6 @@ void Ground::SetGroundColor(Color groundColor) {
 }
 
 void Ground::GroundDraw() {
-	DrawRectangle((int)_groundPosition.x, (int)_groundPosition.y, _groundWidth, _groundHeight, _groundColor);
+	DrawRectangle(static_cast<int>(_groundPosition.x), static_cast<int>(_groundPosition.y), _groundWidth, _groundHeight, _groundColor);
 }
 

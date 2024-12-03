@@ -2,14 +2,14 @@
 
 extern 	_gameScreen _currentScreen = mainMenu;
 
-double _lastUpdateTime = (double)0;
+double _lastUpdateTime = static_cast <double>(0);
 /// <summary>
 /// A function to indicate that the code is stopped for a while
 /// </summary>
 /// <param name="interval - "> The time for which the code will stop</param>
 /// <returns></returns>
 bool TriggerEvent(float interval) {
-	float currentTime = (float)GetTime();
+	float currentTime = static_cast<float>(GetTime());
 
 	if (currentTime - _lastUpdateTime >= interval) {
 		_lastUpdateTime = currentTime;
@@ -20,14 +20,14 @@ bool TriggerEvent(float interval) {
 	return false;
 }
 
-double _lUT = (double)0;
+double _lUT = static_cast <double>(0);
 /// <summary>
 /// A function to indicate that the code is stopped for a while
 /// </summary>
 /// <param name="interval - "> The time for which the code will stop</param>
 /// <returns></returns>
 bool TakeDamageTime(float interval) {
-	float currentTime = (float)GetTime();
+	float currentTime = static_cast<float>(GetTime());
 
 	if (currentTime - _lUT >= interval) {
 		_lUT = currentTime;
@@ -48,7 +48,7 @@ void SetCurrentScreen(_gameScreen curScreen)
 	_currentScreen = curScreen;
 }
 
-Vector2 _lastPlayerPosition;
+Vector2 _lastPlayerPosition = {};
 
 Vector2 GetLastPlayerPosition() {
 	return _lastPlayerPosition;
@@ -64,11 +64,14 @@ Priest priest = Priest({ 2900, 910 });
 
 Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
 
-
-Altar entity = Altar();
+Vector2 _lastAltarPosition = {};
+Altar _altars[5];
 
 void Init()
 {
+	_altars[0] = Altar();
+	_altars[1] = Altar({3200.0f, 900.0f});
+	_altars[1].Init();
 	font = LoadFont("Font.png");;
 	priest.Init();
 	boulderTest.Init();
@@ -139,26 +142,50 @@ bool PlayerCantWalk(Player& player, Border& border) {
 	}
 	if (player.GetPlayerPositionX() + 120 >= border.GetBorderPosX() + 20 && player.GetPlayerPositionX() + 64 <= border.GetBorderPosX() + border.GetBorderWidth() / 2
 		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 30 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
-		player.SetPlayerPositionX((float)border.GetBorderPosX() - (float)130);
+		player.SetPlayerPositionX(static_cast<float>(border.GetBorderPosX() - 130));
 		return true;
 	}
 	if (player.GetPlayerPositionX() + 11 <= border.GetBorderPosX() + border.GetBorderWidth() - 20 && player.GetPlayerPositionX()  + 64 >= border.GetBorderPosX() + border.GetBorderWidth() / 2
 		&& player.GetPlayerPositionY() + 128 >= border.GetBorderPosY() + 30 && player.GetPlayerPositionY() <= border.GetBorderPosY() + border.GetBorderHeight() - 20) {
-		player.SetPlayerPositionX((float)border.GetBorderPosX() + (float)border.GetBorderWidth() + (float)5);
+		player.SetPlayerPositionX((static_cast<float>(border.GetBorderPosX() + border.GetBorderWidth() + 5)));
 		return true;
 	}
 	player.SetPlayerCanWalk(0);
 	return false;
 }
 
-void ResurrectionPlayer(Player& player, Altar& altar) {
-	if (player.PlayerDeath() && altar.GetPlayerWasAtAltar()) {
-		player.SetPlayerPositionV(altar.GetAltarPosV());
-		player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
+bool PlayerWasAtAltar(Player& player, Altar& altar) {
+	if (player.GetPlayerPositionX() + 128 >= altar.GetAltarPosX() - 40 && player.GetPlayerPositionX() <= altar.GetAltarPosX() + 168
+		&& player.GetPlayerPositionY() + 20 >= altar.GetAltarPosY() - 20 && player.GetPlayerPositionY() + 108 <= altar.GetAltarPosY() + 148) {
+		DrawTextEx(font, "PRESS E TO HEAL\n\n   AT  ALTAR", {altar.GetAltarPosX() - 50, altar.GetAltarPosY() - 60}, 30, 2, RAYWHITE);
+		if (IsKeyDown(KEY_E)) {
+			altar.RegeneratePlayerHealth(player);
+			altar.SetPlayerWasAtAltar(true);
+			_lastAltarPosition.x = altar.GetAltarPosX();
+			_lastAltarPosition.y = altar.GetAltarPosY();
+			DrawTextEx(font, "Your soul is so rotten...", { player.GetPlayerPositionX() - 50, player.GetPlayerPositionY() + 180 }, 24, 2, WHITE);
+			return true;
+		}
 	}
-	else if(player.PlayerDeath()) {
+	return false;
+}
+
+
+void ResurrectionPlayer(Player& player, Altar* altar) {
+	for (unsigned short int i = 0; i < 5; ++i) {
+		if (altar[i].GetPlayerWasAtAltar() && player.PlayerDeath()) {
+			player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
+			player.SetPlayerPositionV(_lastAltarPosition);
+			return;
+		}
+		if (altar[i].GetPlayerWasAtAltar() && _lastAltarPosition.x != altar[i].GetAltarPosX() && _lastAltarPosition.y != altar[i].GetAltarPosY()) {
+			altar[i].SetPlayerWasAtAltar(false);
+		}
+	}
+	if (player.PlayerDeath()) {
 		SetCurrentScreen(mainMenu);
 		player.Nullification();
+		return;
 	}
 }
 
@@ -290,7 +317,13 @@ void LEVEL_T_LOGIC(Player& player) {
 	}
 	BoulderKillPlayer(player, boulderTest);
 
-	ResurrectionPlayer(player, entity);
+	for (unsigned short int i = 0; i < 5; ++i) {
+		PlayerWasAtAltar(player, _altars[i]);
+	}
+
+	if (player.PlayerDeath()) {
+		ResurrectionPlayer(player, _altars);
+	}
 }
 
 void LEVEL_T_DRAW(Player& player) {
@@ -331,6 +364,7 @@ void LEVEL_T_DRAW(Player& player) {
 
 	priest.Draw();
 
+	_altars[1].Draw();
 
 	if (PlayerCanTalkWithNpc(player, priest)) {
 		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, RAYWHITE);

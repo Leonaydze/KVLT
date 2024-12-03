@@ -24,10 +24,10 @@ Clergy Clergy::fromJson(const json& _filename)
 }
 
 void Clergy::Draw(Player& player, Font font){
-	DrawRectangle((int)player.GetPlayerPositionX() + 700, (int)player.GetPlayerPositionY() + 230, 130, 50, DARKBROWN);
-	DrawRectangle((int)player.GetPlayerPositionX() + 705, (int)player.GetPlayerPositionY() + 235, 120, 40, BROWN);
+	DrawRectangle(static_cast<int>(player.GetPlayerPositionX()) + 700, static_cast<int>(player.GetPlayerPositionY()) + 230, 130, 50, DARKBROWN);
+	DrawRectangle(static_cast<int>(player.GetPlayerPositionX()) + 705, static_cast<int>(player.GetPlayerPositionY()) + 235, 120, 40, BROWN);
 	DrawTextEx(font, TextFormat(": %i", _countClergy), {player.GetPlayerPositionX() + 750, player.GetPlayerPositionY() + 245 }, 25, 3, RAYWHITE);
-	DrawTexture(_clergyIcon, (int)player.GetPlayerPositionX() + 710, (int)player.GetPlayerPositionY() + 240, WHITE);
+	DrawTexture(_clergyIcon, static_cast<int>(player.GetPlayerPositionX()) + 710, static_cast<int>(player.GetPlayerPositionY()) + 240, WHITE);
 }
 
 void Clergy::Init()

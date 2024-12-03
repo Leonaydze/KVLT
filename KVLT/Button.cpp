@@ -16,7 +16,7 @@ void Button::EnableButton(bool isEnable)
 }
 
 void Button::Draw(){
-	DrawRectangle((int)_buttonPos.x, (int)_buttonPos.y, _width, _height, _buttonColor);
+	DrawRectangle(static_cast<int>(_buttonPos.x), static_cast<int>(_buttonPos.y), _width, _height, _buttonColor);
 }
 
 float Button::GetButtonPosX()

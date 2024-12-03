@@ -1,7 +1,7 @@
 #include "Player.h"
 
 bool Player::TriggerEvent(float interval) {
-	float currentTime = (float)GetTime();
+	float currentTime = static_cast<float>(GetTime());
 
 	if (currentTime - _lastUpdateTime >= interval) {
 		_lastUpdateTime = currentTime;
@@ -125,10 +125,10 @@ void Player::PlayerController() {
 
 			if (_frameRec.x < 880) {
 				if (currentFrame < 2) {
-					_frameRec.x = (float)currentFrame * 111 + 10;
+					_frameRec.x = static_cast<float>(currentFrame * 111 + 10);
 				}
 				else if(currentFrame >= 2 && currentFrame != 3 && currentFrame != 4) {
-					_frameRec.x = (float)currentFrame * 111 + 20;
+					_frameRec.x = static_cast<float>(currentFrame * 111 + 20);
 				}
 				else if (currentFrame == 3) {
 					_frameRec.x = 412.0f;
@@ -165,10 +165,10 @@ void Player::PlayerController() {
 
 			if (_frameRec.x < 880) {
 				if (currentFrame < 2) {
-					_frameRec.x = (float)currentFrame * 111 + 10;
+					_frameRec.x = static_cast<float>(currentFrame * 111 + 10);
 				}
 				else if (currentFrame >= 2 && currentFrame != 3 && currentFrame != 4) {
-					_frameRec.x = (float)currentFrame * 111 + 20;
+					_frameRec.x = static_cast<float>(currentFrame * 111 + 20);
 				}
 				else if (currentFrame == 3) {
 					_frameRec.x = 412.0f;
@@ -281,30 +281,30 @@ void Player::Draw()
 	//player
 	DrawTextureRec(_playerTexture, _frameRec, _playerPosition, WHITE);
 	//Player health
-	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
-	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 645, _playerHealth * 2, 20, RED);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 900, static_cast<int>(_playerPosition.y) - 650, _maxPlayerHealth * 2 + 10, 30, DARKBROWN);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 895, static_cast<int>(_playerPosition.y) - 645, _playerHealth * 2, 20, RED);
 	//Player stamina
-	DrawRectangle((int)_playerPosition.x - 900, (int)_playerPosition.y - 610, _maxStamina * 25 + 10, 30, DARKBROWN);
-	DrawRectangle((int)_playerPosition.x - 895, (int)_playerPosition.y - 605, _stamina * 25, 20, DARKBLUE);
-	DrawRectangle((int)_playerPosition.x - 872, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
-	DrawRectangle((int)_playerPosition.x - 847, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
-	DrawRectangle((int)_playerPosition.x - 822, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 900, static_cast<int>(_playerPosition.y) - 610, _maxStamina * 25 + 10, 30, DARKBROWN);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 895, static_cast<int>(_playerPosition.y) - 605, _stamina * 25, 20, DARKBLUE);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 872, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 847, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
+	DrawRectangle(static_cast<int>(_playerPosition.x) - 822, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
 	if (_maxStamina >= 5) {
-		DrawRectangle((int)_playerPosition.x - 797, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+		DrawRectangle(static_cast<int>(_playerPosition.x) - 797, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
 	}
 	if (_maxStamina >= 6) {
-		DrawRectangle((int)_playerPosition.x - 772, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+		DrawRectangle(static_cast<int>(_playerPosition.x) - 772, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
 	}
 	if (_maxStamina >= 7) {
-		DrawRectangle((int)_playerPosition.x - 747, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+		DrawRectangle(static_cast<int>(_playerPosition.x) - 747, static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
 	}
 	if (_maxStamina == 8) {
-		DrawRectangle((int)_playerPosition.x - 722, (int)_playerPosition.y - 610, 4, 30, DARKBROWN);
+		DrawRectangle(static_cast<int>(_playerPosition.x - 722), static_cast<int>(_playerPosition.y) - 610, 4, 30, DARKBROWN);
 	}
 }
 
 bool Player::PlayerDeath(){
-	return _playerHealth <= 0;
+	return _playerHealth < 0;
 }
 
 void Player::PlayerTakesDamage(unsigned short int damage){

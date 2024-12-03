@@ -4,11 +4,11 @@ Border::Border(){
 }
 
 int Border::GetBorderPosX(){
-	return (int)_borderPosition.x;
+	return static_cast<int>(_borderPosition.x);
 }
 
 int Border::GetBorderPosY(){
-	return (int)_borderPosition.y;
+	return static_cast<int>(_borderPosition.y);
 }
 
 int Border::GetBorderWidth()
@@ -23,5 +23,5 @@ int Border::GetBorderHeight()
 
 void Border::Draw()
 {
-	DrawRectangle((int)_borderPosition.x, (int)_borderPosition.y, _borderWidth, _borderHeight, _borderColor);
+	DrawRectangle(static_cast<int>(_borderPosition.x), static_cast<int>(_borderPosition.y), _borderWidth, _borderHeight, _borderColor);
 }

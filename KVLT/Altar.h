@@ -26,6 +26,9 @@ public:
 
 	bool GetPlayerWasAtAltar();
 	void SetPlayerWasAtAltar(bool flag);
+
+	float GetAltarPosX();
+	float GetAltarPosY();
 };
 
 #endif // !ALTAR_H

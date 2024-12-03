@@ -30,8 +30,8 @@ bool Priest::NpcDeath()
 
 void Priest::Init(){
     _npcTexture = LoadTexture("Sprites\\Priest.png");
-    _npcTexture.height = (int)(_npcTexture.height / 1.28f);
-    _npcTexture.width = (int)(_npcTexture.width / 1.28f);
+    _npcTexture.height = static_cast<int>(_npcTexture.height / 1.28f);
+    _npcTexture.width = static_cast<int>(_npcTexture.width / 1.28f);
 }
 
 void Priest::Draw()

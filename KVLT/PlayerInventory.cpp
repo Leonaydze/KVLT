@@ -39,8 +39,8 @@ void PlayerInventory::Init()
 }
 
 void PlayerInventory::Draw(Player& player, Font font){
-	DrawRectangle((int)player.GetPlayerPositionX() - 900, (int)player.GetPlayerPositionY() + 200, 98, 98, DARKBROWN);
-	DrawRectangle((int)player.GetPlayerPositionX() - 895, (int)player.GetPlayerPositionY() + 205, 88, 88, BROWN);
-	DrawTexture(flask.GetTexture(), (int)player.GetPlayerPositionX() - 898, (int)player.GetPlayerPositionY() + 202, WHITE);
+	DrawRectangle(static_cast<int>(player.GetPlayerPositionX()) - 900, static_cast<int>(player.GetPlayerPositionY()) + 200, 98, 98, DARKBROWN);
+	DrawRectangle(static_cast<int>(player.GetPlayerPositionX()) - 895, static_cast<int>(player.GetPlayerPositionY()) + 205, 88, 88, BROWN);
+	DrawTexture(flask.GetTexture(), static_cast<int>(player.GetPlayerPositionX()) - 898, static_cast<int>(player.GetPlayerPositionY()) + 202, WHITE);
 	DrawTextEx(font, TextFormat("%i", _currentCountFlask), { player.GetPlayerPositionX() - 820, player.GetPlayerPositionY() + 270 }, 20, 2, RAYWHITE );
 }

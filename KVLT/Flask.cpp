@@ -13,6 +13,6 @@ Texture2D Flask::GetTexture()
 void Flask::Init()
 {
     _flaskTexture = LoadTexture("Sprites\\Flask.png");
-    _flaskTexture.height = (int)(_flaskTexture.height * 1.5f);
-    _flaskTexture.width = (int)(_flaskTexture.width * 1.5f);
+    _flaskTexture.height = static_cast<int>(_flaskTexture.height * 1.5f);
+    _flaskTexture.width = static_cast<int>(_flaskTexture.width * 1.5f);
 }

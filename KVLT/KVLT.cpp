@@ -29,7 +29,7 @@ int lastMusicNumber = -1;
 /// </summary>
 /// <param name="music - ">Transmit music for loading and unloading tracks, as well as for switching tracks</param>
 void PlayMusic(Music &music, bool& reroll) {
-	srand((unsigned)time(NULL));
+	srand(static_cast<unsigned>(time(NULL)));
 	int randomMusicNumber = rand() % 12;
 
 	//Choice music
@@ -215,13 +215,13 @@ int main()
 		if(GetCurrentGameScreen() == mainMenu) {
 			ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 			//Heading
-			DrawTextEx(GetCurrentFont(), "KVLT", { (float)100 , (float)300 }, 92, 3, WHITE);
+			DrawTextEx(GetCurrentFont(), "KVLT", { static_cast <float>(100) , static_cast <float>(300) }, 92, 3, WHITE);
 
 			//Buttons
 			GuiSetStyle(DEFAULT, TEXT_SIZE, 24);
-			if (GuiButton({ 125, 500, 100, 40 }, "Play"))		playRequest = true;
-			if (GuiButton({ 125, 575, 100, 40 }, "Settings"))	setRequest = true;
-			if (GuiButton({ 125, 650, 100, 40 }, "Quit")) 		exitRequest = true;
+			if (GuiButton({ 125.0f, 500.0f, 100.0f, 40.0f }, "Play"))		playRequest = true;
+			if (GuiButton({ 125.0f, 575.0f, 100.0f, 40.0f }, "Settings"))	setRequest = true;
+			if (GuiButton({ 125.0f, 650.0f, 100.0f, 40.0f }, "Quit")) 		exitRequest = true;
 			GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
 
 			//Play
@@ -255,11 +255,11 @@ int main()
 				//Exit frim settings
 				if (result == 1 || IsKeyPressed(KEY_ESCAPE)) setRequest = false;
 			}
-			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {(float)GetMonitorWidth(GetCurrentMonitor()) / (float)2 - 150.0f , 1000.0f }, 36, 3, GRAY);
+			DrawTextEx(GetCurrentFont(), "develop. by SVTVN", {static_cast<float>(GetMonitorWidth(GetCurrentMonitor()) / 2 - 150) , 1000.0f }, 36, 3, GRAY);
 
 			//Open exit window
 			if ((GetExitWindowRequest() || exitRequest) && !setRequest ) {
-				int result = GuiMessageBox({ (float)GetMonitorWidth(GetCurrentMonitor()) / (float)2 - 125.0f, (float)GetMonitorHeight(GetCurrentMonitor()) / 2 - 50.0f, 250.0f, 100.0f },
+				int result = GuiMessageBox({ static_cast<float>(GetMonitorWidth(GetCurrentMonitor()) / 2 - 125), static_cast<float>(GetMonitorHeight(GetCurrentMonitor()) / 2 - 50), 250.0f, 100.0f },
 					"#193#Quit?", "Are You Want To Quit?", "Yes;No");
 
 				//Exit window choice
@@ -412,7 +412,7 @@ int main()
 		}
 
 		if (GetExitWindowRequest() && !setRequest  && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory) {
-			int result = GuiMessageBox({ (float)player.GetPlayerPositionX() - 125.0f, (float)player.GetPlayerPositionY() - 250.0f, 300.0f, 100.0f },
+			int result = GuiMessageBox({ static_cast<float>(player.GetPlayerPositionX()) - 125.0f, static_cast<float>(player.GetPlayerPositionY()) - 250.0f, 300.0f, 100.0f },
 				"#193#Quit?", "Quit to the main menu?(Y/N)", ";;;;;;;;;;;;;;;;;;;;");
 
 			//Exit window choice
