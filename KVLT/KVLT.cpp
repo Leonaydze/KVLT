@@ -204,7 +204,8 @@ int main()
 		}
 
 		//If the game is closed, a window pops up
-		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest && GetCurrentGameScreen() != UpgradeLevels && GetCurrentGameScreen() != Inventory) {
+		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) && !setRequest && GetCurrentGameScreen() != UpgradeLevels 
+			&& GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != DEATH_SCREEN) {
 			SetExitWindowRequest(true);
 			exitRequest = true;
 		}
@@ -227,11 +228,21 @@ int main()
 			//Play
 			if (playRequest) {
 				PlaySound(playButton);
-				SetCurrentScreen(LVL_TUTORIAL);
-				SetLastGameScreen(LVL_TUTORIAL);
-				playRequest = false;
-				player.SetPlayerPositionV({ 0.0f, 870.0f });
-				setRequest = false;
+				StopSound(player._jump);
+				
+				if (WhereWasPlayer(player)) {
+					playRequest = false;
+					setRequest = false;
+				}
+				else {
+					SetCurrentScreen(LVL_TUTORIAL);
+					SetLastGameScreen(LVL_TUTORIAL);
+
+					playRequest = false;
+					setRequest = false;
+
+					player.SetPlayerPositionV({ 0.0f, 870.0f });
+				}
 			}
 
 			//Open settings window
@@ -284,7 +295,7 @@ int main()
 			if (GuiButton({ 700.0f, 280.0f, 24.0f, 24.0f }, "->") && hpLvl < 5) {
 				hpLvl++;
 			}
-			else if (GuiButton({ 500.0f, 280.0f, 24.0f, 24.0f }, "<-") && hpLvl > 0 && hpLvl != 5 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl ) {
+			else if (GuiButton({ 500.0f, 280.0f, 24.0f, 24.0f }, "<-") && hpLvl > 0 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl ) {
 				hpLvl--;
 			}
 			DrawTextEx(GetCurrentFont(), TextFormat("Current health: %i", player.GetMaxPlayerHealth()), { 500.0f, 350.0f }, 20, 2, WHITE);
@@ -316,7 +327,7 @@ int main()
 			if (GuiButton({ 1320.0f, 280.0f, 24.0f, 24.0f }, "->") && staminaLvl < 4) {
 				staminaLvl++;
 			}
-			else if (GuiButton({ 1100.0f, 280.0f, 24.0f, 24.0f }, "<-") && staminaLvl > 0 && staminaLvl != 4 && player.GetMaxPlayerHealth() / 10 % 10 < hpLvl) {
+			else if (GuiButton({ 1100.0f, 280.0f, 24.0f, 24.0f }, "<-") && staminaLvl > 0 && player.GetStaminaLevel() < staminaLvl) {
 				staminaLvl--;
 			}
 			DrawTextEx(GetCurrentFont(), TextFormat("Current stamina: %i", player.GetStaminaLevel()), { 1100.0f, 350.0f }, 20, 2, WHITE);
@@ -433,6 +444,11 @@ int main()
 		if (GetCurrentGameScreen() == DEATH_SCREEN) {
 			ClearBackground(BLACK);
 			DEATH_SCREEN_DRAW(player);
+		}
+
+		if (GetLastGameScreen() != GetCurrentGameScreen() && GetCurrentGameScreen() != mainMenu && GetCurrentGameScreen() != UpgradeLevels 
+			&& GetCurrentGameScreen() != Inventory && GetCurrentGameScreen() != DEATH_SCREEN) {
+			SetLastGameScreen(GetCurrentGameScreen());
 		}
 
 		EndDrawing();

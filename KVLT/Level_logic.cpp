@@ -1,7 +1,5 @@
 #include "Level_logic.h"
 
-extern 	_gameScreen _currentScreen = mainMenu;
-
 double _lastUpdateTime = static_cast <double>(0);
 /// <summary>
 /// A function to indicate that the code is stopped for a while
@@ -38,40 +36,32 @@ bool TakeDamageTime(float interval) {
 	return false;
 }
 
-_gameScreen GetCurrentGameScreen()
-{
+_gameScreen _currentScreen = mainMenu;
+
+_gameScreen GetCurrentGameScreen() {
 	return _currentScreen;
 }
-
-void SetCurrentScreen(_gameScreen curScreen)
-{ 
+void SetCurrentScreen(_gameScreen curScreen) {
 	_currentScreen = curScreen;
 }
 
 _gameScreen lastScreen = GetCurrentGameScreen();
 
-_gameScreen GetLastGameScreen()
-{
+_gameScreen GetLastGameScreen() {
 	return lastScreen;
 }
-
-void SetLastGameScreen(_gameScreen gameScreen)
-{
+void SetLastGameScreen(_gameScreen gameScreen) {
 	lastScreen = gameScreen;
 }
-
 
 Vector2 _lastPlayerPosition = {};
 
 Vector2 GetLastPlayerPosition() {
 	return _lastPlayerPosition;
 }
-
 void SetLastPlayerPosition(Vector2 lastPlayerPosition) {
 	_lastPlayerPosition = lastPlayerPosition;
 }
-
-extern Font font = LoadFont("");
 
 Priest priest = Priest({ 2900, 910 });
 
@@ -82,6 +72,12 @@ Altar _altars[5];
 
 Texture2D _deathScreen = LoadTexture("");
 Sound _deathScreenS = LoadSound("");
+
+Font font = LoadFont("");
+
+Font GetCurrentFont() {
+	return font;
+}
 
 void Init()
 {
@@ -94,11 +90,6 @@ void Init()
 	font = LoadFont("Font.png");;
 	priest.Init();
 	boulderTest.Init();
-}
-
-Font GetCurrentFont()
-{
-	return font;
 }
 
 template <typename T>
@@ -191,7 +182,9 @@ bool PlayerWasAtAltar(Player& player, Altar& altar) {
 
 
 void ResurrectionPlayer(Player& player, Altar* altar) {
-	for (unsigned short int i = 0; i < 5; ++i) {
+	unsigned short int i = 0;
+
+	while(i < 5) {
 		if (altar[i].GetPlayerWasAtAltar()) {
 			player.SetPlayerHealth(player.GetMaxPlayerHealth() / 2);
 			player.SetPlayerPositionV(_lastAltarPosition);
@@ -201,6 +194,7 @@ void ResurrectionPlayer(Player& player, Altar* altar) {
 		if (altar[i].GetPlayerWasAtAltar() && _lastAltarPosition.x != altar[i].GetAltarPosX() && _lastAltarPosition.y != altar[i].GetAltarPosY()) {
 			altar[i].SetPlayerWasAtAltar(false);
 		}
+		++i;
 	}
 
 	SetCurrentScreen(mainMenu);
@@ -337,8 +331,10 @@ void LEVEL_T_LOGIC(Player& player) {
 	}
 	BoulderKillPlayer(player, boulderTest);
 
-	for (unsigned short int i = 0; i < 5; ++i) {
+	unsigned short int i = 0;
+	while(i < 5) {
 		PlayerWasAtAltar(player, _altars[i]);
+		++i;
 	}
 
 	if (player.PlayerDeath()) {
@@ -395,7 +391,7 @@ void LEVEL_T_DRAW(Player& player) {
 
 void DEATH_SCREEN_DRAW(Player& player)
 {
-	DrawTextEx(font, "YOU ARE DEAD", { 680.0f, 100.0f }, 84, 4, WHITE);
+	DrawTextEx(font, "YOU ARE DEAD", { 690.0f, 100.0f }, 84, 4, WHITE);
 	DrawTextEx(font, "PRESS SPACE TO REVIVE", { 820.0f, 1000.0f }, 24, 2, RAYWHITE);
 
 	DrawTexture(_deathScreen, 720, 300, WHITE);
@@ -403,4 +399,18 @@ void DEATH_SCREEN_DRAW(Player& player)
 	if (player.PlayerDeath() && (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_ESCAPE))) {
 		ResurrectionPlayer(player, _altars);
 	}
+}
+
+
+bool WhereWasPlayer(Player& player) {
+	unsigned short int i = 0;
+	while(i < 5) {
+		if (_altars[i].GetPlayerWasAtAltar()) {
+			player.SetPlayerPositionV(_lastAltarPosition);
+			SetCurrentScreen(lastScreen);
+			return true;
+		}
+		++i;
+	}
+	return false;
 }

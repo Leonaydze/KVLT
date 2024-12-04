@@ -5,7 +5,6 @@ void DataSource<T>::readFile() {
 	ifstream inputFile(filename);
 	if (inputFile) {
 		inputFile >> data;	
-		std::cout << data.dump(4);
 		currentId = data["id"] + 1;
 	}
 	else {
