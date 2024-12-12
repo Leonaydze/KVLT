@@ -9,7 +9,7 @@ private:
 	unsigned short int _maxCountFlask = 5;
 	
 	Flask flask;
-	Sound _drinkFlask = LoadSound("");
+	Sound _drinkFlask;
 public:
 	int id = -1;
 	PlayerInventory();

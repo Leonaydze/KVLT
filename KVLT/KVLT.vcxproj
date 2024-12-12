@@ -204,7 +204,11 @@
     <Media Include="Sounds\Drink_Flask.mp3" />
     <Media Include="Sounds\Inventory_sound.mp3" />
     <Media Include="Sounds\Jump.mp3" />
+    <Media Include="Sounds\PlayerTakesDamage.mp3" />
     <Media Include="Sounds\Play_button.wav" />
+    <Media Include="Sounds\Weapon_heavy.wav" />
+    <Media Include="Sounds\Weapon_light.wav" />
+    <Media Include="Sounds\Weapon_medium.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

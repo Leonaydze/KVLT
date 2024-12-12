@@ -6,19 +6,20 @@ class Enemy{
 protected:
 	short int _enemyHealth = 0;
 	unsigned short int _enemyDamage = 0;
+	float _enemySpeed = 0;
 
 	float _enemyAttackSpeed = 0;
 
 	Vector2 _enemyPosition {};
 
-	Texture2D _enemyTexture = LoadTexture("");
+	Texture2D _enemyTexture;
 	Rectangle _frameRec = {0, 0, 0, 0};
 
 public:
 	Enemy();
 
-	Enemy(Vector2 enemyPos,short int enemyHealth,  unsigned short int enemyDamage, float enemyAttackSpeed)
-		: _enemyPosition(enemyPos), _enemyDamage(enemyDamage), _enemyHealth(enemyHealth), _enemyAttackSpeed(enemyAttackSpeed) {}
+	Enemy(Vector2 enemyPos, unsigned short int enemyHealth,  unsigned short int enemyDamage, float enemyAttackSpeed, float enemySpeed)
+		: _enemyPosition(enemyPos), _enemyDamage(enemyDamage), _enemyHealth(enemyHealth), _enemyAttackSpeed(enemyAttackSpeed), _enemySpeed(enemySpeed) {}
 
 	Enemy(int enemyHealth, int enemyDamage, Vector2 enemyPosition)
 		: _enemyHealth(enemyHealth), _enemyDamage(enemyDamage), _enemyPosition(enemyPosition) {}
@@ -55,6 +56,8 @@ public:
 	void EnemyMoveX(float enemyMoveX);
 
 	float GetEnemyAttackSpeed();
+
+	float GetEnemySpeed();
 };
 
 #endif // !ENEMY_H

@@ -48,6 +48,8 @@ void Enemy::Init()
 
 void Enemy::Draw(){
 	DrawTextureRec(_enemyTexture, _frameRec, _enemyPosition, WHITE);
+	DrawRectangle(static_cast<int>(_enemyPosition.x), static_cast<int>(_enemyPosition.y - 20), _enemyHealth, 20, DARKBROWN);
+	DrawRectangle(static_cast<int>(_enemyPosition.x + 5), static_cast<int>(_enemyPosition.y - 15), _enemyHealth - 10, 10, RED);
 }
 
 float Enemy::GetFrameRecX()
@@ -95,4 +97,9 @@ void Enemy::EnemyMoveX(float enemyMoveX){
 float Enemy::GetEnemyAttackSpeed()
 {
 	return _enemyAttackSpeed;
+}
+
+float Enemy::GetEnemySpeed()
+{
+	return _enemySpeed;
 }

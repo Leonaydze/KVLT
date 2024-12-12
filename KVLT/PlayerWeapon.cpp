@@ -13,19 +13,27 @@ void PlayerWeapon::SetDamageAndSpeedDueToWeight(_WeaponWeight currentWW)
 	if (currentWW == LIGHT) {
 		_weaponDamage = 10;
 		_weaponSpeed = 1.0f;
+		_attack = LoadSound("Sounds\\Weapon_light.wav");
 		return;
 	}
 	if (currentWW == MEDIUM) {
 		_weaponDamage = 20;
-		_weaponSpeed = 2.0f;
+		_weaponSpeed = 1.5f;
+		_attack = LoadSound("Sounds\\Weapon_medium.wav");
 		return;
 	}
 	if (currentWW == HEAVY) {
 		_weaponDamage = 40;
-		_weaponSpeed = 4.0f;
+		_weaponSpeed = 2.5f;
+		_attack = LoadSound("Sounds\\Weapon_heavy.wav");
 		return;
 	}
 	return;
+}
+
+void PlayerWeapon::AttackSound()
+{
+	PlaySound(_attack);
 }
 
 json PlayerWeapon::toJson() const

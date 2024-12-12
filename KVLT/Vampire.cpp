@@ -6,3 +6,8 @@ void Vampire::Init(){
 	SetFrameRecWidth(100);
 	SetFrameRecHeight(128);
 }
+
+float Vampire::GetFrameRecWidth()
+{
+	return 100.0f;
+}

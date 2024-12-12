@@ -8,6 +8,7 @@
 #include "Boulder.h"
 #include "Button.h"
 #include "Thorn.h"
+#include "Vampire.h"
 
 bool TriggerEvent(float interval);
 
@@ -27,7 +28,7 @@ Font GetCurrentFont();
 
 void Init();
 
-void LEVEL_T_LOGIC(Player& player);
+void LEVEL_T_LOGIC(Player& player, PlayerWeapon& pw);
 void LEVEL_T_DRAW(Player& player);
 
 void DEATH_SCREEN_DRAW(Player& player);

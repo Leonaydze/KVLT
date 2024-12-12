@@ -10,6 +10,7 @@ class PlayerWeapon{
 private:
 	unsigned short int _weaponDamage = 0;
 	float _weaponSpeed = 0;
+	Sound _attack;
 public:
 	enum _WeaponWeight { LIGHT, MEDIUM, HEAVY };
 	_WeaponWeight currentWW = MEDIUM;
@@ -38,5 +39,7 @@ public:
 	PlayerWeapon::_WeaponWeight GetCurrentWeight();
 
 	void SetDamageAndSpeedDueToWeight(_WeaponWeight currentWW);
+
+	void AttackSound();
 };
 

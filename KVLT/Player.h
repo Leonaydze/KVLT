@@ -25,7 +25,7 @@ private:
 	bool _playerJump = false;
 	int _playerCanWalk = 0;
 
-	Texture2D _playerTexture = LoadTexture("");
+	Texture2D _playerTexture;
 	Rectangle _frameRec{0, 131, 131, 131};
 
 	int currentFrame = 0;
@@ -40,12 +40,14 @@ private:
 	unsigned short int _dashLevel = 0;
 	unsigned short int _lastDashLevel = _dashLevel;
 	unsigned short int _dashDistance = 100;
-	Sound _dash = LoadSound("");
+	Sound _dash;
 
 	float _lastUpdateTime = 0.0f;
 	bool TriggerEvent(float interval);
+
+	Sound _playerGetDamage;
 public:
-	Sound _jump = LoadSound("");
+	Sound _jump;
 
 	int id = -1;
 
@@ -112,5 +114,7 @@ public:
 	void PlayerTakesDamage(unsigned short int damage);
 
 	void Nullification();
+
+	void DamageSound();
 };
 

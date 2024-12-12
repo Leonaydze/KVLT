@@ -273,6 +273,7 @@ void Player::Init(/*Player player*/)
 	//this->SetPlayerPositionY(player.GetPlayerPositionY());
 	_playerTexture = LoadTexture("Sprites\\Player.png");
 	_dash = LoadSound("Sounds\\Dash.wav");
+	_playerGetDamage = LoadSound("Sounds\\PlayerTakesDamage.mp3");
 	_jump = LoadSound("Sounds\\Jump.mp3");
 }
 
@@ -304,7 +305,7 @@ void Player::Draw()
 }
 
 bool Player::PlayerDeath(){
-	return _playerHealth < 0;
+	return _playerHealth < 1;
 }
 
 void Player::PlayerTakesDamage(unsigned short int damage){
@@ -322,4 +323,9 @@ void Player::Nullification()
 	_maxStamina = 4;
 	_stamina = _maxStamina;
 	_playerPosition = { 0, 870 };
+}
+
+void Player::DamageSound()
+{
+	PlaySound(_playerGetDamage);
 }

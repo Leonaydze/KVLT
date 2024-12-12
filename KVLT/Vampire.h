@@ -5,10 +5,13 @@
 
 class Vampire : public Enemy{
 public:
-	Vampire(Vector2 enemyPos, short int enemyHealth, unsigned short int enemyDamage, float enemyAttackSpeed) 
-		: Enemy(enemyPos, enemyHealth,enemyDamage, enemyAttackSpeed) {}
+	Vampire() {}
+	Vampire(Vector2 enemyPos) 
+		: Enemy(enemyPos, 100, 10, 2.0f, 3.0f) {}
 
 	void Init() override;
+
+	float GetFrameRecWidth();
 };
 
 #endif // !VAMPIRE_H

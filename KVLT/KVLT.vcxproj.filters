@@ -226,6 +226,18 @@
     <Media Include="Sounds\Inventory_sound.mp3">
       <Filter>Файлы ресурсов\Sound</Filter>
     </Media>
+    <Media Include="Sounds\PlayerTakesDamage.mp3">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
+    <Media Include="Sounds\Weapon_heavy.wav">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
+    <Media Include="Sounds\Weapon_light.wav">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
+    <Media Include="Sounds\Weapon_medium.wav">
+      <Filter>Файлы ресурсов\Sound</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Font.png">

@@ -418,7 +418,7 @@ int main()
 		if (GetCurrentGameScreen() == LVL_TUTORIAL) {
 			ClearBackground(BLACK);
 			LEVEL_T_DRAW(player);
-			LEVEL_T_LOGIC(player);
+			LEVEL_T_LOGIC(player, playerW);
 			_playerClergy.Draw(player, GetCurrentFont());
 			playerInv.Draw(player, GetCurrentFont());
 			playerInv.HealFlask(player);

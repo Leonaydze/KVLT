@@ -70,10 +70,12 @@ Boulder boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
 Vector2 _lastAltarPosition = {};
 Altar _altars[5];
 
-Texture2D _deathScreen = LoadTexture("");
-Sound _deathScreenS = LoadSound("");
+Texture2D _deathScreen;
+Sound _deathScreenS;
 
-Font font = LoadFont("");
+Font font;
+
+Vampire _vampire[4];
 
 Font GetCurrentFont() {
 	return font;
@@ -84,6 +86,8 @@ void Init()
 	_deathScreen = LoadTexture("Sprites\\Death_screen.png");
 	_deathScreenS = LoadSound("Sounds\\Death_screen.mp3");
 	SetSoundVolume(_deathScreenS, 0.8f);
+	_vampire[0] = Vampire({3600.0f, 900.0f});
+	_vampire[0].Init();
 	_altars[0] = Altar();
 	_altars[1] = Altar({3200.0f, 900.0f});
 	_altars[1].Init();
@@ -94,24 +98,26 @@ void Init()
 
 template <typename T>
 void EnemyAttacksThePlayer(T& enemy, Player& player) {
-	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 100
-		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 232
-		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 90
+	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 40
+		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 180
+		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 50
 		&& player.GetPlayerPositionY() + 198 <= enemy.GetEnemyPosY() + 222 && enemy.GetEnemyHealth() > 0) {
-		if (TriggerEvent(enemy.GetEnemyAttackSpeed)) {
+		if (TriggerEvent(enemy.GetEnemyAttackSpeed())) {
 			player.PlayerTakesDamage(enemy.GetEnemyDamage());
+			player.DamageSound();
 		}
 	}
 }
 
 template <typename T>
 void PlayerAttacksEnemy(T& enemy, Player& player, PlayerWeapon& pw) {
-	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPositionX() - 80
-		&& player.GetPlayerPositionX() <= enemy.GetEnemyPositionX() + 212
-		&& player.GetPlayerPositionY() >= enemy.GetEnemyPositionY() - 80
-		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPositionY() + 212) {
+	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 80
+		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 212
+		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 80
+		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPosY() + 212) {
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && TriggerEvent(pw.GetWeaponSpeed())) {
 			enemy.EnemyGetDamage(pw.GetWeaponDamage());
+			pw.AttackSound();
 		}
 	}
 }
@@ -120,11 +126,13 @@ template <typename T>
 void EnemyGoesToThePlayer(T& enemy, Player& player) {
 	if (player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 250
 		&& player.GetPlayerPositionX() + 128 <= enemy.GetEnemyPosX() + 128 && enemy.GetEnemyHealth() > 0) {
-		enemy.EnemyMoveX(-5.5f);
+		enemy.EnemyMoveX(-enemy.GetEnemySpeed());
+		enemy.SetFrameRecWidth(-enemy.GetFrameRecWidth());
 	}
 	if (player.GetPlayerPositionX() + 128 <= enemy.GetEnemyPosX() + 378
 		&& player.GetPlayerPositionX() >= enemy.GetEnemyPosX() && enemy.GetEnemyHealth() > 0) {
-		enemy.EnemyMoveX(5.5f);
+		enemy.EnemyMoveX(enemy.GetEnemySpeed());
+		enemy.SetFrameRecWidth(enemy.GetFrameRecWidth());
 	}
 }
 
@@ -300,7 +308,7 @@ Border _borderAlt = Border({ 2600.0f, -300.0f }, 3000, 40, DARKGRAY);
 
 Button buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::MOVE);
 
-void LEVEL_T_LOGIC(Player& player) {
+void LEVEL_T_LOGIC(Player& player, PlayerWeapon& pw) {
 	if (!UpgradePlayerLevel(player, priest)) {
 		player.PlayerController();
 	}
@@ -335,6 +343,14 @@ void LEVEL_T_LOGIC(Player& player) {
 	while(i < 5) {
 		PlayerWasAtAltar(player, _altars[i]);
 		++i;
+	}
+
+	unsigned short int k = 0;
+	while (k < 4) {
+		PlayerAttacksEnemy(_vampire[k], player, pw);
+		EnemyGoesToThePlayer(_vampire[k], player);
+		EnemyAttacksThePlayer(_vampire[k], player);
+		++k;
 	}
 
 	if (player.PlayerDeath()) {
@@ -383,6 +399,7 @@ void LEVEL_T_DRAW(Player& player) {
 	priest.Draw();
 
 	_altars[1].Draw();
+	_vampire[0].Draw();
 
 	if (PlayerCanTalkWithNpc(player, priest)) {
 		DrawTextEx(font, "PRESS E TO TALK", { priest.GetNpcPosX() - 70.0f, priest.GetNpcPosY() - 100.0f }, 30, 2, RAYWHITE);
