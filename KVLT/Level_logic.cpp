@@ -359,7 +359,7 @@ void LEVEL_T_LOGIC(Player& player, PlayerWeapon& pw) {
 		PlaySound(_deathScreenS);
 	}
 }
-
+	
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
 
