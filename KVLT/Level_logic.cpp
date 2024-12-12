@@ -102,7 +102,7 @@ void EnemyAttacksThePlayer(T& enemy, Player& player) {
 		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 180
 		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 50
 		&& player.GetPlayerPositionY() + 198 <= enemy.GetEnemyPosY() + 222 && enemy.GetEnemyHealth() > 0) {
-		if (TriggerEvent(enemy.GetEnemyAttackSpeed())) {
+		if (TakeDamageTime(enemy.GetEnemyAttackSpeed())) {
 			player.PlayerTakesDamage(enemy.GetEnemyDamage());
 			player.DamageSound();
 		}
@@ -115,7 +115,7 @@ void PlayerAttacksEnemy(T& enemy, Player& player, PlayerWeapon& pw) {
 		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 212
 		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 80
 		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPosY() + 212) {
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && TriggerEvent(pw.GetWeaponSpeed())) {
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && TakeDamageTime(pw.GetWeaponSpeed())) {
 			enemy.EnemyGetDamage(pw.GetWeaponDamage());
 			pw.AttackSound();
 		}
