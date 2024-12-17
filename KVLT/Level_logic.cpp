@@ -422,7 +422,7 @@ void DEATH_SCREEN_DRAW(Player& player)
 bool WhereWasPlayer(Player& player) {
 	unsigned short int i = 0;
 	while(i < 5) {
-		if (_altars[i].GetPlayerWasAtAltar()) {
+		if (_altars[i].GetPlayerWasAtAltar() && player.PlayerDeath()) {
 			player.SetPlayerPositionV(_lastAltarPosition);
 			SetCurrentScreen(lastScreen);
 			return true;

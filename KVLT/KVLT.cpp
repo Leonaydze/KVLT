@@ -170,23 +170,42 @@ int main()
 	Music playMusic = LoadMusicStream("");
 
 	PlayerService playerS;
-
-	Player player;
-	player.Init(/*playerS.read()[0]*/);
-
-	Clergy _playerClergy = Clergy();
-	_playerClergy.Init();
-
-	PlayerInventory playerInv;
-	playerInv.Init();
-
+	PlayerWeaponService playerWS;
+	PlayerClergyService clergyS;
 	PlayerInventoryService playerInvS;
 
-	PlayerWeapon playerW = PlayerWeapon();
-	PlayerWeaponService playerWS;
+	Player player;
+	try {
+		player.Init(playerS.read());
+	}
+	catch (...) {
+		playerS.create(player);
+	}
 
-	Clergy c;
-	PlayerClergyService cS;
+	Clergy _playerClergy = Clergy();
+	try {
+		_playerClergy.Init(clergyS.read());
+	}
+	catch (...) {
+		clergyS.create(_playerClergy);
+	}
+
+	PlayerInventory playerInv;
+	try {
+		playerInv.Init(playerInvS.read());
+	}
+	catch (...) {
+		playerInvS.create(playerInv);
+	}
+
+	PlayerWeapon playerW = PlayerWeapon();
+	try {
+		playerW.Init(playerWS.read());
+	}
+	catch (...) {
+		playerWS.create(playerW);
+	}
+
 
 	unsigned short int hpLvl = player.GetHealthLevel();
 	unsigned short int dashLvl = player.GetDashLevel();
@@ -241,7 +260,7 @@ int main()
 					playRequest = false;
 					setRequest = false;
 
-					player.SetPlayerPositionV({ 0.0f, 870.0f });
+					//player.SetPlayerPositionV({ 0.0f, 870.0f });
 				}
 			}
 
@@ -454,6 +473,11 @@ int main()
 		EndDrawing();
 		EndMode2D();
 	}
+
+	playerWS.create(playerW);
+	playerInvS.create(playerInv);
+	clergyS.create(_playerClergy);
+	playerS.create(player);
 
 	//Close and unload
 	UnloadSound(playButton);

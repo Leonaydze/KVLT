@@ -30,7 +30,8 @@ void Clergy::Draw(Player& player, Font font){
 	DrawTexture(_clergyIcon, static_cast<int>(player.GetPlayerPositionX()) + 710, static_cast<int>(player.GetPlayerPositionY()) + 240, WHITE);
 }
 
-void Clergy::Init()
+void Clergy::Init(Clergy clergy)
 {
+	_countClergy = clergy._countClergy;
 	_clergyIcon = LoadTexture("Sprites\\Clergy_icon.png");
 }

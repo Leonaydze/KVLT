@@ -32,8 +32,8 @@ public:
 	~DataSource();
 
 	void create(const T& item);
-
-	vector<T> read();
+	
+	T read();
 
 	void update(const T& item);
 

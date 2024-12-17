@@ -5,7 +5,7 @@ void Service<T>::create(DataSource<T>& dataSource, const T& item) {
 	dataSource.create(item);
 }
 template <typename T>
-vector<T> Service<T>::read(DataSource<T>& dataSource) {
+T Service<T>::read(DataSource<T>& dataSource) {
 	return dataSource.read();
 }
 template <typename T>

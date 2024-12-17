@@ -41,5 +41,8 @@ public:
 	void SetDamageAndSpeedDueToWeight(_WeaponWeight currentWW);
 
 	void AttackSound();
+
+	void Init(PlayerWeapon pw);
+
 };
 

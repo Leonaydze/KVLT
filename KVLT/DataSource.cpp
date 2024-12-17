@@ -50,12 +50,11 @@ void DataSource<T>::create(const T& item) {
 }
 
 template <typename T>
-vector<T> DataSource<T>::read() {
-	vector<T> items;
-	for (const auto& j : data) {
-		items.push_back(T::fromJson(j));
-	}
-	return items;
+T DataSource<T>::read() {
+	//for (const auto& j : data) {
+	//	items.push_back(T::fromJson(j));
+	//}
+	return T::fromJson(data);
 }
 
 template <typename T>

@@ -52,14 +52,19 @@ public:
 	int id = -1;
 
 	Player() {};
-	Player(int id, short int _playerHealth, float _playerPosX, float _playerPosY) {
+	Player(int id, short int _playerHealth, float _playerPosX, float _playerPosY, unsigned short int _dashLevel,
+		unsigned short int _staminaLevel, unsigned short int _maxPlayerHealth) {
+		this->id = id;
 		this->_playerHealth = _playerHealth;
 		this->_playerPosition.x = _playerPosX;
 		this->_playerPosition.y = _playerPosY;
-		this->id = id;
+		this->_dashLevel = _dashLevel;
+		this->_staminaLevel = _staminaLevel;
+		this->_maxPlayerHealth = _maxPlayerHealth;
 	};
 
-	Player(int id, const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition) {}
+	Player(int id, const Player& other) : _playerHealth(other._playerHealth), _playerPosition(other._playerPosition), 
+		_staminaLevel(other._staminaLevel), _dashLevel(other._dashLevel), _maxPlayerHealth(other._maxPlayerHealth) {}
 
 	short int GetPlayerHealth();
 	void SetPlayerHealth(short int playerHealth);
@@ -106,7 +111,7 @@ public:
 	unsigned short int GetDashLevel();
 	void UpgradeDashLevel(unsigned short int dashLvl);
 
-	void Init(/*Player player*/);
+	void Init(Player player);
 	void Draw();
 
 	bool PlayerDeath();

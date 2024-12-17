@@ -25,7 +25,7 @@ public:
 
 	int GetFlaskHeal();
 
-	void Init();
+	void Init(PlayerInventory pi);
 
 	void Draw(Player& player, Font font);
 

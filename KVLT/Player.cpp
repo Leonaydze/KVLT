@@ -72,12 +72,14 @@ void Player::SetPlayerPositionY(float playerPosY){
 
 json Player::toJson() const
 {
-	return json{ {"id", id}, { "Health", _playerHealth }, {"PosX", _playerPosition.x}, {"PosY", _playerPosition.y}};
+	return json{ {"id", id}, { "Health", _playerHealth }, {"PosX", _playerPosition.x}, {"PosY", _playerPosition.y},
+		 { "Dash", _dashLevel }, {"Stamina", _staminaLevel} , {"MaxHealth", _maxPlayerHealth}};
 }
 
 Player Player::fromJson(const json& _filename)
 {
-	return Player(_filename["id"], _filename["Health"], _filename["PosX"], _filename["PosY"]);
+	return Player(_filename["id"], _filename["Health"], _filename["PosX"], _filename["PosY"],
+		_filename["Dash"], _filename["Stamina"], _filename["MaxHealth"]);
 }
 
 unsigned short int Player::GetStaminaLevel()
@@ -267,10 +269,15 @@ void Player::UpgradeDashLevel(unsigned short int dashLvl){
 	}
 }
 
-void Player::Init(/*Player player*/)
+void Player::Init(Player player)
 {
-	//this->SetPlayerPositionX(player.GetPlayerPositionX());
-	//this->SetPlayerPositionY(player.GetPlayerPositionY());
+	this->SetPlayerPositionX(player.GetPlayerPositionX());
+	this->SetPlayerPositionY(player.GetPlayerPositionY());
+	this->UpgradeStaminaLevel(player.GetStaminaLevel());
+	this->UpgradeDashLevel(player.GetDashLevel());
+	this->UpgradeHealthLevel(player.GetHealthLevel());
+	this->SetPlayerHealth(player.GetPlayerHealth());
+	this->_stamina = player.GetStaminaLevel() + 4;
 	_playerTexture = LoadTexture("Sprites\\Player.png");
 	_dash = LoadSound("Sounds\\Dash.wav");
 	_playerGetDamage = LoadSound("Sounds\\PlayerTakesDamage.mp3");

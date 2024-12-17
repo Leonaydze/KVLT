@@ -1,6 +1,6 @@
 {
-    "CurrentWeaponWeight": 0,
-    "WeaponDamage": 0,
-    "WeaponSpeed": 0.0,
+    "CurrentWeaponWeight": 1,
+    "WeaponDamage": 20,
+    "WeaponSpeed": 1.5,
     "id": -1
 }

@@ -11,7 +11,7 @@ public:
 	PlayerService();
 
 	void create(const Player& player);
-	vector<Player> read();
+	Player read();
 	void update(const Player& player);
 	void remove(int id);
 };
@@ -23,7 +23,7 @@ public:
 	PlayerInventoryService();
 
 	void create(const PlayerInventory& playerInventory);
-	vector<PlayerInventory> read();
+	PlayerInventory read();
 	void update(const PlayerInventory& playerInventory);
 	void remove(int id);
 };
@@ -35,7 +35,7 @@ public:
 	PlayerWeaponService();
 
 	void create(const PlayerWeapon& playerWeapon);
-	vector<PlayerWeapon> read();
+	PlayerWeapon read();
 	void update(const PlayerWeapon& playerWeapon);
 	void remove(int id);
 };
@@ -47,7 +47,7 @@ public:
 	PlayerClergyService();
 
 	void create(const Clergy& playerClergy);
-	vector<Clergy> read();
+	Clergy read();
 	void update(const Clergy& playerClergy);
 	void remove(int id);
 };

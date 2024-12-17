@@ -36,6 +36,12 @@ void PlayerWeapon::AttackSound()
 	PlaySound(_attack);
 }
 
+void PlayerWeapon::Init(PlayerWeapon pw)
+{
+	this->currentWW = pw.currentWW;
+	SetDamageAndSpeedDueToWeight(currentWW);
+}
+
 json PlayerWeapon::toJson() const
 {
 	return json{ {"id", id}, { "CurrentWeaponWeight", currentWW }, {"WeaponDamage", _weaponDamage}, {"WeaponSpeed", _weaponSpeed}};

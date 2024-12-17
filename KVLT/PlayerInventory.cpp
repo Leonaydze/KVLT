@@ -32,9 +32,10 @@ int PlayerInventory::GetFlaskHeal()
 	return flask.GetMaxHealCount();
 }
 
-void PlayerInventory::Init()
+void PlayerInventory::Init(PlayerInventory pi)
 {
 	flask.Init();
+	this->_currentCountFlask = pi._currentCountFlask;
 	_drinkFlask = LoadSound("Sounds\\Drink_Flask.mp3");
 }
 

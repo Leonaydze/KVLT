@@ -5,7 +5,7 @@ PlayerService::PlayerService() : dataSource("Save\\PlayerData.json") {}
 void PlayerService::create(const Player& player) {
 	Service::create(dataSource, player);
 }
-vector<Player> PlayerService::read() {
+Player PlayerService::read() {
 	return Service::read(dataSource);
 }
 void PlayerService::update(const Player& player) {
@@ -20,7 +20,7 @@ PlayerInventoryService::PlayerInventoryService() : dataSource("Save\\PlayerInven
 void PlayerInventoryService::create(const PlayerInventory& playerInventory){
 	Service::create(dataSource, playerInventory);
 }
-vector<PlayerInventory> PlayerInventoryService::read() {
+PlayerInventory PlayerInventoryService::read() {
 	return Service::read(dataSource);
 }
 void PlayerInventoryService::update(const PlayerInventory& playerInventory) {
@@ -36,7 +36,7 @@ PlayerWeaponService::PlayerWeaponService() : dataSource("Save\\PlayerWeaponData.
 void PlayerWeaponService::create(const PlayerWeapon& playerWeapon) {
 	Service::create(dataSource, playerWeapon);
 }
-vector<PlayerWeapon> PlayerWeaponService::read() {
+PlayerWeapon PlayerWeaponService::read() {
 	return Service::read(dataSource);
 }
 void PlayerWeaponService::update(const PlayerWeapon& playerWeapon) {
@@ -52,7 +52,7 @@ PlayerClergyService::PlayerClergyService() : dataSource("Save\\PlayerClergyData.
 void PlayerClergyService::create(const Clergy& playerClergy) {
 	Service::create(dataSource, playerClergy);
 }
-vector<Clergy> PlayerClergyService::read() {
+Clergy PlayerClergyService::read() {
 	return Service::read(dataSource);
 }
 void PlayerClergyService::update(const Clergy& playerClergy) {

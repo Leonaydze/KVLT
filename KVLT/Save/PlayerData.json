@@ -1,6 +1,9 @@
 {
+    "Dash": 5,
     "Health": 100,
-    "PosX": 1066.0,
-    "PosY": 700.0,
+    "MaxHealth": 150,
+    "PosX": 3375.0,
+    "PosY": 888.3997802734375,
+    "Stamina": 4,
     "id": -1
 }
