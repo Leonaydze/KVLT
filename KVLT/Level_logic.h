@@ -35,4 +35,6 @@ void DEATH_SCREEN_DRAW(Player& player);
 
 bool WhereWasPlayer(Player& player);
 
+void Restart();
+
 #endif // !LEVEL_LOGIC_H

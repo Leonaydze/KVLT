@@ -10,10 +10,10 @@ class PlayerWeapon{
 private:
 	unsigned short int _weaponDamage = 0;
 	float _weaponSpeed = 0;
-	Sound _attack;
+	Sound _attack = LoadSound("");
 public:
 	enum _WeaponWeight { LIGHT, MEDIUM, HEAVY };
-	_WeaponWeight currentWW = MEDIUM;
+	_WeaponWeight currentWW = LIGHT;
 
 	int id = -1;
 

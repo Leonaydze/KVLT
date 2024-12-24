@@ -32,6 +32,6 @@ void Clergy::Draw(Player& player, Font font){
 
 void Clergy::Init(Clergy clergy)
 {
-	_countClergy = clergy._countClergy;
-	_clergyIcon = LoadTexture("Sprites\\Clergy_icon.png");
+	this->_countClergy = clergy._countClergy;
+	this->_clergyIcon = LoadTexture("Sprites\\Clergy_icon.png");
 }

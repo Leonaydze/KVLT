@@ -1,6 +1,7 @@
 #include "PlayerWeapon.h"
 
 PlayerWeapon::PlayerWeapon() {
+	currentWW = LIGHT;
 	SetDamageAndSpeedDueToWeight(currentWW);
 }
 

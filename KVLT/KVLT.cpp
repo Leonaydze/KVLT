@@ -206,7 +206,6 @@ int main()
 		playerWS.create(playerW);
 	}
 
-
 	unsigned short int hpLvl = player.GetHealthLevel();
 	unsigned short int dashLvl = player.GetDashLevel();
 	unsigned short int staminaLvl = player.GetStaminaLevel();
@@ -259,7 +258,6 @@ int main()
 
 					playRequest = false;
 					setRequest = false;
-
 					//player.SetPlayerPositionV({ 0.0f, 870.0f });
 				}
 			}
@@ -274,13 +272,29 @@ int main()
 				GuiDrawIcon(ICON_AUDIO, 800, 280, 1, WHITE);
 				SetMasterVolume(volume);
 
-				//Slider and musiv volume change
+				//Slider and music volume change
 				DrawTextEx(GetCurrentFont(), "MusicVolume", { 650.0f, 325.0f }, 20, 2, RAYWHITE);
 				GuiSlider({ 650.0f, 350.0f, 100.0f, 25.0f }, "", "100%", &musicVolume, 0, 1);
 				GuiDrawIcon(ICON_AUDIO, 800, 355, 1, WHITE);
 
 				DrawTextEx(GetCurrentFont(), "Reroll track", { 650.0f, 410.0f }, 20, 2, RAYWHITE);
 				if (GuiButton({ 800.0f, 405.0f, 30.0f, 30.0f }, "#60#")) setMusicReroll = true;
+
+				DrawTextEx(GetCurrentFont(), "Delete Save", { 650.0f, 465.0f }, 20, 2, RAYWHITE);
+				if (GuiButton({ 800.0f, 460.0f, 30.0f, 30.0f }, "#60#")) {
+					remove("Save\\PlayerClergyData.json");
+					remove("Save\\PlayerData.json");
+					remove("Save\\PlayerInventoryData.json");
+					remove("Save\\PlayerWeaponData.json");
+					hpLvl = 0;
+					staminaLvl = 0;
+					dashLvl = 0;
+					player.Init(Player());
+					_playerClergy.Init(Clergy());
+					playerInv.Init(PlayerInventory());
+					playerW.Init(PlayerWeapon());
+					Restart();
+				}
 
 				//Exit frim settings
 				if (result == 1 || IsKeyPressed(KEY_ESCAPE)) setRequest = false;

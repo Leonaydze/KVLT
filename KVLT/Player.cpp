@@ -275,9 +275,11 @@ void Player::Init(Player player)
 	this->SetPlayerPositionY(player.GetPlayerPositionY());
 	this->UpgradeStaminaLevel(player.GetStaminaLevel());
 	this->UpgradeDashLevel(player.GetDashLevel());
+	this->_maxPlayerHealth = player._maxPlayerHealth;
 	this->UpgradeHealthLevel(player.GetHealthLevel());
 	this->SetPlayerHealth(player.GetPlayerHealth());
 	this->_stamina = player.GetStaminaLevel() + 4;
+	this->_maxStamina = player._maxStamina;
 	_playerTexture = LoadTexture("Sprites\\Player.png");
 	_dash = LoadSound("Sounds\\Dash.wav");
 	_playerGetDamage = LoadSound("Sounds\\PlayerTakesDamage.mp3");

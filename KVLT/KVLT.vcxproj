@@ -210,6 +210,12 @@
     <Media Include="Sounds\Weapon_light.wav" />
     <Media Include="Sounds\Weapon_medium.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Save\PlayerClergyData.json" />
+    <None Include="Save\PlayerData.json" />
+    <None Include="Save\PlayerInventoryData.json" />
+    <None Include="Save\PlayerWeaponData.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

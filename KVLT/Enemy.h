@@ -12,7 +12,7 @@ protected:
 
 	Vector2 _enemyPosition {};
 
-	Texture2D _enemyTexture;
+	Texture2D _enemyTexture = LoadTexture("");
 	Rectangle _frameRec = {0, 0, 0, 0};
 
 public:

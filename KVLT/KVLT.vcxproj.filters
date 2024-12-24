@@ -49,6 +49,9 @@
     <Filter Include="Файлы ресурсов\Sprites\Screen">
       <UniqueIdentifier>{0feddfa3-e9b5-4a15-b759-2eb3864ba986}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\Save">
+      <UniqueIdentifier>{757dfbfa-3753-47d6-986a-419c69783ded}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
@@ -285,5 +288,19 @@
     <Image Include="Sprites\Death_screen.png">
       <Filter>Файлы ресурсов\Sprites\Screen</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Save\PlayerClergyData.json">
+      <Filter>Файлы ресурсов\Save</Filter>
+    </None>
+    <None Include="Save\PlayerData.json">
+      <Filter>Файлы ресурсов\Save</Filter>
+    </None>
+    <None Include="Save\PlayerInventoryData.json">
+      <Filter>Файлы ресурсов\Save</Filter>
+    </None>
+    <None Include="Save\PlayerWeaponData.json">
+      <Filter>Файлы ресурсов\Save</Filter>
+    </None>
   </ItemGroup>
 </Project>

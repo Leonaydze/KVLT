@@ -431,3 +431,18 @@ bool WhereWasPlayer(Player& player) {
 	}
 	return false;
 }
+
+void Restart(){
+	boulderTest = Boulder({ 2640.0f, 100.0f }, 50.0f, WHITE);
+	boulderTest.Init();
+
+	_vampire[0] = Vampire({ 3600.0f, 900.0f });
+	_vampire[0].Init();
+
+	_altars[0] = Altar();
+	_altars[1] = Altar({ 3200.0f, 900.0f });
+	_altars[1].Init();
+
+	buttonTest = Button({ 2640.0f, 990.0f }, Button::_buttonAction::MOVE);
+	buttonTest.EnableButton(false);
+}

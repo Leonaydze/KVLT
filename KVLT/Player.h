@@ -40,18 +40,25 @@ private:
 	unsigned short int _dashLevel = 0;
 	unsigned short int _lastDashLevel = _dashLevel;
 	unsigned short int _dashDistance = 100;
-	Sound _dash;
+	Sound _dash = LoadSound("");
 
 	float _lastUpdateTime = 0.0f;
 	bool TriggerEvent(float interval);
 
-	Sound _playerGetDamage;
+	Sound _playerGetDamage = LoadSound("");
 public:
-	Sound _jump;
+	Sound _jump = LoadSound("");
 
 	int id = -1;
 
-	Player() {};
+	Player() {
+		_maxPlayerHealth = 100;
+		_playerHealth = _maxPlayerHealth;
+		_staminaLevel = 0;
+		_maxStamina = 4;
+		_dashLevel = 0;
+		_dashDistance = 100;
+	};
 	Player(int id, short int _playerHealth, float _playerPosX, float _playerPosY, unsigned short int _dashLevel,
 		unsigned short int _staminaLevel, unsigned short int _maxPlayerHealth) {
 		this->id = id;
