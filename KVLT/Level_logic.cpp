@@ -72,6 +72,8 @@ Altar _altars[5];
 
 Texture2D _deathScreen;
 Sound _deathScreenS;
+Texture2D _backgrounds[5];
+Texture2D _grounds[5];
 
 Font font;
 
@@ -94,6 +96,22 @@ void Init()
 	font = LoadFont("Font.png");;
 	priest.Init();
 	boulderTest.Init();
+
+	_backgrounds[0] = LoadTexture("Background\\Battleground4_t.png");
+	_backgrounds[0].width = static_cast<int>(_backgrounds[0].width * 1.7f);
+	_backgrounds[0].height = static_cast<int>(_backgrounds[0].height * 1.5f);
+
+	_grounds[0] = LoadTexture("Background\\Ground4.png");
+	_grounds[0].width = static_cast<int>(_grounds[0].width * 1.7f);
+	_grounds[0].height = static_cast<int>(_grounds[0].height / 1.5f);
+
+	_backgrounds[1] = LoadTexture("Background\\Battleground1_t.png");
+	_backgrounds[1].width = static_cast<int>(_backgrounds[0].width * 1.7f);
+	_backgrounds[1].height = static_cast<int>(_backgrounds[0].height * 1.2f);
+
+	_grounds[1] = LoadTexture("Background\\Ground1.png");
+	_grounds[1].width = static_cast<int>(_grounds[1].width * 2.7f);
+	_grounds[1].height = static_cast<int>(_grounds[1].height / 1.5f);
 }
 
 template <typename T>
@@ -362,6 +380,11 @@ void LEVEL_T_LOGIC(Player& player, PlayerWeapon& pw) {
 	
 void LEVEL_T_DRAW(Player& player) {
 	BeginMode2D(_playerCamera);
+	
+	DrawTexture(_backgrounds[0], -500, -300, WHITE);
+	DrawTexture(_grounds[0], -500, 700, WHITE);
+	DrawTexture(_backgrounds[1], 2610, -150, WHITE);
+	DrawTexture(_grounds[1], 2610, 630, WHITE);
 
 	_playerCamera.target = { player.GetPlayerPositionX(), player.GetPlayerPositionY() - 200 };
 	_playerCamera.offset = { 1920.0f / 2.0f, 1080.0f / 2.0f };
@@ -380,17 +403,14 @@ void LEVEL_T_DRAW(Player& player) {
 
 	_firstG.GroundDraw();
 	_secondG.GroundDraw();
-
 	_groundBorder.Draw();
 	_border.Draw();
-
 	_border2.Draw();
-
 	_borderAlt.Draw();
 
 	buttonTest.Draw();
 
-	mainGroundFloor.GroundDraw();
+	//mainGroundFloor.GroundDraw();
 
 	boulderTest.Draw();
 

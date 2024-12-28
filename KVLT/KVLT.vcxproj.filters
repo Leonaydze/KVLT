@@ -52,6 +52,9 @@
     <Filter Include="Файлы ресурсов\Save">
       <UniqueIdentifier>{757dfbfa-3753-47d6-986a-419c69783ded}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\Background">
+      <UniqueIdentifier>{a2a65b6d-281b-40b6-8fb0-02e5bbdfb048}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KVLT.cpp">
@@ -114,6 +117,9 @@
     <ClCompile Include="Vampire.cpp">
       <Filter>Исходные файлы\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Altar.h">
@@ -172,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Vampire.h">
       <Filter>Файлы заголовков\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +296,24 @@
     </Image>
     <Image Include="Sprites\Death_screen.png">
       <Filter>Файлы ресурсов\Sprites\Screen</Filter>
+    </Image>
+    <Image Include="Background\Battleground1.png">
+      <Filter>Файлы ресурсов\Background</Filter>
+    </Image>
+    <Image Include="Background\Battleground2.png">
+      <Filter>Файлы ресурсов\Background</Filter>
+    </Image>
+    <Image Include="Background\Battleground3.png">
+      <Filter>Файлы ресурсов\Background</Filter>
+    </Image>
+    <Image Include="Background\Battleground4.png">
+      <Filter>Файлы ресурсов\Background</Filter>
+    </Image>
+    <Image Include="Background\Ground1.png">
+      <Filter>Файлы ресурсов\Background</Filter>
+    </Image>
+    <Image Include="Background\Ground4.png">
+      <Filter>Файлы ресурсов\Background</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

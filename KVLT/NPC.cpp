@@ -7,32 +7,34 @@ NPC::NPC()
 	_currentAction = DEFAULT;
 }
 
-inline short int NPC::GetNpcHealth()
+short int NPC::GetNpcHealth()
 {
 	return _npcHealth;
 }
 
-inline void NPC::ScaleNpcHealth(unsigned short int damage)
+void NPC::ScaleNpcHealth(unsigned short int damage)
 {
 	_npcHealth -= damage;
 }
 
-inline float NPC::GetNpcPosX()
+float NPC::GetNpcPosX()
 {
 	return _npcPosition.x;
 }
 
-inline float NPC::GetNpcPosY()
+float NPC::GetNpcPosY()
 {
 	return _npcPosition.y;
 }
 
-inline bool NPC::NpcDeath()
+bool NPC::NpcDeath()
 {
 	return _npcHealth < 1;
 }
 
-inline void NPC::Init() {}
+void NPC::Init() {
+	return;
+}
 
 void NPC::Draw()
 {

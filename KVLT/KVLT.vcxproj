@@ -172,6 +172,12 @@
     <ClInclude Include="Vampire.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Background\Battleground1.png" />
+    <Image Include="Background\Battleground2.png" />
+    <Image Include="Background\Battleground3.png" />
+    <Image Include="Background\Battleground4.png" />
+    <Image Include="Background\Ground1.png" />
+    <Image Include="Background\Ground4.png" />
     <Image Include="Font.png" />
     <Image Include="Sprites\Altar.png" />
     <Image Include="Sprites\Boulder.png" />

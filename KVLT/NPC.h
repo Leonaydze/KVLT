@@ -17,15 +17,15 @@ public:
 
 	NPC(Vector2 npcPosition, short int npcHealth, _Action curAct) : _npcPosition(npcPosition), _npcHealth(npcHealth), _currentAction(curAct) {}
 
-	inline short int GetNpcHealth();
-	inline void ScaleNpcHealth(unsigned short int damage);
+	short int GetNpcHealth();
+	void ScaleNpcHealth(unsigned short int damage);
 
-	inline float GetNpcPosX();
-	inline float GetNpcPosY();
+	float GetNpcPosX();
+	float GetNpcPosY();
 
-	inline bool NpcDeath();
+	bool NpcDeath();
 
-	virtual inline void Init();
+	virtual void Init();
 	void Draw();
 
 	_Action GetAction();
