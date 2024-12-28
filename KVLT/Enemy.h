@@ -58,6 +58,8 @@ public:
 	float GetEnemyAttackSpeed();
 
 	float GetEnemySpeed();
+
+	~Enemy();
 };
 
 #endif // !ENEMY_H

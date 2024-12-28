@@ -34,3 +34,7 @@ float Pugalo::GetPugaloPositionY()
 void Pugalo::SetFrameRecX(float x) {
 	_frameRec.x = x;
 }
+
+Pugalo::~Pugalo(){
+	UnloadTexture(_pugaloTexture);
+}

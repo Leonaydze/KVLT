@@ -23,6 +23,8 @@ public:
 	void Draw();
 
 	void SetFrameRecX(float x);
+
+	~Pugalo();
 };
 
 #endif // !PUGALO_H

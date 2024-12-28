@@ -44,5 +44,6 @@ public:
 
 	void Init(PlayerWeapon pw);
 
+	~PlayerWeapon();
 };
 

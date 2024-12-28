@@ -30,5 +30,7 @@ public:
 	void Draw(Player& player, Font font);
 
 	void HealFlask(Player &player);
+
+	~PlayerInventory();
 };
 

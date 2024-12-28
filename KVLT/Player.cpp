@@ -338,3 +338,11 @@ void Player::DamageSound()
 {
 	PlaySound(_playerGetDamage);
 }
+
+Player::~Player()
+{
+	UnloadSound(_playerGetDamage);
+	UnloadSound(_dash);
+	UnloadSound(_jump);
+	UnloadTexture(_playerTexture);
+}

@@ -43,6 +43,7 @@ void PlayerWeapon::Init(PlayerWeapon pw)
 	SetDamageAndSpeedDueToWeight(currentWW);
 }
 
+
 json PlayerWeapon::toJson() const
 {
 	return json{ {"id", id}, { "CurrentWeaponWeight", currentWW }, {"WeaponDamage", _weaponDamage}, {"WeaponSpeed", _weaponSpeed}};
@@ -85,3 +86,7 @@ void PlayerWeapon::SetRandomDamage(){
 	}
 }
 
+PlayerWeapon::~PlayerWeapon()
+{
+	UnloadSound(_attack);
+}

@@ -35,3 +35,8 @@ void Clergy::Init(Clergy clergy)
 	this->_countClergy = clergy._countClergy;
 	this->_clergyIcon = LoadTexture("Sprites\\Clergy_icon.png");
 }
+
+Clergy::~Clergy()
+{
+	UnloadTexture(_clergyIcon);
+}

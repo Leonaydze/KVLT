@@ -32,6 +32,8 @@ public:
 	void Draw(Player& player, Font font);
 
 	void Init(Clergy clergy);
+
+	~Clergy();
 };
 
 #endif // !CLERGY_H

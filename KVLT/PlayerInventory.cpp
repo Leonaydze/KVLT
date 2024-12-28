@@ -8,6 +8,7 @@ void PlayerInventory::HealFlask(Player &player){
 	}
 }
 
+
 PlayerInventory::PlayerInventory(){
 	_currentCountFlask = 1;
 }
@@ -44,4 +45,9 @@ void PlayerInventory::Draw(Player& player, Font font){
 	DrawRectangle(static_cast<int>(player.GetPlayerPositionX()) - 895, static_cast<int>(player.GetPlayerPositionY()) + 205, 88, 88, BROWN);
 	DrawTexture(flask.GetTexture(), static_cast<int>(player.GetPlayerPositionX()) - 898, static_cast<int>(player.GetPlayerPositionY()) + 202, WHITE);
 	DrawTextEx(font, TextFormat("%i", _currentCountFlask), { player.GetPlayerPositionX() - 820, player.GetPlayerPositionY() + 270 }, 20, 2, RAYWHITE );
+}
+
+PlayerInventory::~PlayerInventory()
+{
+	UnloadSound(_drinkFlask);
 }

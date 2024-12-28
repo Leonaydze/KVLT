@@ -25,7 +25,7 @@ private:
 	bool _playerJump = false;
 	int _playerCanWalk = 0;
 
-	Texture2D _playerTexture;
+	Texture2D _playerTexture = LoadTexture("");
 	Rectangle _frameRec{0, 131, 131, 131};
 
 	int currentFrame = 0;
@@ -128,5 +128,7 @@ public:
 	void Nullification();
 
 	void DamageSound();
+
+	~Player();
 };
 

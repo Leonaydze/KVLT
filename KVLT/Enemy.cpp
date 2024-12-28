@@ -103,3 +103,8 @@ float Enemy::GetEnemySpeed()
 {
 	return _enemySpeed;
 }
+
+Enemy::~Enemy()
+{
+	UnloadTexture(_enemyTexture);
+}

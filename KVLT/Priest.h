@@ -1,33 +1,19 @@
 #ifndef PRIEST_H
 #define PRIEST_H
-#include <raylib.h>
+#include "NPC.h"
 
-class Priest{
+class Priest : public NPC{
 private:
-	short int _npcHealth = 50;
-	Vector2 _npcPosition = {};
-
 	Texture2D _npcTexture = LoadTexture("");
 	Rectangle _frameRec{ 0, 0, 100, 100 };
 public:
-	Priest() {
-		_npcHealth = 0;
-		_npcPosition = {};
-	}
-	Priest(Vector2 npcPosition) : _npcPosition(npcPosition) {}
+	Priest();
 
-	short int GetNpcHealth();
-	void ScaleNpcHealth(unsigned short int damage);
+	Priest(Vector2 npcPosition) : NPC(npcPosition, 50, SKILL) {}
 
-	float GetNpcPosX();
-	float GetNpcPosY();
+	inline void Init() override;
 
-	bool NpcDeath();
-
-	void Init();
-	void Draw();
+	~Priest();
 };
 
 #endif // !PRIEST_H
-
-
