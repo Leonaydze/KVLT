@@ -121,6 +121,9 @@ void EnemyAttacksThePlayer(T& enemy, Player& player) {
 		if (TakeDamageTime(enemy.GetEnemyAttackSpeed())) {
 			player.PlayerTakesDamage(enemy.GetEnemyDamage());
 			player.DamageSound();
+			if (typeid(enemy) == typeid(Vampire)) {
+				enemy.StealHP(2);
+			}
 		}
 	}
 }

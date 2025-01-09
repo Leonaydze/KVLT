@@ -11,3 +11,8 @@ float Vampire::GetFrameRecWidth()
 {
 	return 100.0f;
 }
+
+void Vampire::StealHP(int amount)
+{
+	_enemyHealth += amount;
+}

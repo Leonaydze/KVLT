@@ -12,6 +12,8 @@ public:
 	void Init() override;
 
 	float GetFrameRecWidth();
+
+	void StealHP(int amount);
 };
 
 #endif // !VAMPIRE_H

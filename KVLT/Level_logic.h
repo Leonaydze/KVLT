@@ -1,5 +1,6 @@
 #ifndef LEVEL_LOGIC_H
 #define LEVEL_LOGIC_H
+#include <typeinfo>
 #include "Ground.h"
 #include "Border.h"
 #include "Altar.h"
