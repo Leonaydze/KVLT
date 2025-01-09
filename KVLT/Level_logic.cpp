@@ -116,10 +116,8 @@ void Init()
 
 template <typename T>
 void EnemyAttacksThePlayer(T& enemy, Player& player) {
-	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 40
-		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 180
-		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 50
-		&& player.GetPlayerPositionY() + 198 <= enemy.GetEnemyPosY() + 222 && enemy.GetEnemyHealth() > 0) {
+	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() + 20 && player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 120
+		&& player.GetPlayerPositionY() + 128 >= enemy.GetEnemyPosY() - 30 && player.GetPlayerPositionY() <= enemy.GetEnemyPosY() + 140 && enemy.GetEnemyHealth() > 0) {
 		if (TakeDamageTime(enemy.GetEnemyAttackSpeed())) {
 			player.PlayerTakesDamage(enemy.GetEnemyDamage());
 			player.DamageSound();
@@ -129,13 +127,11 @@ void EnemyAttacksThePlayer(T& enemy, Player& player) {
 
 template <typename T>
 void PlayerAttacksEnemy(T& enemy, Player& player, PlayerWeapon& pw) {
-	if (player.GetPlayerHealth() > 0 && player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 80
-		&& player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 212
-		&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 80
-		&& player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPosY() + 212) {
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && TakeDamageTime(pw.GetWeaponSpeed())) {
+	if (player.GetPlayerHealth() > 0 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && enemy.TakeDamageTime(pw.GetWeaponSpeed())) {
+		pw.AttackSound();
+		if (player.GetPlayerPositionX() + 128 >= enemy.GetEnemyPosX() - 80 && player.GetPlayerPositionX() <= enemy.GetEnemyPosX() + 212
+			&& player.GetPlayerPositionY() >= enemy.GetEnemyPosY() - 80 && player.GetPlayerPositionY() + 128 <= enemy.GetEnemyPosY() + 212) {
 			enemy.EnemyGetDamage(pw.GetWeaponDamage());
-			pw.AttackSound();
 		}
 	}
 }

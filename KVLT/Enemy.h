@@ -15,6 +15,7 @@ protected:
 	Texture2D _enemyTexture = LoadTexture("");
 	Rectangle _frameRec = {0, 0, 0, 0};
 
+	double _lUT = static_cast <double>(0);
 public:
 	Enemy();
 
@@ -58,6 +59,13 @@ public:
 	float GetEnemyAttackSpeed();
 
 	float GetEnemySpeed();
+
+	/// <summary>
+	/// A function to indicate that the code is stopped for a while
+	/// </summary>
+	/// <param name="interval - "> The time for which the code will stop</param>
+	/// <returns></returns>
+	bool TakeDamageTime(float interval);
 
 	~Enemy();
 };

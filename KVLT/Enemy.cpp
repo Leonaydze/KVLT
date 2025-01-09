@@ -104,6 +104,19 @@ float Enemy::GetEnemySpeed()
 	return _enemySpeed;
 }
 
+bool Enemy::TakeDamageTime(float interval)
+{
+	float currentTime = static_cast<float>(GetTime());
+
+	if (currentTime - _lUT >= interval) {
+		_lUT = currentTime;
+
+		return true;
+	}
+
+	return false;
+}
+
 Enemy::~Enemy()
 {
 	UnloadTexture(_enemyTexture);
